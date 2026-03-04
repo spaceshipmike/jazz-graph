@@ -1,0 +1,208 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   THE JAZZ GRAPH — Design Tokens
+   Inspired by Reid Miles' Blue Note Records covers
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Backgrounds & Surfaces */
+  --bg: #08080a;
+  --surface: #111114;
+  --surface-hover: #161619;
+  --border: #1e1e22;
+  --border-light: #2a2a2e;
+
+  /* Foreground */
+  --fg: #e8e4dc;
+  --fg-dim: #888;
+  --fg-muted: #555;
+  --fg-ghost: #333;
+
+  /* Instrument Families */
+  --brass: #e85d3a;
+  --brass-dim: #d94e2e;
+  --reeds: #d4a843;
+  --reeds-dim: #c99b38;
+  --keys: #5b9bd5;
+  --keys-dim: #4a8ac4;
+  --rhythm-bass: #7c5cbf;
+  --rhythm-drums: #45a67d;
+  --rhythm-perc: #389068;
+  --strings: #c75d8f;
+  --mallets: #6bb5a0;
+  --vocals: #d48db0;
+
+  /* Label Colors */
+  --label-blue-note: #0070c0;
+  --label-columbia: #c41e3a;
+  --label-impulse: #e8740c;
+  --label-prestige: #6b3fa0;
+  --label-riverside: #2d8659;
+  --label-atlantic: #cc9b26;
+  --label-ecm: #5a7d8c;
+  --label-verve: #b38600;
+  --label-emarcy: #8b5e3c;
+  --label-warner: #3d6b4f;
+  --label-mercury: #7a4466;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --font-body: 'Playfair Display', Georgia, serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 24px;
+
+  /* Transitions */
+  --ease-default: 200ms ease;
+  --ease-card: 300ms cubic-bezier(0.2, 0, 0, 1);
+  --stagger: 40ms;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Utility Classes ────────────────────────────────────────────────── */
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.pill {
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--ease-default);
+  cursor: pointer;
+}
+
+.pill:hover {
+  filter: brightness(1.2);
+}
+
+/* ── Film Grain Overlay ─────────────────────────────────────────────── */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Animations ─────────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.5s ease both;
+}
+
+/* ── Image Loading ─────────────────────────────────────────────────── */
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cover-img.loaded {
+  opacity: 1;
+}
+
+/* ── Card Base ──────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: transform var(--ease-card), box-shadow var(--ease-card);
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-muted);
+}

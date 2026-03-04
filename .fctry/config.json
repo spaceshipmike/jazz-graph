@@ -1,0 +1,37 @@
+{
+  "versions": {
+    "external": {
+      "type": "external",
+      "current": "0.1.0",
+      "propagationTargets": [],
+      "incrementRules": {
+        "patch": "auto-per-chunk",
+        "minor": "suggest-at-plan-completion",
+        "major": "suggest-at-experience-milestone"
+      }
+    },
+    "spec": {
+      "type": "internal",
+      "current": "0.2",
+      "propagationTargets": [
+        {
+          "file": ".fctry/spec.md",
+          "field": "spec-version"
+        }
+      ],
+      "incrementRules": {
+        "minor": "auto-on-evolve"
+      }
+    }
+  },
+  "relationshipRules": [
+    {
+      "when": {
+        "type": "spec",
+        "change": "major"
+      },
+      "action": "suggest-external-minor-bump"
+    }
+  ],
+  "formatVersion": "0.28.0"
+}
