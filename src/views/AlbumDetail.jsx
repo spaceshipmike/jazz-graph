@@ -1,12 +1,18 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, labelColor, slugify } from "../data";
 import { useMemo } from "react";
 
+function formatDuration(ms) {
+  const totalSec = Math.round(ms / 1000);
+  const min = Math.floor(totalSec / 60);
+  const sec = totalSec % 60;
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
 export default function AlbumDetail() {
   const { slug } = useParams();
-  const navigate = useNavigate();
-  const { albums, index, onRemoveAlbum } = useData();
+  const { albums, index } = useData();
 
   const album = index?.albumsBySlug.get(slug);
 
@@ -54,52 +60,49 @@ export default function AlbumDetail() {
         </div>
         <div style={{ flex: 1, minWidth: 200 }}>
           <h1 style={{ fontSize: 32, fontWeight: 900, lineHeight: 1.1, marginBottom: 8 }}>{album.title}</h1>
-          <p className="mono" style={{ fontSize: 14, color: labelColor(album.label), marginBottom: 4 }}>
+          <Link to={`/artist/${slugify(album.artist)}`} className="mono" style={{ fontSize: 14, color: labelColor(album.label), marginBottom: 4, display: "block", textDecoration: "none" }}>
             {album.artist}
-          </p>
+          </Link>
           <p className="mono" style={{ fontSize: 12, color: "var(--fg-muted)" }}>
-            {album.year || "?"} · {album.label || "Unknown label"}
+            <Link to={`/time?year=${album.year}`} style={{ color: "inherit", textDecoration: "none" }}>{album.year || "?"}</Link>
+            {" · "}
+            <Link to={`/?q=${encodeURIComponent(album.label || "")}`} style={{ color: "inherit", textDecoration: "none" }}>{album.label || "Unknown label"}</Link>
           </p>
-          {album.userAdded && (
-            <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-              <span className="mono" style={{
-                padding: "3px 8px", borderRadius: "var(--radius-sm)",
-                border: "1px dashed var(--fg-ghost)", fontSize: 9,
-                color: "var(--fg-muted)", letterSpacing: "0.05em",
-              }}>
-                USER ADDED
-              </span>
-              <button
-                onClick={() => {
-                  onRemoveAlbum(album.id);
-                  navigate("/");
-                }}
-                className="mono"
-                style={{
-                  padding: "3px 8px", borderRadius: "var(--radius-sm)",
-                  border: "1px solid var(--border)", fontSize: 9,
-                  color: "var(--fg-muted)",
-                }}
-              >
-                Remove
-              </button>
-              <a
-                href={`https://github.com/spaceshipmike/jazz-graph/issues/new?title=${encodeURIComponent(`Add album: ${album.title} — ${album.artist}`)}&body=${encodeURIComponent(`## Album Submission\n\n- **Title:** ${album.title}\n- **Artist:** ${album.artist}\n- **Year:** ${album.year || "?"}\n- **Label:** ${album.label || "?"}\n- **MusicBrainz ID:** ${album.mbid || "?"}\n\nSubmitted via The Jazz Graph "Add Album" feature.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mono"
-                style={{
-                  padding: "3px 8px", borderRadius: "var(--radius-sm)",
-                  border: "1px solid var(--fg-ghost)", fontSize: 9,
-                  color: "var(--fg-dim)", textDecoration: "none",
-                }}
-              >
-                Submit to project →
-              </a>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Track Listing */}
+      {album.tracks && album.tracks.length > 0 && (
+        <section style={{ marginBottom: "var(--space-2xl)" }}>
+          <h3 className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "var(--space-sm)" }}>
+            Tracks
+          </h3>
+          {album.tracks.map((t) => (
+            <div
+              key={t.position}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "6px 12px",
+                borderBottom: "1px solid var(--border)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <span className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)", width: 20, textAlign: "right" }}>
+                  {t.position}
+                </span>
+                <span style={{ fontSize: 13, color: "var(--fg-dim)" }}>{t.title}</span>
+              </div>
+              {t.lengthMs && (
+                <span className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)" }}>
+                  {formatDuration(t.lengthMs)}
+                </span>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* Lineup */}
       <section style={{ marginBottom: "var(--space-2xl)" }}>
@@ -164,8 +167,16 @@ export default function AlbumDetail() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 12, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{a.title}</div>
                   <div className="mono" style={{ fontSize: 9, color: "var(--fg-muted)" }}>{a.artist} · {a.year}</div>
-                  <div className="mono" style={{ fontSize: 9, color: "var(--fg-ghost)", marginTop: 2 }}>
-                    {shared.map((m) => m.name.split(" ").pop()).join(", ")}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 3 }}>
+                    {shared.map((m) => (
+                      <span key={m.name} className="mono" style={{
+                        fontSize: 8, color: instrumentColor(m.instrument),
+                        background: `${instrumentColor(m.instrument)}15`,
+                        padding: "1px 4px", borderRadius: 3,
+                      }}>
+                        {m.name} <span style={{ opacity: 0.6 }}>({m.instrument})</span>
+                      </span>
+                    ))}
                   </div>
                 </div>
               </Link>

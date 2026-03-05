@@ -1,33 +1,34 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.2"
+spec-version: "0.6"
 spec-format: nlspec-v2
 date: 2026-03-04
 status: active
 author: mike
 synopsis:
-  short: "Interactive visual encyclopedia exploring connections across 700+ classic jazz albums — browse, visualize, and contribute"
-  medium: "The Jazz Graph is a static web app that visualizes the hidden network of jazz — how musicians, albums, instruments, labels, and eras connect across 320+ canonical recordings. Built with real cover art and multiple purpose-built data visualizations in a Blue Note-inspired dark aesthetic."
-  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from a curated collection of 320+ greatest jazz albums (sourced from MusicBrainz and Discogs), it reveals the dense web of connections between musicians, albums, instruments, and labels through multiple visualization types — a browsable gallery, force-directed network graph, artist career timelines, and album connection diagrams. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. No backend required — all data is pre-fetched and bundled for fast, self-contained deployment."
+  short: "Interactive visual encyclopedia exploring 2,000+ jazz albums through seven data dimensions — color, artists, instruments, labels, time, sound, and words"
+  medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,000+ albums with full track listings, session lineups, and real cover art in a Blue Note-inspired dark aesthetic."
+  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,000+ albums (sourced from MusicBrainz), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing), Sound (durations and ensemble patterns), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers."
   stack:
     - JavaScript
     - React + Vite
     - D3.js
     - MusicBrainz API
-    - Discogs API
+    - Spotify API (cover art)
     - Static site deployment
   patterns:
     - Static SPA with pre-built data
     - Build-time data pipeline
-    - Client-side routing
+    - Client-side routing with nested sub-navigation
+    - Category + sub-view navigation model
     - Multiple specialized data visualizations
     - Design token system
   goals:
-    - Visualize jazz musician/album connections through diverse, polished dataviz
-    - Provide a browsable encyclopedia experience with real album art and artist photos
+    - Visualize jazz through seven thematic data dimensions with multiple viz types per dimension
+    - Provide a browsable encyclopedia experience with real album art
     - Maintain Blue Note-inspired visual identity across all views
-    - Perform fluidly with 320+ albums on commodity hardware
-    - Ship incrementally in 1-2 hour daily sessions
+    - Perform fluidly with 2,000+ albums on commodity hardware
+    - Mine semantic meaning from 15,000+ song and album titles
 plugin-version: 0.28.0
 ```
 
@@ -37,9 +38,9 @@ plugin-version: 0.28.0
 
 The Jazz Graph is a visual encyclopedia of jazz. It makes visible what liner notes only hint at — the dense, fascinating web of who played with whom, when, and on what instrument.
 
-The experience is **discovery-driven**. You land on a gallery of real album covers. You click one. You see the lineup. You notice Ron Carter. You click his name. You see his timeline — 15 albums across two decades, moving from hard bop to fusion. You notice he overlaps with Herbie Hancock on 6 records. You pull up the network graph and see the cluster they form with Tony Williams and Wayne Shorter — the Second Great Quintet plus solo work radiating outward.
+The experience is **discovery-driven**. You land on a mosaic of album covers sorted by color. You switch to Artists and see a radial chart of the most prolific musicians. You drill into the collaboration network and discover that Ron Carter connects to 47 other musicians. You switch to Words and see a world map lit up with place names pulled from thousands of song titles — "Havana", "Paris", "Harlem", "Tokyo."
 
-Every view answers a different question about the data. The gallery asks "what's here?" The network asks "who connects to whom?" The timeline asks "what's this person's story?" The connections view asks "which albums share DNA?"
+The app is organized into **seven thematic categories**, each containing multiple visualization panels accessed via sub-navigation tabs. This structure scales naturally as new visualizations are added.
 
 ### Design Language
 
@@ -48,19 +49,30 @@ Dark, high-contrast, typographically bold — inspired by Reid Miles' Blue Note 
 - **Typography:** Bold serif for headings (display weight), monospace for metadata and data labels
 - **Color:** Instrument-family color system (brass = warm orange/red, reeds = gold, keys = blue, rhythm = purple/green, strings = pink, mallets = teal). Label colors as accents.
 - **Texture:** Subtle film grain overlay. Deep blacks. Restrained use of glow on interactive elements.
-- **Layout:** Each view is its own distinct dataviz format, not a repurposed generic chart. Inspired by the diversity of types at datavizproject.com.
+- **Layout:** Each visualization panel is its own distinct dataviz format. Inspired by the diversity of types at datavizproject.com.
 
 ## 2. Data
 
 ### Source & Pipeline
 
-A build-time script fetches and assembles the dataset:
+A build-time pipeline fetches and assembles the dataset:
 
-1. **Album list:** Composite of canonical "greatest jazz albums" lists (Rolling Stone, Jazz Times, AllAboutJazz, etc.), targeting ~500 albums
+1. **Album list:** Curated seed list expanded via automated MusicBrainz discovery, targeting 2,000+ albums
 2. **Metadata:** MusicBrainz for album/artist/personnel data (full session lineups with instruments)
-3. **Cover art:** Cover Art Archive (primary), Discogs API (fallback)
-4. **Artist photos:** Discogs artist images (Spotify as future enhancement)
-5. **Output:** Static JSON + downloaded image assets
+3. **Track listings:** MusicBrainz recordings — title, position, duration for every track
+4. **Cover art:** Spotify API 640px (primary), Cover Art Archive (fallback)
+5. **Color extraction:** Dominant color (HSL) extracted from each cover image at build time
+6. **Post-processing:** Instrument normalization, date correction, label correction, lead instrument resolution
+7. **Output:** Static JSON + downloaded image assets
+
+Pipeline scripts (run in order):
+```
+npm run fetch-data            # MusicBrainz metadata + lineup
+npm run fetch-tracks          # MusicBrainz track listings
+npm run fetch-spotify-covers  # Spotify 640px art (primary)
+npm run fetch-covers          # Cover Art Archive (fallback)
+npm run extract-colors        # Dominant color from covers
+```
 
 ### Data Schema
 
@@ -72,15 +84,24 @@ Album {
   year: number (original release year)
   label: string
   coverPath: string | null (local image path)
-  mbid: string (MusicBrainz release ID — pipeline provenance)
-  rgid: string (MusicBrainz release-group ID — pipeline provenance)
+  dominantColor: { h: number, s: number, l: number } | null
+  mbid: string (MusicBrainz release ID)
+  rgid: string (MusicBrainz release-group ID)
+  spotifyId: string | null
   lineup: Musician[]
+  tracks: Track[]
 }
 
 Musician {
   name: string (normalized across albums)
   instrument: string
   lead: boolean
+}
+
+Track {
+  title: string
+  position: number
+  lengthMs: number | null
 }
 
 Artist (derived at runtime) {
@@ -108,7 +129,7 @@ Instruments not in the map fall through to a neutral gray (#888) and "other" fam
 
 ### Label Colors
 
-Record labels have assigned brand colors used throughout the app for node coloring, metadata display, and group headers.
+Record labels have assigned brand colors used throughout the app.
 
 **Primary labels (11):** Blue Note (#0070c0), Columbia (#c41e3a), Impulse! (#e8740c), Prestige (#6b3fa0), Riverside (#2d8659), Atlantic (#cc9b26), ECM (#5a7d8c), Verve (#b38600), EmArcy (#8b5e3c), Warner Bros. (#3d6b4f), Mercury (#7a4466).
 
@@ -118,119 +139,152 @@ Unrecognized labels use neutral gray (#888).
 
 ## 3. Views
 
-### 3.1 Album Gallery (Home — `/`)
+### Navigation Model
 
-The primary entry point. A filterable, groupable grid of album cards with real cover art.
+The app uses a **two-level navigation** system:
 
-**Card contents:** Cover image, title, artist, year, label badge, truncated lineup pills.
+- **Primary nav** (top bar): 7 category pills — Color · Artists · Instruments · Labels · Time · Sound · Words
+- **Sub-nav** (secondary pill row below primary): switches between visualization panels within the active category. One panel visible at a time.
 
-**Controls:**
-- Search: filters across title, artist, musician name, instrument, label
-- Group by: label, decade, leader, lead instrument
-- Instrument filter: toggle pills to show only albums featuring that instrument
+Sub-nav selections are encoded in the URL as path segments (e.g., `/labels/flow`, `/instruments/eras`). The first sub-view in each category is the default when navigating to the category root.
 
-**Behavior:** Groups display as labeled sections with a colored divider. Filtering is immediate. Cards animate in with staggered fade.
+### 3.1 Color (Home — `/`)
 
-### 3.2 Network Graph (`/network`)
+The landing page. A dense, edge-to-edge grid of album covers sorted by dominant color — no metadata, no gaps, no rounded corners. The covers flow through the hue spectrum.
 
-Force-directed graph showing musician-album connections.
+**Sub-views:** None (single panel).
 
-**Nodes:** Albums (colored by label) and musicians (colored by primary instrument). Node size reflects number of connections.
+**Layout:** Square cover images tiled with zero padding/gap. No text or overlays.
 
-**Edges:** Connect musicians to albums they appear on. Colored by instrument when filtered.
+**Sort order:** Albums sorted by dominant hue. Albums without covers placed at end.
 
-**Interaction:** Zoom, pan, drag nodes. Hover highlights connections and dims unrelated nodes. Click navigates to full album/artist page. Instrument legend is interactive (click to filter).
+**Interaction:** Click navigates to album detail. Hover shows subtle brightness shift.
 
-**Performance target:** 60fps interaction with full dataset. Initial layout settles without visible jank.
+### 3.2 Artists (`/artists`)
 
-### 3.3 Artist Timeline (`/artist/:slug`)
+Visualizations centered on the people who made the music.
+
+**Sub-views:**
+- **Overview** (`/artists` default) — Radial bar chart of top artists by album count, colored by primary instrument family. Shows the most prolific musicians at a glance.
+- **Network** (`/artists/network`) — Force-directed graph showing musician-album connections. Nodes are albums (colored by label) and musicians (colored by primary instrument). Edges connect musicians to albums. Zoom, pan, drag. Hover highlights connections. Click navigates to detail pages.
+- **Careers** (`/artists/careers`) — Career span chart showing each artist's first to last album as a horizontal bar on a year axis. Sorted by career start date. Reveals generational clusters and longevity patterns.
+
+### 3.3 Instruments (`/instruments`)
+
+Visualizations centered on what was played.
+
+**Sub-views:**
+- **Overview** (`/instruments` default) — Radial bar chart of lead instruments by album count, colored by instrument family. Shows which instruments dominate jazz leadership.
+- **Eras** (`/instruments/eras`) — Streamgraph showing instrument family prevalence across the jazz timeline. D3 stack with `stackOffsetWiggle` and `curveBasis`. Each stream colored by family. Hover shows family/year/count. Reveals how jazz's instrumental palette shifted over decades.
+
+**Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete. Filters apply across all sub-views.
+
+### 3.4 Labels (`/labels`)
+
+Visualizations centered on the business of jazz.
+
+**Sub-views:**
+- **Overview** (`/labels` default) — Radial bar chart of labels by album count, using label brand colors. Shows the landscape of jazz recording.
+- **Browse** (`/labels/browse`) — Filterable grid of album cards grouped by label with colored section headers. Search across title, artist, musician, instrument, label. Instrument family filter pills.
+- **Flow** (`/labels/flow`) — Alluvial diagram showing how musicians moved between labels across time periods (1949–55, 1956–60, 1961–65, 1966–70, 1971–75, 1976–80, 1981+). Nodes represent labels sized by musician count. Ribbons show transitions.
+
+**Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete. Filters apply across all sub-views.
+
+### 3.5 Time (`/time`)
+
+Visualizations centered on when the music was made.
+
+**Sub-views:**
+- **Timeline** (`/time` default) — Chronological view. Albums grouped by year, laid out vertically. Year headings as typographic anchors, album covers in horizontal rows. Deep-linking via `?year=YYYY`.
+- **Density** (`/time/density`) — Albums per year bar chart showing recording activity over time. Reveals boom periods and quiet years.
+- **Ensembles** (`/time/ensembles`) — Lineup size trend over decades. Shows whether jazz ensembles got bigger or smaller over time.
+
+**Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete.
+
+### 3.6 Sound (`/sound`)
+
+Visualizations derived from track-level data (durations, counts, structure).
+
+**Sub-views:**
+- **Durations** (`/sound` default) — Track duration distribution. How long is a jazz track? Histogram or violin plot showing the spread, with notable outliers labeled.
+- **By Era** (`/sound/by-era`) — Average track duration by decade. Did jazz tracks get longer over time? (Spoiler: yes, dramatically.)
+- **Track Counts** (`/sound/tracks`) — Distribution of tracks per album. Reveals format conventions (LP sides, CD-era expansion).
+
+### 3.7 Words (`/words`)
+
+Semantic mining of album and song titles — 15,000+ titles analyzed for recurring themes.
+
+**Sub-views:**
+- **Geography** (`/words` default) — Place names extracted from titles, plotted on a stylized dark world map (D3 equirectangular or natural earth projection). Dots sized by frequency. Reveals jazz's geographic imagination — where the music dreams of.
+- **Mood** (`/words/mood`) — Keyword dictionaries for emotion categories (joy, melancholy, love, longing, night, freedom). Rendered as a force-directed cluster or terrain visualization. Shows the emotional landscape of jazz titles.
+- **Vocabulary** (`/words/vocabulary`) — Frequency of musical form words (blues, bossa, waltz, swing, ballad, groove) as a treemap or radial layout. Adjacent section for jazz slang (cookin', blowin', groovin', etc.) if data density supports it.
+- **Imagery** (`/words/imagery`) — Time-of-day, seasons, weather, celestial references extracted from titles. Rendered as a clock face, calendar wheel, or seasonal arc. When does jazz happen in its own imagination?
+
+### 3.8 Album Detail (`/album/:slug`)
+
+A dedicated full page for each album.
+
+**Header:** Large cover art, title, artist (links to artist page), year (links to `/time?year=YYYY`), label (links to `/labels/browse` filtered by label).
+
+**Track listing:** Full track list with titles and durations (when available).
+
+**Lineup:** Full list of musicians with instrument and lead status. Each name links to the artist page.
+
+**Connections:** Section showing other albums that share musicians, ranked by shared personnel count.
+
+### 3.9 Artist Detail (`/artist/:slug`)
 
 A dedicated full page for each artist.
 
 **Header:** Artist name, photo (if available), instrument badges, album count, leader count.
 
-**Timeline:** Horizontal, year-axis. Each album is a node on the line. Leader appearances are visually prominent (larger, brighter). Sideman appearances are subdued. Hovering a node shows album details.
+**Timeline:** Horizontal, year-axis. Each album is a node. Leader appearances are visually prominent, sideman appearances subdued.
 
-**Collaborators:** Section showing top collaborators ranked by shared-album count, with links to their pages.
+**Collaborators:** Top collaborators ranked by shared-album count, with links.
 
 **Discography:** Grid of album covers (all appearances), sortable by year.
 
-### 3.4 Album Detail (`/album/:slug`)
-
-A dedicated full page for each album.
-
-**Header:** Large cover art, title, artist, year, label.
-
-**Lineup:** Full list of musicians with instrument and lead status. Each name links to the artist page.
-
-**Connections:** Section showing other albums that share musicians with this one, ranked by number of shared personnel.
-
-### 3.5 Album Connections (`/connections`)
-
-Two distinct visualizations showing how albums are related through shared musicians, toggled via Chord / Arc buttons.
-
-**Chord Diagram** (default): Albums arranged around a circle, grouped by label. Ribbons connect albums that share musicians — ribbon thickness maps to number of shared personnel. Label colors are used throughout. Hovering an arc shows album info; hovering a ribbon shows which musicians are shared. Click navigates to album detail.
-
-**Arc Diagram**: Albums laid out on a horizontal axis sorted by year. Arcs above the axis connect albums sharing musicians — arc thickness and opacity map to shared count. Year axis provides temporal context. Same hover/click behavior as chord view.
-
-**Filtering:** Minimum shared musicians threshold (1–5) to control density. Both views share the same filter.
-
-### 3.6 Instrument Eras (`/eras`)
-
-Streamgraph showing how instrument family prevalence evolves across the jazz timeline (1949–2005). Albums are grouped by year, and instrument families (brass, reeds, keys, rhythm, strings, mallets, vocals) are counted per year. D3 stack with `stackOffsetWiggle` and `curveBasis` produces smooth, organic streams. Each stream is colored by its instrument family token. Hovering a stream highlights it and shows a tooltip with family name, year, and album count. Clicking a stream navigates to the gallery filtered by a representative instrument from that family.
-
-### 3.7 Label Flow (`/flow`)
-
-Alluvial diagram showing how musicians moved between record labels across 7 time periods (1949–55, 1956–60, 1961–65, 1966–70, 1971–75, 1976–80, 1981+). Columns represent periods; nodes within each column represent labels sized by musician-appearance count. Curved ribbons connect labels across consecutive periods when musicians recorded for one label in one period and another in the next. Node colors use `labelColor()`. Hovering a node shows label name, count, and top musicians. Hovering a ribbon shows source/destination labels and the musicians who made that transition.
-
-### 3.8 Add Album (`#add-album`)
-
-User-contributed album additions via client-side MusicBrainz lookup.
-
-**Entry point:** "Add Album" button in the Gallery header, next to search/filter controls. Styled consistently with nav pills (mono font, pill shape, ghost border).
-
-**Flow:**
-1. User clicks "Add Album" → inline form expands (not a separate page or modal)
-2. User types album title and artist name
-3. User clicks "Search" → app queries MusicBrainz API client-side (`/ws/2/release?query=...&fmt=json`)
-4. Results list shows matching releases (title, artist, year, label) — max 10 results
-5. User picks the correct release → app fetches full release details (lineup with instruments, release-group for original year)
-6. Preview shows: title, artist, year, label, full lineup with instruments and lead status
-7. User confirms → album is added to the local dataset
-
-**Instrument normalization:** The same `INSTRUMENTS` map from `data.js` is applied to MusicBrainz instrument strings (e.g., "tenor saxophone" → "tenor sax", "drum set" → "drums") to ensure color coding and family grouping work correctly.
-
-**Persistence:** User-added albums are stored in `localStorage` under a `jazzgraph-user-albums` key as a JSON array. On app load, user albums are merged with the canonical dataset before `buildIndex()` runs. User albums include a `userAdded: true` flag.
-
-**Visual indicator:** User-added album cards show a subtle badge or border treatment (e.g., dashed border or small "+" icon) to distinguish them from the canonical set.
-
-**Removal:** User can remove their additions via a "Remove" action on the album detail page (only shown for `userAdded` albums).
-
-**Integration with all views:** User-added albums participate in all visualizations — gallery, network, connections, eras, flow — exactly like canonical albums. The `buildIndex()` function processes them identically.
-
-**Submit to project:** On the album detail page for user-added albums, a "Submit to project" link opens a pre-filled GitHub Issue in the project repo. The issue body contains the album's title, artist, MusicBrainz release ID, year, and label in a structured format. This lets the maintainer review and add it to the canonical seed list.
-
-**Error handling:** If MusicBrainz is unreachable or returns no results, show a clear message. Rate limit client requests to 1/second per MusicBrainz policy.
-
 ## 4. Navigation & Routing
 
-Client-side routing with these routes:
-- `/` — Album Gallery
-- `/network` — Network Graph
-- `/connections` — Album Connections
-- `/eras` — Instrument Eras
-- `/flow` — Label Flow
-- `/album/:slug` — Album Detail
-- `/artist/:slug` — Artist Detail
+Client-side routing with nested paths:
 
-**Navigation bar:** Top nav with view links (Gallery, Network, Connections, Eras, Flow). Active view indicated. App title "The Jazz Graph" links home. On detail pages (`/album/:slug`, `/artist/:slug`), view links are hidden — the title remains as a home link, and a "← Back" link provides navigation context.
+```
+/                        — Color Mosaic (home)
+/artists                 — Artists: Overview (default)
+/artists/network         — Artists: Network
+/artists/careers         — Artists: Careers
+/instruments             — Instruments: Overview (default)
+/instruments/eras        — Instruments: Eras
+/labels                  — Labels: Overview (default)
+/labels/browse           — Labels: Browse
+/labels/flow             — Labels: Flow
+/time                    — Time: Timeline (default)
+/time/density            — Time: Density
+/time/ensembles          — Time: Ensembles
+/sound                   — Sound: Durations (default)
+/sound/by-era            — Sound: By Era
+/sound/tracks            — Sound: Track Counts
+/words                   — Words: Geography (default)
+/words/mood              — Words: Mood
+/words/vocabulary        — Words: Vocabulary
+/words/imagery           — Words: Imagery
+/album/:slug             — Album Detail
+/artist/:slug            — Artist Detail
+```
+
+**Primary nav bar:** 7 category pills at top. Active category indicated. "The Jazz Graph" title links home.
+
+**Sub-nav bar:** Secondary row of smaller pills below primary nav, showing available panels for the active category. Active panel indicated. Only visible on category pages (hidden on detail pages and Color home).
+
+**Detail pages:** Primary and sub-nav hidden. Title remains as home link. "← Back" link for navigation context.
 
 **Behavior:**
 - Browser back/forward works correctly
 - All routes are bookmarkable and load directly
-- Filter/search state preserved when returning to gallery via back button
-- Clicking any musician name anywhere navigates to their artist page
-- Clicking any album reference anywhere navigates to its album page
+- Filter state preserved in URL search params
+- Clicking any musician name navigates to their artist page
+- Clicking any album reference navigates to its album page
+- Navigating to a category root (e.g., `/labels`) loads the default sub-view
 
 ## 5. Design Tokens
 
@@ -271,23 +325,21 @@ Transitions:
 
 ## 6. Build Order
 
-Each phase targets a shippable increment within 1-2 hour sessions:
-
-1. **Data pipeline** — Script fetching ~500 albums from MusicBrainz/Discogs with cover art
-2. **Project scaffold** — Framework setup, routing, design token system, layout shell
-3. **Album gallery** — Real covers, filtering, grouping (replaces mockup)
-4. **Album detail pages** — Full page with lineup, connections section
-5. **Artist detail pages** — Timeline visualization, discography, collaborators
-6. **Network graph** — Polished force-directed graph with navigation integration
-7. **Album connections** — Force-directed album similarity network
-8. **Polish** — Performance optimization, responsive tweaks, animation refinement
+1. **Data pipeline** — Metadata, tracks, cover art, color extraction for 2,000+ albums
+2. **Navigation scaffold** — Two-level nav system with category + sub-view routing
+3. **Color mosaic** — Dense cover grid sorted by hue (home page)
+4. **Labels category** — Overview radial bar, Browse grid, Flow alluvial
+5. **Instruments category** — Overview radial bar, Eras streamgraph
+6. **Artists category** — Overview radial bar, Network graph, Careers chart
+7. **Time category** — Timeline, Density chart, Ensembles trend
+8. **Sound category** — Duration distribution, By Era chart, Track Counts
+9. **Words category** — Geography map, Mood landscape, Vocabulary treemap, Imagery wheel
+10. **Polish** — Performance, responsive tweaks, animation refinement
 
 ## 7. Future Enhancements (Not in v1)
 
-- Spotify artist imagery integration
-- Streamgraph of instrument prevalence over time
-- Alluvial diagram showing musician flow between groups
 - Audio preview integration
-
 - Mobile-optimized layout
-- Full-text search across liner notes / album descriptions
+- Artist birthplace/nationality data from MusicBrainz
+- Genre/style tags from MusicBrainz
+- Recording location/studio data

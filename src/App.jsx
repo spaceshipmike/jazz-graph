@@ -1,24 +1,24 @@
 import { BrowserRouter, Routes, Route, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect, useMemo, useCallback, createContext, useContext } from "react";
+import { useState, useEffect, useMemo, createContext, useContext } from "react";
 import { buildIndex } from "./data";
-import { loadUserAlbums, addUserAlbum, removeUserAlbum, mergeAlbums } from "./userAlbums";
 import "./tokens.css";
 
-import Gallery from "./views/Gallery";
+import Color from "./views/Color";
+import ArtistsCategory from "./views/ArtistsCategory";
+import InstrumentsCategory from "./views/InstrumentsCategory";
+import LabelsCategory from "./views/LabelsCategory";
+import TimeCategory from "./views/TimeCategory";
+import SoundCategory from "./views/SoundCategory";
+import WordsCategory from "./views/WordsCategory";
 import AlbumDetail from "./views/AlbumDetail";
 import ArtistDetail from "./views/ArtistDetail";
-import Network from "./views/Network";
-import Connections from "./views/Connections";
-import Eras from "./views/Eras";
-import Flow from "./views/Flow";
 
 // Global data context
 const DataContext = createContext(null);
 export const useData = () => useContext(DataContext);
 
 export default function App() {
-  const [canonicalAlbums, setCanonicalAlbums] = useState([]);
-  const [userAlbums, setUserAlbums] = useState([]);
+  const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   const [artistPhotos, setArtistPhotos] = useState({});
 
@@ -27,30 +27,16 @@ export default function App() {
       fetch("/data/albums.json").then((r) => r.ok ? r.json() : []),
       fetch("/data/artist-photos.json").then((r) => r.ok ? r.json() : {}).catch(() => ({})),
     ]).then(([albumData, photos]) => {
-      setCanonicalAlbums(albumData);
-      setUserAlbums(loadUserAlbums());
+      setAlbums(albumData);
       setArtistPhotos(photos);
       setLoading(false);
     });
   }, []);
 
-  const albums = useMemo(
-    () => mergeAlbums(canonicalAlbums, userAlbums),
-    [canonicalAlbums, userAlbums],
-  );
-
   const index = useMemo(
     () => (albums.length > 0 ? buildIndex(albums) : null),
     [albums],
   );
-
-  const handleAddAlbum = useCallback((album) => {
-    setUserAlbums(addUserAlbum(album));
-  }, []);
-
-  const handleRemoveAlbum = useCallback((albumId) => {
-    setUserAlbums(removeUserAlbum(albumId));
-  }, []);
 
   if (loading) {
     return (
@@ -61,16 +47,18 @@ export default function App() {
   }
 
   return (
-    <DataContext.Provider value={{ albums, index, artistPhotos, onAddAlbum: handleAddAlbum, onRemoveAlbum: handleRemoveAlbum }}>
+    <DataContext.Provider value={{ albums, index, artistPhotos }}>
       <BrowserRouter>
         <div className="grain" />
         <Nav />
         <Routes>
-          <Route path="/" element={<Gallery />} />
-          <Route path="/network" element={<Network />} />
-          <Route path="/connections" element={<Connections />} />
-          <Route path="/eras" element={<Eras />} />
-          <Route path="/flow" element={<Flow />} />
+          <Route path="/" element={<Color />} />
+          <Route path="/artists/*" element={<ArtistsCategory />} />
+          <Route path="/instruments/*" element={<InstrumentsCategory />} />
+          <Route path="/labels/*" element={<LabelsCategory />} />
+          <Route path="/time/*" element={<TimeCategory />} />
+          <Route path="/sound/*" element={<SoundCategory />} />
+          <Route path="/words/*" element={<WordsCategory />} />
           <Route path="/album/:slug" element={<AlbumDetail />} />
           <Route path="/artist/:slug" element={<ArtistDetail />} />
         </Routes>
@@ -79,18 +67,20 @@ export default function App() {
   );
 }
 
+const CATEGORIES = [
+  { to: "/", label: "Color", exact: true },
+  { to: "/artists", label: "Artists" },
+  { to: "/instruments", label: "Instruments" },
+  { to: "/labels", label: "Labels" },
+  { to: "/time", label: "Time" },
+  { to: "/sound", label: "Sound" },
+  { to: "/words", label: "Words" },
+];
+
 function Nav() {
   const location = useLocation();
   const navigate = useNavigate();
   const isDetail = location.pathname.startsWith("/album/") || location.pathname.startsWith("/artist/");
-
-  const links = [
-    { to: "/", label: "Gallery" },
-    { to: "/network", label: "Network" },
-    { to: "/connections", label: "Connections" },
-    { to: "/eras", label: "Eras" },
-    { to: "/flow", label: "Flow" },
-  ];
 
   return (
     <header style={{ padding: "20px var(--space-xl) 0", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
@@ -112,11 +102,11 @@ function Nav() {
       </div>
       {!isDetail && (
         <nav style={{ display: "flex", gap: 4, marginBottom: 2 }}>
-          {links.map(({ to, label }) => (
+          {CATEGORIES.map(({ to, label, exact }) => (
             <NavLink
               key={to}
               to={to}
-              end={to === "/"}
+              end={exact}
               className="mono"
               style={({ isActive }) => ({
                 padding: "7px 18px",

@@ -138,4 +138,18 @@ export function buildIndex(albums) {
   return { musicians, albumsBySlug, artistsBySlug };
 }
 
-export { INSTRUMENTS, LABELS };
+const FAMILIES = {
+  brass:   "#e85d3a",
+  reeds:   "#d4a843",
+  keys:    "#5b9bd5",
+  rhythm:  "#7c5cbf",
+  strings: "#c75d8f",
+  mallets: "#6bb5a0",
+  vocals:  "#d48db0",
+};
+
+export function familyColor(family) {
+  return FAMILIES[family] || "#888";
+}
+
+export { INSTRUMENTS, LABELS, FAMILIES };

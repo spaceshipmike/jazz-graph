@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, labelColor, slugify } from "../data";
 import { useMemo, useRef, useEffect } from "react";
@@ -141,6 +141,7 @@ export default function ArtistDetail() {
 
 function Timeline({ albums, artistName }) {
   const svgRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!svgRef.current || albums.length === 0) return;
@@ -206,6 +207,9 @@ function Timeline({ albums, artistName }) {
       .on("mouseout", (event, d) => {
         tip.style("display", "none");
         d3.select(event.target).attr("fill-opacity", (d) => d._lead ? 0.9 : 0.4).attr("r", (d) => d._lead ? 8 : 5);
+      })
+      .on("click", (event, d) => {
+        navigate(`/album/${d.id}`);
       });
 
   }, [albums]);

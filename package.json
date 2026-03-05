@@ -7,7 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fetch-data": "node scripts/fetch-data.mjs"
+    "fetch-data": "node scripts/fetch-data.mjs",
+    "fetch-spotify-covers": "node scripts/fetch-spotify-covers.mjs",
+    "fetch-covers": "node scripts/fetch-covers.mjs",
+    "fetch-tracks": "node scripts/fetch-tracks.mjs",
+    "extract-colors": "node scripts/extract-colors.mjs",
+    "pipeline": "npm run fetch-data && npm run fetch-spotify-covers && npm run fetch-covers && npm run extract-colors"
   },
   "dependencies": {
     "d3": "^7.9.0",
@@ -17,6 +22,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.0",
+    "sharp": "^0.34.5",
     "vite": "^6.0.0"
   }
 }

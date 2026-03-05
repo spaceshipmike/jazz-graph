@@ -134,12 +134,13 @@ function ChordDiagram({ albums, matrix, labelGroups, connections }) {
   const svgRef = useRef(null);
   const navigate = useNavigate();
   const [tip, setTip] = useState(null);
+  const [legend, setLegend] = useState([]);
 
   useEffect(() => {
     if (!svgRef.current || albums.length === 0) return;
 
-    const size = Math.min(window.innerWidth - 64, 800);
-    const outerRadius = size / 2 - 60;
+    const size = Math.min(window.innerWidth - 64, 960);
+    const outerRadius = size / 2 - 120;
     const innerRadius = outerRadius - 20;
 
     const svg = d3.select(svgRef.current);
@@ -196,17 +197,17 @@ function ChordDiagram({ albums, matrix, labelGroups, connections }) {
       .each((d) => { d.angle = (d.startAngle + d.endAngle) / 2; })
       .attr("dy", "0.35em")
       .attr("transform", (d) =>
-        `rotate(${(d.angle * 180 / Math.PI - 90)}) translate(${outerRadius + 6}) ${d.angle > Math.PI ? "rotate(180)" : ""}`
+        `rotate(${(d.angle * 180 / Math.PI - 90)}) translate(${outerRadius + 8}) ${d.angle > Math.PI ? "rotate(180)" : ""}`
       )
       .attr("text-anchor", (d) => d.angle > Math.PI ? "end" : null)
       .text((d) => {
         const a = albums[d.index];
         const span = d.endAngle - d.startAngle;
-        if (span < 0.04) return "";
-        const max = span < 0.08 ? 12 : 22;
+        if (span < 0.012) return "";
+        const max = span < 0.03 ? 8 : span < 0.06 ? 14 : 22;
         return a.title.length > max ? a.title.slice(0, max - 1) + "…" : a.title;
       })
-      .attr("font-size", 7)
+      .attr("font-size", 6)
       .attr("font-family", "'JetBrains Mono', monospace")
       .attr("fill", "#555")
       .style("pointer-events", "none");
@@ -239,40 +240,34 @@ function ChordDiagram({ albums, matrix, labelGroups, connections }) {
         setTip(null);
       });
 
-    // Label group arcs (outer ring showing label names)
-    const labelEntries = [...labelGroups.entries()]
+    // Build legend data (top labels by album count)
+    const legendEntries = [...labelGroups.entries()]
       .filter(([, indices]) => indices.length >= 3)
-      .sort((a, b) => b[1].length - a[1].length);
-
-    if (labelEntries.length > 0) {
-      const labelG = g.append("g");
-      for (const [label, indices] of labelEntries) {
-        const angles = indices.map((i) => {
-          const grp = chords.groups[i];
-          return grp ? (grp.startAngle + grp.endAngle) / 2 : 0;
-        }).filter(Boolean);
-        if (angles.length === 0) continue;
-        const midAngle = d3.mean(angles);
-        labelG.append("text")
-          .attr("transform",
-            `rotate(${midAngle * 180 / Math.PI - 90}) translate(${outerRadius + 38}) ${midAngle > Math.PI ? "rotate(180)" : ""}`
-          )
-          .attr("text-anchor", midAngle > Math.PI ? "end" : "start")
-          .attr("dy", "0.35em")
-          .text(label)
-          .attr("font-size", 9)
-          .attr("font-weight", 600)
-          .attr("font-family", "'JetBrains Mono', monospace")
-          .attr("fill", labelColor(label))
-          .attr("fill-opacity", 0.7)
-          .style("pointer-events", "none");
-      }
-    }
+      .sort((a, b) => b[1].length - a[1].length)
+      .slice(0, 12)
+      .map(([label, indices]) => ({ label, count: indices.length }));
+    setLegend(legendEntries);
   }, [albums, matrix, labelGroups, navigate]);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <svg ref={svgRef} style={{ display: "block", margin: "0 auto", borderRadius: "var(--radius-md)", background: "var(--bg)" }} />
+      {legend.length > 0 && (
+        <div className="mono" style={{
+          position: "absolute", top: 12, right: 12,
+          display: "flex", flexDirection: "column", gap: 3,
+          background: "rgba(0,0,0,0.5)", borderRadius: "var(--radius-sm)",
+          padding: "8px 10px", backdropFilter: "blur(4px)",
+        }}>
+          {legend.map(({ label, count }) => (
+            <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ width: 8, height: 8, borderRadius: 2, background: labelColor(label), flexShrink: 0 }} />
+              <span style={{ fontSize: 8, color: "var(--fg-muted)" }}>{label}</span>
+              <span style={{ fontSize: 7, color: "var(--fg-ghost)", marginLeft: "auto" }}>{count}</span>
+            </div>
+          ))}
+        </div>
+      )}
       {tip && (
         <div className="mono" style={{
           position: "fixed", left: tip.x + 14, top: tip.y - 8,
@@ -286,7 +281,7 @@ function ChordDiagram({ albums, matrix, labelGroups, connections }) {
       <p className="mono" style={{ textAlign: "center", fontSize: 10, color: "var(--fg-ghost)", marginTop: "var(--space-sm)" }}>
         Hover arcs for album info · Hover ribbons for shared musicians · Click arcs for album details
       </p>
-    </>
+    </div>
   );
 }
 
