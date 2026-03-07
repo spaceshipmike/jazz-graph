@@ -23,34 +23,38 @@ If requirements shift, update the spec first (via `/fctry:evolve`), then impleme
 
 ```
 .fctry/              — spec, scenarios, config, references
-scripts/             — data pipeline scripts
-  fetch-data.mjs     — MusicBrainz metadata pipeline (no images)
-  fetch-tracks.mjs   — MusicBrainz track listings
-  fetch-spotify-covers.mjs — Spotify 640px cover art (primary)
-  fetch-covers.mjs   — Cover Art Archive fallback
-  extract-colors.mjs — dominant color extraction (HSL)
-  clean-data.mjs     — instrument/label normalization
-  fix-dates.mjs      — automated date correction
-  fix-labels.mjs     — label corrections
-  fix-leads.mjs      — leader instrument resolution
-  seed-albums.json   — seed list of ~3,100 album titles
 data/                — pipeline output (gitignored images)
+  artist-roster.json — curated artist list (source of truth for rebuild)
   albums.json        — 2,000+ albums with metadata + lineup + tracks + dominantColor
   images/covers/     — album cover art JPGs
+scripts/             — data pipeline scripts
+  rebuild-library.mjs     — full rebuild from artist roster (--browse, --resume)
+  filter-catalog.mjs      — filter catalog between browse and fetch phases
+  fetch-spotify-covers.mjs — Spotify 640px cover art (primary)
+  fetch-covers.mjs         — Cover Art Archive fallback
+  extract-colors.mjs       — dominant color extraction (HSL)
+  clean-data.mjs           — instrument/label normalization
+  fix-dates.mjs            — automated date correction
+  fix-labels.mjs           — label corrections
+  fix-leads.mjs            — leader instrument resolution
+  add-artist.mjs           — interactive single-artist addition
 src/                 — application source
   App.jsx            — router, two-level nav, data context
   data.js            — instrument/label/family maps, buildIndex()
   tokens.css         — design tokens + reset
-  components/FilterBar.jsx — shared filter bar (family pills, label pills, artist autocomplete)
-  views/Color.jsx    — color mosaic home
-  views/Gallery.jsx  — labels browse view (album grid grouped by label)
+  components/FilterBar.jsx   — shared filter bar (family pills, label pills, artist autocomplete)
+  components/CategoryPage.jsx — category layout with sub-nav tabs
+  views/Color.jsx              — color mosaic home
+  views/ArtistsCategory.jsx    — Artists: Overview, Network, Connections, Careers
+  views/ArtistsConnections.jsx — Six Degrees of Jazz path finder
+  views/ArtistsCareers.jsx     — career span chart
+  views/InstrumentsCategory.jsx — Instruments: Overview, Eras
+  views/LabelsCategory.jsx      — Labels: Overview, Browse, Flow
+  views/TimeCategory.jsx        — Time: Timeline, Density, Ensembles
+  views/SoundCategory.jsx       — Sound: Durations, By Era, Track Counts
+  views/WordsCategory.jsx       — Words: Geography, Mood, Vocabulary, Imagery
   views/AlbumDetail.jsx
   views/ArtistDetail.jsx
-  views/Network.jsx  — force-directed graph (moving to Artists category)
-  views/Connections.jsx — chord + arc diagrams (being removed)
-  views/Eras.jsx     — streamgraph (moving to Instruments category)
-  views/Flow.jsx     — alluvial diagram (moving to Labels category)
-  views/Timeline.jsx — chronological view (moving to Time category)
 ```
 
 ## Key Decisions

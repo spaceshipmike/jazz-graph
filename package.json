@@ -1,6 +1,6 @@
 {
   "name": "the-jazz-graph",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,7 +15,9 @@
     "pipeline": "npm run fetch-data && npm run fetch-spotify-covers && npm run fetch-covers && npm run extract-colors"
   },
   "dependencies": {
+    "culori": "^4.0.2",
     "d3": "^7.9.0",
+    "node-vibrant": "^4.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.0"
