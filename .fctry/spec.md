@@ -55,24 +55,29 @@ Dark, high-contrast, typographically bold — inspired by Reid Miles' Blue Note 
 
 ### Source & Pipeline
 
-A build-time pipeline fetches and assembles the dataset:
+A build-time pipeline fetches and assembles the dataset from a curated artist roster.
 
-1. **Album list:** Curated seed list expanded via automated MusicBrainz discovery, targeting 2,000+ albums
-2. **Metadata:** MusicBrainz for album/artist/personnel data (full session lineups with instruments)
-3. **Track listings:** MusicBrainz recordings — title, position, duration for every track
-4. **Cover art:** Spotify API 640px (primary), Cover Art Archive (fallback)
-5. **Color extraction:** Dominant color (HSL) extracted from each cover image at build time
-6. **Post-processing:** Instrument normalization, date correction, label correction, lead instrument resolution
-7. **Output:** Static JSON + downloaded image assets
+**Architecture:** The library is built top-down from `data/artist-roster.json`, which declares the artists and labels to include. The rebuild script fetches complete discographies from MusicBrainz, filters out reissues and posthumous releases, then fetches album details (lineup, label, year) for each remaining entry.
 
-Pipeline scripts (run in order):
+**Rebuild workflow:**
+1. **Browse** — Fetch discographies for all roster artists + label catalogs (`--browse` flag)
+2. **Filter** — Remove posthumous releases (lifetime + 10 years), reissue title patterns, duplicate titles, junk budget labels (`scripts/filter-catalog.mjs`)
+3. **Fetch** — Fetch album details for the filtered catalog (`--resume` flag)
+4. **Cover art** — Spotify API 640px (primary), Cover Art Archive (fallback)
+5. **Color extraction** — Dominant color (HSL) extracted from each cover image
+6. **Post-processing** — Instrument normalization, date correction, label correction, lead instrument resolution
+
+**Rebuild scripts:**
 ```
-npm run fetch-data            # MusicBrainz metadata + lineup
-npm run fetch-tracks          # MusicBrainz track listings
-npm run fetch-spotify-covers  # Spotify 640px art (primary)
-npm run fetch-covers          # Cover Art Archive (fallback)
-npm run extract-colors        # Dominant color from covers
+node scripts/rebuild-library.mjs --browse   # Phase 1: browse discographies
+node scripts/filter-catalog.mjs             # Filter catalog
+node scripts/rebuild-library.mjs --resume   # Phase 2: fetch album details
+node scripts/fetch-spotify-covers.mjs       # Spotify 640px art (primary)
+node scripts/fetch-covers.mjs               # Cover Art Archive (fallback)
+node scripts/extract-colors.mjs             # Dominant color from covers
 ```
+
+**Artist roster:** `data/artist-roster.json` contains a curated list of ~76 artists and label catalogs (e.g., Groove Merchant Records). New artists are added manually after reviewing sideman candidates that appear frequently in existing lineups.
 
 ### Data Schema
 
@@ -167,6 +172,7 @@ Visualizations centered on the people who made the music.
 **Sub-views:**
 - **Overview** (`/artists` default) — Radial bar chart of top artists by album count, colored by primary instrument family. Shows the most prolific musicians at a glance.
 - **Network** (`/artists/network`) — Force-directed graph showing musician-album connections. Nodes are albums (colored by label) and musicians (colored by primary instrument). Edges connect musicians to albums. Zoom, pan, drag. Hover highlights connections. Click navigates to detail pages.
+- **Connections** (`/artists/connections`) — Six Degrees of Jazz. Two autocomplete inputs let you pick any two musicians; a BFS path-finder shows the shortest chain of shared albums connecting them. Includes a "most connected" leaderboard.
 - **Careers** (`/artists/careers`) — Career span chart showing each artist's first to last album as a horizontal bar on a year axis. Sorted by career start date. Reveals generational clusters and longevity patterns.
 
 ### 3.3 Instruments (`/instruments`)
@@ -252,6 +258,7 @@ Client-side routing with nested paths:
 /                        — Color Mosaic (home)
 /artists                 — Artists: Overview (default)
 /artists/network         — Artists: Network
+/artists/connections     — Artists: Connections
 /artists/careers         — Artists: Careers
 /instruments             — Instruments: Overview (default)
 /instruments/eras        — Instruments: Eras
