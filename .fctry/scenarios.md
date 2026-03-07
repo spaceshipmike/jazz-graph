@@ -1,10 +1,12 @@
 # The Jazz Graph — Scenarios
 
 ## S1: Data Pipeline Produces Valid Dataset
-A developer runs the data pipeline. It fetches album metadata, track listings, and cover art, then extracts dominant colors. The output is a JSON file containing 2,000+ albums.
+A developer configures the artist roster (`data/artist-roster.json`), runs the rebuild pipeline, then fetches cover art and extracts colors. The output is a JSON file containing 2,000+ albums sourced from the curated roster.
 
 **Satisfied when:**
-- Pipeline scripts run to completion without errors
+- Artist roster defines the source artists and label catalogs
+- Rebuild script (`rebuild-library.mjs`) fetches discographies and album details from MusicBrainz
+- Filter script (`filter-catalog.mjs`) removes posthumous releases, reissue titles, duplicates, and junk labels
 - Output JSON contains 2,000+ albums with complete metadata
 - Each album has at least one musician in the lineup
 - Albums have a `tracks` array with title, position, and duration for each track
@@ -55,11 +57,12 @@ A user navigates to Instruments. They see a radial bar chart of lead instruments
 - Both panels render correctly with the full dataset
 
 ## S6: Artists Category
-A user navigates to Artists. They see a radial bar chart of top artists. They switch to Network and see the force-directed collaboration graph. They switch to Careers and see career span bars.
+A user navigates to Artists. They see a radial bar chart of top artists. They switch to Network and see the force-directed collaboration graph. They switch to Connections and pick two musicians to find the shortest path between them. They switch to Careers and see career span bars.
 
 **Satisfied when:**
 - Overview shows radial bar chart of top artists by album count
 - Network shows force-directed graph with zoom/pan/hover/click
+- Connections shows Six Degrees path-finder with autocomplete inputs and most-connected leaderboard
 - Careers shows horizontal career span bars on a year axis
 - Click on any artist or album navigates to the detail page
 
