@@ -12,6 +12,22 @@ A developer configures the artist roster (`data/artist-roster.json`), runs the r
 - Albums have a `tracks` array with title, position, and duration for each track
 - 50%+ of albums have a downloaded cover image with `dominantColor` HSL values
 - Musician names are normalized (same person = same string across albums)
+- Each album has `secondaryTypes` from MusicBrainz (populated via backfill or at fetch time)
+
+## S14: Data Quality Audit Catches Suspect Albums
+A developer runs the audit script against the finished library. The script flags reissues, compilations, posthumous releases, label-era mismatches, thin lineups, and missing tracks. The developer reviews flagged items interactively and applies approved actions. Removed albums go to quarantine, not deletion.
+
+**Satisfied when:**
+- `audit-library.mjs` scans `albums.json` and produces `data/audit-report.json`
+- Report entries include issue type, action (REMOVE/FIX_DATE/FLAG), confidence (high/medium/low), and human-readable reason
+- High-confidence checks: MB secondary types (Compilation/Live/Remix), posthumous (death+10), reissue title patterns, junk labels
+- Medium-confidence checks: label-era mismatch (classic label outside active window), suspect date
+- Low-confidence checks: thin lineup (0–1 musicians), missing tracks
+- `--review` flag enables interactive terminal review (approve/reject per item)
+- `--apply` flag executes approved actions: removals move to `data/quarantine.json` with timestamp and reason
+- `--backfill-types` flag fetches MB secondary types for all existing albums and stores in album records
+- Quarantined albums are restorable (cover images preserved)
+- Running the audit twice without changes produces the same report (idempotent)
 
 ## S2: Color Mosaic Loads as Home
 A user opens The Jazz Graph. They see a dense, edge-to-edge grid of album covers sorted by dominant color — no gaps, no metadata, no rounded corners. Clicking any cover navigates to the album detail page.

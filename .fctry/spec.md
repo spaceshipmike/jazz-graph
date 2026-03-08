@@ -1,14 +1,14 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.6"
+spec-version: "0.7"
 spec-format: nlspec-v2
 date: 2026-03-04
 status: active
 author: mike
 synopsis:
   short: "Interactive visual encyclopedia exploring 2,000+ jazz albums through seven data dimensions — color, artists, instruments, labels, time, sound, and words"
-  medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,000+ albums with full track listings, session lineups, and real cover art in a Blue Note-inspired dark aesthetic."
-  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,000+ albums (sourced from MusicBrainz), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing), Sound (durations and ensemble patterns), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers."
+  medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,000+ albums with full track listings, session lineups, and real cover art in a Blue Note-inspired dark aesthetic. A repeatable data quality audit catches reissues, compilations, and metadata gaps."
+  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,000+ albums (sourced from MusicBrainz), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing), Sound (durations and ensemble patterns), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. A post-build audit pipeline flags reissues, compilations, label-era mismatches, and metadata gaps with human-in-the-loop review and quarantine-based removal."
   stack:
     - JavaScript
     - React + Vite
@@ -75,9 +75,42 @@ node scripts/rebuild-library.mjs --resume   # Phase 2: fetch album details
 node scripts/fetch-spotify-covers.mjs       # Spotify 640px art (primary)
 node scripts/fetch-covers.mjs               # Cover Art Archive (fallback)
 node scripts/extract-colors.mjs             # Dominant color from covers
+node scripts/audit-library.mjs              # Post-build quality audit (on-demand)
 ```
 
 **Artist roster:** `data/artist-roster.json` contains a curated list of ~76 artists and label catalogs (e.g., Groove Merchant Records). New artists are added manually after reviewing sideman candidates that appear frequently in existing lineups.
+
+### Data Quality Audit
+
+A repeatable post-build audit scans the finished library for albums that weaken data quality. Run on-demand against `albums.json` — not part of every rebuild, but used when the library feels suspect or after adding new artists.
+
+**Audit checks (ordered by confidence):**
+
+| Check | Signal | Confidence |
+|-------|--------|------------|
+| MB secondary types | Compilation, Live, Remix, DJ-mix, Mixtape/Street | High |
+| Posthumous release | Album year > artist death + 10 years | High |
+| Reissue title patterns | "best of", "remastered", "complete sessions", etc. | High |
+| Junk/budget label | Known reissue imprints (Waxtime, Laserlight, etc.) | High |
+| Label-era mismatch | Classic label outside its active recording window | Medium |
+| Suspect date | Year far from artist's active period | Medium |
+| Thin lineup | 0–1 musicians in lineup | Low |
+| Missing tracks | No track data at all | Low |
+
+**Label-era definitions:** A map of label name → active recording years (e.g., Prestige: 1949–1975, Riverside: 1953–1964). Albums credited to a label outside its window receive medium-confidence flags requiring human review. The map lives in the audit script.
+
+**Audit workflow:**
+1. `node scripts/audit-library.mjs` — scans library, produces `data/audit-report.json` with issue type, action (REMOVE / FIX_DATE / FLAG), confidence, and reason
+2. `node scripts/audit-library.mjs --review` — interactive terminal review: displays each flagged album, user approves or rejects the recommended action
+3. `node scripts/audit-library.mjs --apply` — executes approved actions: removals go to `data/quarantine.json` (restorable), date fixes update in-place
+
+**One-time backfill:** `node scripts/audit-library.mjs --backfill-types` fetches MusicBrainz secondary types for all existing albums (via release-group lookup) and stores them in the album record as `secondaryTypes: string[]`. After backfill, the MB type check runs locally without API calls.
+
+**Output files:**
+- `data/audit-report.json` — flagged albums with reasons and recommended actions
+- `data/quarantine.json` — removed albums (restorable archive)
+
+**Quarantine model:** Albums are never deleted. Approved removals move from `albums.json` to `data/quarantine.json` with a timestamp and reason. Cover images are preserved. Albums can be restored by moving them back.
 
 ### Data Schema
 
@@ -92,6 +125,7 @@ Album {
   dominantColor: { h: number, s: number, l: number } | null
   mbid: string (MusicBrainz release ID)
   rgid: string (MusicBrainz release-group ID)
+  secondaryTypes: string[] (MB release-group types: Compilation, Live, etc.)
   spotifyId: string | null
   lineup: Musician[]
   tracks: Track[]

@@ -38,6 +38,7 @@ scripts/             — data pipeline scripts
   fix-labels.mjs           — label corrections
   fix-leads.mjs            — leader instrument resolution
   add-artist.mjs           — interactive single-artist addition
+  audit-library.mjs        — post-build quality audit (reissues, dates, lineup, tracks)
 src/                 — application source
   App.jsx            — router, two-level nav, data context
   data.js            — instrument/label/family maps, buildIndex()
