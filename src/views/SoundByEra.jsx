@@ -18,7 +18,7 @@ export default function SoundByEra() {
     }
     return [...byDecade.entries()]
       .sort((a, b) => a[0] - b[0])
-      .filter(([, durations]) => durations.length >= 5)
+      .filter(([, durations]) => durations.length >= 20)
       .map(([decade, durations]) => ({
         decade,
         avg: d3.mean(durations),

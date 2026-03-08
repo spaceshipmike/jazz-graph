@@ -4,7 +4,10 @@
       "type": "external",
       "current": "0.1.3",
       "propagationTargets": [
-        { "file": "package.json", "field": "version" }
+        {
+          "file": "package.json",
+          "field": "version"
+        }
       ],
       "incrementRules": {
         "patch": "auto-per-chunk",
@@ -35,5 +38,5 @@
       "action": "suggest-external-minor-bump"
     }
   ],
-  "formatVersion": "0.28.0"
+  "formatVersion": "0.33.0"
 }

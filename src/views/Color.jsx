@@ -6,72 +6,104 @@ export default function Color() {
   const { albums } = useData();
 
   const sorted = useMemo(() => {
-    const withColor = albums.filter((a) => a.coverPath && a.palette && a.palette.length > 0);
+    const withColor = albums.filter((a) => a.coverPath && a.vibrant);
 
-    function metrics(album) {
+    // CIELAB chroma: distance from neutral axis — low = achromatic
+    function labChroma(c) {
+      if (c.lab) return Math.sqrt(c.lab.a * c.lab.a + c.lab.b * c.lab.b);
+      return c.s;
+    }
+
+    // Percentage of palette that is near-neutral, optionally filtered by lightness
+    function neutralPct(p, minL = -Infinity, maxL = Infinity) {
+      return p.filter(c => {
+        if (labChroma(c) >= 15) return false;
+        const l = c.lab ? c.lab.L : c.l;
+        return l > minL && l < maxL;
+      }).reduce((s, c) => s + c.pct, 0);
+    }
+
+    // Precompute sort keys for each album in a single pass
+    const keys = new Map();
+    for (const album of withColor) {
       const p = album.palette;
-      const avgL = p.reduce((s, c) => s + c.l * c.pct, 0) / 100;
-      const avgS = p.reduce((s, c) => s + c.s * c.pct, 0) / 100;
-      const maxSat = Math.max(...p.map(c => c.s));
 
-      // Representative color: area-weighted, with saturation bonus for large clusters
-      let best = p[0], bestScore = -1;
-      for (const c of p) {
-        const areaWeight = c.pct * 2;
-        const satBonus = c.pct >= 15 ? c.s : c.s * 0.3;
-        const lightPenalty = c.l < 10 ? 50 : c.l > 90 ? 50 : 0;
-        const score = areaWeight + satBonus - lightPenalty;
-        if (score > bestScore) { bestScore = score; best = c; }
+      // Palette metrics (single pass where possible)
+      let avgL = 50, wChroma = 0;
+      if (p && p.length > 0) {
+        const useLab = p[0] && p[0].lab;
+        avgL = p.reduce((s, c) => s + (useLab ? c.lab.L : c.l) * c.pct, 0) / 100;
+        wChroma = p.reduce((s, c) => s + labChroma(c) * c.pct, 0) / 100;
       }
 
-      // Accent color for monochrome covers
-      let accent = null, accScore = -1;
-      for (const c of p) {
-        if (c.l <= 15 && c.s <= 20) continue;
-        if (c.l >= 88) continue;
-        const score = c.s * 0.7 + c.pct * 0.3;
-        if (score > accScore) { accScore = score; accent = c; }
-      }
+      const darkNPct = p ? neutralPct(p, -Infinity, 30) : 0;
+      const lightNPct = p ? neutralPct(p, 60, Infinity) : 0;
+      const totalNeutral = p ? neutralPct(p) : 0;
 
       // Monochrome detection
-      let darkPct = 0, lightPct = 0;
-      for (const c of p) {
-        if (c.l <= 15 && c.s <= 20) darkPct += c.pct;
-        if (c.l >= 95 || (c.l >= 88 && c.s <= 15)) lightPct += c.pct;
+      let mono = false;
+      if (p) {
+        const maxChroma = Math.max(...p.map(labChroma));
+        if (maxChroma <= 12 || wChroma <= 8) mono = true;
+        else if (Math.max(...p.map(c => c.s)) <= 10) mono = true;
+        else {
+          let dkPct = 0, ltPct = 0;
+          for (const c of p) {
+            if (c.l <= 15 && c.s <= 20) dkPct += c.pct;
+            if (c.l >= 95 || (c.l >= 88 && c.s <= 15)) ltPct += c.pct;
+          }
+          if (dkPct >= 45 || ltPct >= 45 || dkPct + ltPct >= 75) mono = true;
+        }
       }
-      let mono = null;
-      if (darkPct >= 45) mono = "black";
-      else if (lightPct >= 45) mono = "white";
-      else if (darkPct + lightPct >= 75) mono = darkPct >= lightPct ? "black" : "white";
-      else if (maxSat <= 10) mono = avgL >= 50 ? "white" : "black";
 
       // Tier: 0=black, 1=dark, 2=mid, 3=light, 4=white
       let tier;
-      if (mono === "black") tier = 0;
-      else if (mono === "white") tier = 4;
-      else if (best.l < 25) tier = 1;
-      else if (best.l > 75) tier = 3;
-      else tier = 2;
+      if (avgL < 25) tier = avgL < 15 ? 0 : 1;
+      else if (avgL > 85) tier = 4;
+      else if (darkNPct >= 70) tier = 1;
+      else if (lightNPct >= 70) tier = avgL > 85 ? 4 : 3;
+      else if (totalNeutral >= 65 && avgL > 65) tier = 3;
+      else if (totalNeutral >= 65 && avgL < 30) tier = 1;
+      else if (wChroma < 20 && avgL > 60) tier = 3;
+      else if (wChroma < 20 && avgL < 35) tier = 1;
+      else if (mono) {
+        if (avgL < 30) tier = 0;
+        else if (avgL > 70) tier = 4;
+        else tier = avgL < 50 ? 1 : 3;
+      } else {
+        const l = album.vibrant.oklch.l;
+        tier = l < 0.3 ? 1 : l > 0.75 ? 3 : 2;
+      }
 
-      return { avgL, avgS, rep: best, accent, tier };
+      // Dominant chromatic hue from palette, fallback to vibrant
+      let hue = album.vibrant.oklch.h || 0;
+      if (p) {
+        const chromatic = p.filter(c => labChroma(c) >= 15);
+        if (chromatic.length > 0) {
+          const biggest = chromatic.reduce((a, b) => a.pct > b.pct ? a : b);
+          if (biggest.lab) {
+            const h = Math.atan2(biggest.lab.b, biggest.lab.a) * (180 / Math.PI);
+            hue = h < 0 ? h + 360 : h;
+          }
+        }
+      }
+
+      keys.set(album, { tier, avgL, hue, accentHue: album.vibrant.oklch.h || 0 });
     }
 
     withColor.sort((a, b) => {
-      const ma = metrics(a), mb = metrics(b);
-      if (ma.tier !== mb.tier) return ma.tier - mb.tier;
+      const kA = keys.get(a), kB = keys.get(b);
+      if (kA.tier !== kB.tier) return kA.tier - kB.tier;
 
       // Black/white tiers: sort by accent hue, then lightness
-      if (ma.tier === 0 || ma.tier === 4) {
-        const hA = ma.accent ? ma.accent.h : -1;
-        const hB = mb.accent ? mb.accent.h : -1;
-        if (hA !== hB) return hA - hB;
-        return ma.avgL - mb.avgL;
+      if (kA.tier === 0 || kA.tier === 4) {
+        if (kA.accentHue !== kB.accentHue) return kA.accentHue - kB.accentHue;
+        return kA.avgL - kB.avgL;
       }
 
-      // Color tiers (1, 2, 3): hue first, then lightness
-      if (ma.rep.h !== mb.rep.h) return ma.rep.h - mb.rep.h;
-      if (ma.rep.l !== mb.rep.l) return ma.rep.l - mb.rep.l;
-      return mb.rep.s - ma.rep.s;
+      // Color tiers: sort by dominant palette hue, then lightness
+      if (kA.hue !== kB.hue) return kA.hue - kB.hue;
+      return a.vibrant.oklch.l - b.vibrant.oklch.l;
     });
 
     return withColor;
@@ -92,30 +124,20 @@ export default function Color() {
           to={`/album/${album.id}`}
           style={{ display: "block", aspectRatio: "1", overflow: "hidden" }}
         >
-          {album.coverPath ? (
-            <img
-              src={`/data/${album.coverPath}`}
-              alt={album.title}
-              loading="lazy"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-                transition: "filter 200ms ease",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.2)")}
-              onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
-            />
-          ) : (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                background: "var(--surface)",
-              }}
-            />
-          )}
+          <img
+            src={`/data/${album.coverPath}`}
+            alt={album.title}
+            loading="lazy"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              transition: "filter 200ms ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.2)")}
+            onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
+          />
         </Link>
       ))}
     </div>

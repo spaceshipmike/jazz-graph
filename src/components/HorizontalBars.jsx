@@ -8,6 +8,7 @@ import * as d3 from "d3";
 export default function HorizontalBars({
   data,
   maxBars = 20,
+  globalMax,
   onBarClick,
 }) {
   const svgRef = useRef(null);
@@ -28,7 +29,7 @@ export default function HorizontalBars({
     svg.attr("width", width).attr("height", height);
 
     const x = d3.scaleLinear()
-      .domain([0, d3.max(items, (d) => d.value)])
+      .domain([0, globalMax || d3.max(items, (d) => d.value)])
       .range([margin.left, width - margin.right]);
 
     const g = svg.append("g");
@@ -80,7 +81,7 @@ export default function HorizontalBars({
       .attr("font-weight", 600)
       .text((d) => d.value);
 
-  }, [data, maxBars, onBarClick]);
+  }, [data, maxBars, globalMax, onBarClick]);
 
   return <svg ref={svgRef} />;
 }

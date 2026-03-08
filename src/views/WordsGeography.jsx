@@ -64,7 +64,7 @@ const REGION_ORDER = [
 export default function WordsGeography() {
   const { albums } = useData();
 
-  const { sections, titleCount, placeCount } = useMemo(() => {
+  const { sections, titleCount, placeCount, globalMax } = useMemo(() => {
     const titles = getAllTitles(albums);
     const places = extractPlaces(titles);
 
@@ -90,7 +90,9 @@ export default function WordsGeography() {
       });
     }
 
-    return { sections: secs, titleCount: titles.length, placeCount: places.length };
+    const allCounts = secs.flatMap((s) => s.places.map((p) => p.count));
+    const globalMax = allCounts.length > 0 ? Math.max(...allCounts) : 1;
+    return { sections: secs, titleCount: titles.length, placeCount: places.length, globalMax };
   }, [albums]);
 
   return (
@@ -122,6 +124,7 @@ export default function WordsGeography() {
               color: section.color,
             }))}
             maxBars={20}
+            globalMax={globalMax}
           />
         </div>
       ))}
