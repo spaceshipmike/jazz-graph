@@ -52,6 +52,7 @@ export default function App() {
       <BrowserRouter>
         <div className="grain" />
         <Nav />
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Color />} />
           <Route path="/artists/*" element={<ArtistsCategory />} />
@@ -67,6 +68,12 @@ export default function App() {
       </BrowserRouter>
     </DataContext.Provider>
   );
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
 }
 
 const CATEGORIES = [
@@ -112,7 +119,7 @@ function Nav() {
           </h1>
         </NavLink>
       </div>
-      {!isDetail && !isAbout && (
+      {!isDetail && (
         <nav style={{ display: "flex", gap: 4, alignItems: "center", marginBottom: 2 }}>
           {CATEGORIES.map(({ to, label, exact }) => (
             <NavLink
