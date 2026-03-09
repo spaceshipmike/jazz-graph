@@ -210,9 +210,30 @@ function creditsToLineup(credits, existingLeader) {
   return lineup;
 }
 
+// ─── Safe save: re-read albums.json and merge only lineup changes ───
+
+function saveEnrichedLineups(updatedLineups) {
+  // Re-read the current albums.json so we don't overwrite other changes
+  const fresh = JSON.parse(readFileSync(DATA_FILE, "utf8"));
+  const idIndex = new Map(fresh.map((a, i) => [a.id, i]));
+
+  let merged = 0;
+  for (const [id, lineup] of updatedLineups) {
+    const idx = idIndex.get(id);
+    if (idx !== undefined) {
+      fresh[idx].lineup = lineup;
+      merged++;
+    }
+  }
+
+  writeFileSync(DATA_FILE, JSON.stringify(fresh, null, 2) + "\n");
+  console.log(`  💾 Saved ${merged} enriched lineups (merged into current albums.json)`);
+}
+
 // ─── Main ───────────────────────────────────────────────────────────
 
 const albums = JSON.parse(readFileSync(DATA_FILE, "utf8"));
+const pendingLineups = new Map(); // id → lineup (changes to merge on save)
 
 // Load progress for resume
 let attempted = new Set();
@@ -308,7 +329,9 @@ for (let i = 0; i < toProcess.length; i++) {
   console.log(`${prefix} ★ ${album.artist} — ${album.title} (${album.lineup.length} → ${newLineup.length}, +${added})`);
 
   if (!DRY_RUN) {
-    // Find and update in main array
+    // Stage the lineup change for merge-save
+    pendingLineups.set(album.id, newLineup);
+    // Also update in-memory so threshold checks stay accurate
     const idx = albums.findIndex((a) => a.id === album.id);
     albums[idx].lineup = newLineup;
   }
@@ -318,13 +341,14 @@ for (let i = 0; i < toProcess.length; i++) {
 
   // Save progress every 25 albums
   if (i % 25 === 24 && !DRY_RUN) {
-    writeFileSync(DATA_FILE, JSON.stringify(albums, null, 2) + "\n");
+    saveEnrichedLineups(pendingLineups);
     writeFileSync(PROGRESS_FILE, JSON.stringify([...attempted]));
+    pendingLineups.clear();
   }
 }
 
-if (!DRY_RUN) {
-  writeFileSync(DATA_FILE, JSON.stringify(albums, null, 2) + "\n");
+if (!DRY_RUN && pendingLineups.size > 0) {
+  saveEnrichedLineups(pendingLineups);
   writeFileSync(PROGRESS_FILE, JSON.stringify([...attempted]));
 }
 

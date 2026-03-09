@@ -4,7 +4,7 @@
  * Post-process albums.json to normalize instruments and clean up lineup data.
  */
 
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -145,7 +145,7 @@ const REISSUE_LABELS = new Set([
 ]);
 
 // Title patterns that indicate compilations (not original albums)
-const COMP_TITLE_RE = /\bcomplete\b.*\b(session|recording|broadcast|concert)s?\b|\bcollection\b|\banthology\b|\bbest of\b|\bgreatest hits\b|\bsampler\b|\bparade of\b/i;
+const COMP_TITLE_RE = /\bcomplete\b.*\b(session|recording|broadcast|concert|live)s?\b|\bcollection\b|\banthology\b|\bbest of\b|\bgreatest hits\b|\bsampler\b|\bparade of\b/i;
 
 // Exceptions: titles that match patterns but are legitimate original albums
 const COMP_EXCEPTIONS = new Set([
@@ -247,6 +247,22 @@ for (const album of albums) {
   album.lineup = newLineup;
 }
 
+// ─── Cover Path Normalization ────────────────────────────────────────
+// Ensure coverPath points to WebP files when they exist
+let pathsFixed = 0;
+for (const album of albums) {
+  if (album.coverPath && album.coverPath.includes("images/covers/") && !album.coverPath.endsWith(".webp")) {
+    const webpPath = album.coverPath
+      .replace("images/covers/", "images/covers-webp/")
+      .replace(/\.(jpe?g|png)$/i, ".webp");
+    const fullPath = join(__dirname, "..", "data", webpPath);
+    if (existsSync(fullPath)) {
+      album.coverPath = webpPath;
+      pathsFixed++;
+    }
+  }
+}
+
 writeFileSync(DATA_FILE, JSON.stringify(albums, null, 2));
 
 // Report
@@ -254,5 +270,6 @@ const insts = new Set();
 albums.forEach((a) => a.lineup.forEach((m) => insts.add(m.instrument)));
 console.log(`Compilations removed: ${compilationsRemoved} (${beforeCount} → ${albums.length})`);
 console.log(`Cleaned ${cleaned} instrument names, removed ${removed} non-instrument entries, fixed ${labelsFixed} labels, deduped ${deduped} lineup entries, normalized ${artistsNormalized} artist names`);
+if (pathsFixed > 0) console.log(`Fixed ${pathsFixed} cover paths to WebP`);
 console.log(`Unique instruments now: ${insts.size}`);
 console.log([...insts].sort().join(", "));
