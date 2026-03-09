@@ -46,8 +46,8 @@
 
   /* Typography */
   --font-display: 'Oswald', 'Arial Narrow', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-  --font-body: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  --font-body: 'Source Serif 4', 'Georgia', serif;
 
   /* Spacing */
   --space-xs: 4px;
@@ -87,11 +87,15 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.01em;
-  text-transform: lowercase;
   line-height: 1.5;
   min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-transform: lowercase;
 }
 
 a {
