@@ -6,6 +6,45 @@ import HorizontalBars from "../components/HorizontalBars";
 
 const RARE_THRESHOLD = 5;
 
+// Wikipedia links for obscure instruments
+const WIKI_LINKS = {
+  "surdo": "https://en.wikipedia.org/wiki/Surdo",
+  "balafon": "https://en.wikipedia.org/wiki/Balafon",
+  "lyricon": "https://en.wikipedia.org/wiki/Lyricon",
+  "bodhrán": "https://en.wikipedia.org/wiki/Bodhr%C3%A1n",
+  "uilleann pipes": "https://en.wikipedia.org/wiki/Uilleann_pipes",
+  "pakhawaj": "https://en.wikipedia.org/wiki/Pakhawaj",
+  "cabasa": "https://en.wikipedia.org/wiki/Cabasa",
+  "shekere": "https://en.wikipedia.org/wiki/Shekere",
+  "basset clarinet": "https://en.wikipedia.org/wiki/Basset_clarinet",
+  "caxixi": "https://en.wikipedia.org/wiki/Caxixi",
+  "contrabassoon": "https://en.wikipedia.org/wiki/Contrabassoon",
+  "koto": "https://en.wikipedia.org/wiki/Koto_(instrument)",
+  "gumbri": "https://en.wikipedia.org/wiki/Guembri",
+  "daf": "https://en.wikipedia.org/wiki/Daf",
+  "celesta": "https://en.wikipedia.org/wiki/Celesta",
+  "clavichord": "https://en.wikipedia.org/wiki/Clavichord",
+  "ganzá": "https://en.wikipedia.org/wiki/Ganz%C3%A1",
+  "berimbau": "https://en.wikipedia.org/wiki/Berimbau",
+  "ocarina": "https://en.wikipedia.org/wiki/Ocarina",
+  "melodica": "https://en.wikipedia.org/wiki/Melodica",
+  "tanpura": "https://en.wikipedia.org/wiki/Tanpura",
+  "tambura": "https://en.wikipedia.org/wiki/Tambura",
+  "oud": "https://en.wikipedia.org/wiki/Oud",
+  "mridangam": "https://en.wikipedia.org/wiki/Mridangam",
+  "batá drum": "https://en.wikipedia.org/wiki/Bat%C3%A1_drum",
+  "agogô": "https://en.wikipedia.org/wiki/Agog%C3%B4",
+  "kora": "https://en.wikipedia.org/wiki/Kora_(instrument)",
+  "talking drum": "https://en.wikipedia.org/wiki/Talking_drum",
+  "mellophone": "https://en.wikipedia.org/wiki/Mellophone",
+  "mbira": "https://en.wikipedia.org/wiki/Mbira",
+  "tabla": "https://en.wikipedia.org/wiki/Tabla",
+  "vocoder": "https://en.wikipedia.org/wiki/Vocoder",
+  "mouth harp": "https://en.wikipedia.org/wiki/Jew%27s_harp",
+  "bass recorder": "https://en.wikipedia.org/wiki/Recorder_(musical_instrument)#Bass",
+  "tack piano": "https://en.wikipedia.org/wiki/Tack_piano",
+};
+
 export default function InstrumentsOverview() {
   const { albums } = useData();
 
@@ -82,7 +121,18 @@ export default function InstrumentsOverview() {
                 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                  <span style={{ fontSize: 13, color: "var(--fg)" }}>{instrument}</span>
+                  {WIKI_LINKS[instrument] ? (
+                    <a
+                      href={WIKI_LINKS[instrument]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontSize: 13, color: "var(--fg)", textDecoration: "none", borderBottom: "1px dotted var(--fg-ghost)" }}
+                    >
+                      {instrument}
+                    </a>
+                  ) : (
+                    <span style={{ fontSize: 13, color: "var(--fg)" }}>{instrument}</span>
+                  )}
                   <span className="mono" style={{ fontSize: 9, color: "var(--fg-muted)" }}>
                     {count}×
                   </span>
