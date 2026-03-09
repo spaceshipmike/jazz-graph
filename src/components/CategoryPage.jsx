@@ -15,7 +15,7 @@ export default function CategoryPage({ tabs, children }) {
       <div style={{
         display: "flex",
         gap: 3,
-        padding: "8px var(--space-xl) 0",
+        padding: "16px var(--space-xl) 0",
         borderBottom: "1px solid var(--border)",
       }}>
         {tabs.map(({ path, label }) => {

@@ -129,23 +129,77 @@ export function countKeywords(titles, categories) {
  * Extract place mentions from titles.
  * Returns [{ label, lat, lng, count }]
  */
+// Artistic phrases where "in [place]" is NOT a venue reference
+const ARTISTIC_IN = /\b(?:april|autumn|night|midnight|round midnight|spring|summer|winter|sketches of)\s+in\b/i;
+
+function isVenueReference(title, placeKey) {
+  const t = title.toLowerCase();
+  const k = placeKey.toLowerCase();
+
+  // "live/recorded/concert at/in/from [place]"
+  if (/\b(?:live|recorded|concert)\s+(?:at|in|from)\b/.test(t)) return true;
+  // "at [the] [0-3 words] [place]" — direct venue
+  if (new RegExp(`\\bat\\s+(?:the\\s+)?(?:\\w+\\s+){0,3}${k}\\b`).test(t)) return true;
+  // "in [place]" unless preceded by artistic phrase
+  if (new RegExp(`\\bin\\s+${k}\\b`).test(t) && !ARTISTIC_IN.test(t)) return true;
+  // "from [place]"
+  if (new RegExp(`\\bfrom\\s+${k}\\b`).test(t)) return true;
+  // "[place] + year/decade" (e.g., "Montreux '77", "Paris 1965")
+  if (new RegExp(`${k}\\s*['''\u2019]?\\d{2,4}\\b`).test(t)) return true;
+  // "[place] + roman numerals" (e.g., "Montreux II")
+  if (new RegExp(`${k}\\s+[ivx]+\\b`).test(t)) return true;
+  // "[place] [0-2 words] Concert/Festival/Sessions/Tapes etc."
+  if (new RegExp(`${k}\\s+(?:\\w+\\s+){0,2}(?:concert|festival|session|tapes|years|jam|live)s?\\b`).test(t)) return true;
+  // Specific venue names
+  if (/\bvillage\s+(?:vanguard|gate)\b/.test(t)) return true;
+  // "[place] in [other place]" — touring/festival reference
+  if (new RegExp(`\\b${k}\\s+in\\s+`).test(t)) return true;
+
+  return false;
+}
+
 export function extractPlaces(titles) {
   const counts = new Map();
   for (const [key, place] of Object.entries(PLACES)) {
     if (!place.lat) continue; // skip generic directions
     const regex = new RegExp(`\\b${key}\\b`, "i");
-    let count = 0;
     for (const t of titles) {
-      if (regex.test(t)) count++;
-    }
-    if (count > 0) {
+      if (!regex.test(t)) continue;
+      if (isVenueReference(t, key)) continue;
       const existing = counts.get(place.label);
       if (existing) {
-        existing.count += count;
+        existing.count += 1;
+        existing.matchedTitles.push(t);
       } else {
-        counts.set(place.label, { ...place, count });
+        counts.set(place.label, { ...place, count: 1, matchedTitles: [t] });
       }
     }
   }
   return [...counts.values()].sort((a, b) => b.count - a.count);
+}
+
+/**
+ * Given albums and a list of matched title strings, return the albums
+ * that contain any of those titles (as album title or track title).
+ */
+export function albumsForTitles(albums, matchedTitles) {
+  const titleSet = new Set(matchedTitles);
+  const result = [];
+  const seen = new Set();
+  for (const a of albums) {
+    if (seen.has(a.id)) continue;
+    if (titleSet.has(a.title)) {
+      result.push(a);
+      seen.add(a.id);
+      continue;
+    }
+    for (const t of a.tracks || []) {
+      if (titleSet.has(t.title)) {
+        result.push(a);
+        seen.add(a.id);
+        break;
+      }
+    }
+  }
+  return result.sort((a, b) => (a.year || 0) - (b.year || 0));
 }

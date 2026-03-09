@@ -131,7 +131,7 @@ export default function Gallery() {
       {groups.map(([name, items]) => (
         <section key={name} style={{ marginBottom: 40 }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 14, borderBottom: `1px solid ${labelColor(name)}33`, paddingBottom: 8 }}>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: labelColor(name) }}>{name}</h2>
+            <h2 style={{ fontSize: 20, fontWeight: 300, color: labelColor(name) }}>{name}</h2>
             <span className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)" }}>
               {items.length} album{items.length > 1 ? "s" : ""}
             </span>
