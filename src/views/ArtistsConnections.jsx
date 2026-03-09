@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentFamily, familyColor, slugify } from "../data";
+import StatCard from "../components/StatCard";
 
 /**
  * Build a musician-to-musician collaboration graph from album lineups.
@@ -70,8 +71,28 @@ export default function ArtistsConnections() {
   const [path, setPath] = useState(null);
   const [notFound, setNotFound] = useState(false);
 
-  const { nodes, edges, ranked } = useMemo(() => {
+  const { nodes, edges, ranked, stats } = useMemo(() => {
     const { nodes, edges } = buildCollabGraph(albums);
+
+    // Track leader vs sideman connections
+    const leaderCollabs = new Map(); // name → Set of unique collabs as leader
+    const sidemanCollabs = new Map(); // name → Set of unique collabs as sideperson
+    for (const album of albums) {
+      const names = album.lineup.map((m) => m.name);
+      for (const m of album.lineup) {
+        for (const other of names) {
+          if (other === m.name) continue;
+          if (m.lead) {
+            if (!leaderCollabs.has(m.name)) leaderCollabs.set(m.name, new Set());
+            leaderCollabs.get(m.name).add(other);
+          } else {
+            if (!sidemanCollabs.has(m.name)) sidemanCollabs.set(m.name, new Set());
+            sidemanCollabs.get(m.name).add(other);
+          }
+        }
+      }
+    }
+
     const ranked = [...nodes.entries()]
       .map(([name, data]) => ({
         name,
@@ -81,7 +102,24 @@ export default function ArtistsConnections() {
         family: instrumentFamily([...data.instruments][0]),
       }))
       .sort((a, b) => b.collabs - a.collabs);
-    return { nodes, edges, ranked };
+
+    // Most connected as leader
+    const topLeader = [...leaderCollabs.entries()]
+      .sort((a, b) => b[1].size - a[1].size)[0];
+    // Most connected as sideman
+    const topSideman = [...sidemanCollabs.entries()]
+      .sort((a, b) => b[1].size - a[1].size)[0];
+    // Average degrees of separation (sample a few random pairs)
+    const totalConnected = ranked.filter((r) => r.collabs > 0).length;
+
+    const stats = {
+      totalConnected,
+      mostConnected: ranked[0] ? `${ranked[0].name} (${ranked[0].collabs})` : "",
+      topLeader: topLeader ? `${topLeader[0]} (${topLeader[1].size})` : "",
+      topSideman: topSideman ? `${topSideman[0]} (${topSideman[1].size})` : "",
+    };
+
+    return { nodes, edges, ranked, stats };
   }, [albums]);
 
   // Autocomplete suggestions
@@ -119,13 +157,25 @@ export default function ArtistsConnections() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Six Degrees of Jazz</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>six degrees of jazz</h1>
       <p
         className="mono"
         style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}
       >
         How many handshakes connect any two jazz musicians?
       </p>
+
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+        gap: 8,
+        marginBottom: "var(--space-xl)",
+      }}>
+        <StatCard label="musicians connected by collaboration" value={stats.totalConnected.toLocaleString()} />
+        <StatCard label="most connected overall" value={stats.mostConnected} />
+        <StatCard label="most connected as a bandleader" value={stats.topLeader} />
+        <StatCard label="most connected as a sideman" value={stats.topSideman} />
+      </div>
 
       {/* Path finder */}
       <div
