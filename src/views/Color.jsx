@@ -67,8 +67,8 @@ export default function Color() {
       else if (lightNPct >= 70) tier = avgL > 85 ? 4 : 3;
       else if (totalNeutral >= 65 && avgL > 65) tier = 3;
       else if (totalNeutral >= 65 && avgL < 30) tier = 1;
-      else if (wChroma < 20 && avgL > 60) tier = 3;
-      else if (wChroma < 20 && avgL < 35) tier = 1;
+      else if (wChroma < 12 && avgL > 60) tier = 3;
+      else if (wChroma < 12 && avgL < 35) tier = 1;
       else if (mono) {
         if (avgL < 30) tier = 0;
         else if (avgL > 70) tier = 4;
@@ -101,10 +101,17 @@ export default function Color() {
       const kA = keys.get(a), kB = keys.get(b);
       if (kA.tier !== kB.tier) return kA.tier - kB.tier;
 
-      // Black/white tiers: sort by accent hue, then lightness
-      if (kA.tier === 0 || kA.tier === 4) {
-        if (kA.accentHue !== kB.accentHue) return kA.accentHue - kB.accentHue;
-        return kA.avgL - kB.avgL;
+      // Black tier: sort by lightness (darkest first), then accent hue
+      if (kA.tier === 0) {
+        if (Math.abs(kA.avgL - kB.avgL) > 3) return kA.avgL - kB.avgL;
+        return kA.accentHue - kB.accentHue;
+      }
+
+      // Light/white tiers: sort by any remaining chroma (most colorful first), then lightness
+      if (kA.tier === 3 || kA.tier === 4) {
+        if (Math.abs(kA.wChroma - kB.wChroma) > 2) return kB.wChroma - kA.wChroma;
+        if (Math.abs(kA.avgL - kB.avgL) > 3) return kA.avgL - kB.avgL;
+        return kA.accentHue - kB.accentHue;
       }
 
       // Color tiers: coarse hue bin → chroma (saturated first) → fine hue
