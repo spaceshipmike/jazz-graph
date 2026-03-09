@@ -6,16 +6,16 @@
 :root {
   /* Backgrounds & Surfaces */
   --bg: #08080a;
-  --surface: #111114;
-  --surface-hover: #161619;
+  --surface: #0e0e11;
+  --surface-hover: #141417;
   --border: #1e1e22;
   --border-light: #2a2a2e;
 
   /* Foreground */
   --fg: #e8e4dc;
-  --fg-dim: #888;
-  --fg-muted: #555;
-  --fg-ghost: #333;
+  --fg-dim: #aaa;
+  --fg-muted: #777;
+  --fg-ghost: #555;
 
   /* Instrument Families */
   --brass: #e85d3a;

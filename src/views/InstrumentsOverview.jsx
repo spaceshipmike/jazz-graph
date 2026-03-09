@@ -33,7 +33,7 @@ export default function InstrumentsOverview() {
     const instMap = new Map(); // instrument → { count, albums[] }
     for (const a of albums) {
       for (const m of a.lineup) {
-        if (m.instrument === "unknown" || m.instrument === "leader") continue;
+        if (m.instrument === "unknown" || m.instrument === "leader" || m.instrument.includes("vocals")) continue;
         if (!instMap.has(m.instrument)) {
           instMap.set(m.instrument, { count: 0, albums: [] });
         }
@@ -82,8 +82,8 @@ export default function InstrumentsOverview() {
                 }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                  <span style={{ fontSize: 13, color: "var(--fg-dim)" }}>{instrument}</span>
-                  <span className="mono" style={{ fontSize: 9, color: "var(--fg-ghost)" }}>
+                  <span style={{ fontSize: 13, color: "var(--fg)" }}>{instrument}</span>
+                  <span className="mono" style={{ fontSize: 9, color: "var(--fg-muted)" }}>
                     {count}×
                   </span>
                 </div>
