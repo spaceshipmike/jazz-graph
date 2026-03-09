@@ -132,12 +132,61 @@ function normalizeArtistName(name, allArtists) {
   return name;
 }
 
-const albums = JSON.parse(readFileSync(DATA_FILE, "utf8"));
+// ─── Compilation / Reissue Detection ────────────────────────────────
+// Labels that exclusively repackage content (not original releases)
+const REISSUE_LABELS = new Set([
+  "lone hill jazz", "definitive records", "chrome dreams",
+  "enlightenment", "hmv jazz", "properbox", "solid jazz recordings",
+  "éditions atlas", "recording arts", "object enterprises",
+  "distribution movieplay", "scotti bros. records", "retro music",
+  "nocturne", "membran music ltd.", "hi hat", "cleo",
+  "epm musique", "tko magnum music", "passport audio",
+  "x5 music group",
+]);
+
+// Title patterns that indicate compilations (not original albums)
+const COMP_TITLE_RE = /\bcomplete\b.*\b(session|recording|broadcast|concert)s?\b|\bcollection\b|\banthology\b|\bbest of\b|\bgreatest hits\b|\bsampler\b|\bparade of\b/i;
+
+// Exceptions: titles that match patterns but are legitimate original albums
+const COMP_EXCEPTIONS = new Set([
+  // "Complete Last Concert" = a real concert, not a compilation
+  // Add IDs here if false positives arise
+]);
+
+function isCompilation(album) {
+  if (COMP_EXCEPTIONS.has(album.id)) return false;
+
+  // "Various Artists" is always a compilation
+  if (album.artist === "Various Artists") return true;
+
+  const label = (album.label || "").toLowerCase();
+
+  // Known reissue-only labels with late release dates
+  if (REISSUE_LABELS.has(label)) return true;
+
+  // "Complete X Sessions/Recordings" released much later than likely recording date
+  if (COMP_TITLE_RE.test(album.title) && album.year > 1990) return true;
+
+  return false;
+}
+
+let albums = JSON.parse(readFileSync(DATA_FILE, "utf8"));
 let cleaned = 0;
 let removed = 0;
 let labelsFixed = 0;
 let deduped = 0;
 let artistsNormalized = 0;
+let compilationsRemoved = 0;
+
+// Filter compilations
+const beforeCount = albums.length;
+albums = albums.filter((a) => {
+  if (isCompilation(a)) {
+    compilationsRemoved++;
+    return false;
+  }
+  return true;
+});
 
 // Build artist set for ensemble resolution
 const allArtists = new Set(albums.map((a) => a.artist));
@@ -203,6 +252,7 @@ writeFileSync(DATA_FILE, JSON.stringify(albums, null, 2));
 // Report
 const insts = new Set();
 albums.forEach((a) => a.lineup.forEach((m) => insts.add(m.instrument)));
+console.log(`Compilations removed: ${compilationsRemoved} (${beforeCount} → ${albums.length})`);
 console.log(`Cleaned ${cleaned} instrument names, removed ${removed} non-instrument entries, fixed ${labelsFixed} labels, deduped ${deduped} lineup entries, normalized ${artistsNormalized} artist names`);
 console.log(`Unique instruments now: ${insts.size}`);
 console.log([...insts].sort().join(", "));

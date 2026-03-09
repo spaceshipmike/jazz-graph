@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentFamily, labelColor } from "../data";
 import FilterBar from "../components/FilterBar";
+import StatCard from "../components/StatCard";
 
 export default function Timeline() {
   const { albums } = useData();
@@ -47,6 +48,38 @@ export default function Timeline() {
     return [...map.entries()].sort((a, b) => a[0] - b[0]);
   }, [filtered]);
 
+  const stats = useMemo(() => {
+    const withYear = albums.filter((a) => a.year);
+    if (withYear.length === 0) return null;
+
+    const years = withYear.map((a) => a.year);
+    const earliest = Math.min(...years);
+    const latest = Math.max(...years);
+
+    // Albums per year
+    const yearCounts = new Map();
+    for (const y of years) yearCounts.set(y, (yearCounts.get(y) || 0) + 1);
+    const peakEntry = [...yearCounts.entries()].sort((a, b) => b[1] - a[1])[0];
+
+    // Albums per decade
+    const decadeCounts = new Map();
+    for (const y of years) {
+      const dec = Math.floor(y / 10) * 10;
+      decadeCounts.set(dec, (decadeCounts.get(dec) || 0) + 1);
+    }
+    const peakDecade = [...decadeCounts.entries()].sort((a, b) => b[1] - a[1])[0];
+    const peakDecadePct = Math.round(peakDecade[1] / withYear.length * 100);
+
+    return {
+      span: `${earliest}–${latest}`,
+      spanYears: latest - earliest,
+      peakYear: `${peakEntry[0]} with ${peakEntry[1]} albums`,
+      peakDecade: `${peakDecade[0]}s`,
+      peakDecadePct,
+      peakDecadeCount: peakDecade[1],
+    };
+  }, [albums]);
+
   useEffect(() => {
     if (targetYear && yearRefs.current[targetYear]) {
       yearRefs.current[targetYear].scrollIntoView({ behavior: "smooth", block: "center" });
@@ -55,7 +88,25 @@ export default function Timeline() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)", maxWidth: 1000, margin: "0 auto" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 0 }}>Timeline</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 0 }}>timeline</h1>
+
+      {stats && (
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+          gap: 8,
+          marginTop: "var(--space-md)",
+          marginBottom: "var(--space-md)",
+        }}>
+          <StatCard label="years of recorded jazz" value={`${stats.spanYears}`} sub={stats.span} />
+          <StatCard label="most prolific year" value={stats.peakYear} />
+          <StatCard
+            label={`of the catalog from one decade`}
+            value={`${stats.peakDecadePct}%`}
+            sub={`${stats.peakDecadeCount} albums in the ${stats.peakDecade}`}
+          />
+        </div>
+      )}
 
       <FilterBar
         family={familyFilter}
