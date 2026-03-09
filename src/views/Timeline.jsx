@@ -98,7 +98,7 @@ export default function Timeline() {
           marginTop: "var(--space-md)",
           marginBottom: "var(--space-md)",
         }}>
-          <StatCard label="years of recorded jazz" value={`${stats.spanYears}`} sub={stats.span} />
+          <StatCard label="years of jazz in the collection" value={`${stats.spanYears}`} sub={stats.span} />
           <StatCard label="most prolific year" value={stats.peakYear} />
           <StatCard
             label={`of the catalog from one decade`}
