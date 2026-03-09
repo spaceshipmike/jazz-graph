@@ -1,6 +1,6 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.8"
+spec-version: "0.9"
 spec-format: nlspec-v2
 date: 2026-03-04
 status: active
@@ -214,7 +214,7 @@ Visualizations centered on the people who made the music.
 Visualizations centered on what was played.
 
 **Sub-views:**
-- **Overview** (`/instruments` default) — Radial bar chart of lead instruments by album count, colored by instrument family. Shows which instruments dominate jazz leadership.
+- **Overview** (`/instruments` default) — Radial bar chart of lead instruments by album count, colored by instrument family. Shows which instruments dominate jazz leadership. Below the main chart, a "Rare Instruments" section displays all instruments appearing fewer than 5 times — the long tail of jazz's instrumental palette (koto, uilleann pipes, berimbau, ocarina, etc.). Each rare instrument links to the album(s) it appears on.
 - **Eras** (`/instruments/eras`) — Streamgraph showing instrument family prevalence across the jazz timeline. D3 stack with `stackOffsetWiggle` and `curveBasis`. Each stream colored by family. Hover shows family/year/count. Reveals how jazz's instrumental palette shifted over decades.
 
 **Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete. Filters apply across all sub-views.

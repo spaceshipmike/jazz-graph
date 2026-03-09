@@ -68,6 +68,7 @@ A user navigates to Instruments. They see a radial bar chart of lead instruments
 
 **Satisfied when:**
 - Overview shows radial bar chart of lead instruments colored by family
+- Overview includes a "Rare Instruments" section showing instruments with <5 appearances, each linking to its album(s)
 - Eras shows streamgraph with instrument family streams over decades
 - Filter bar is present and functional
 - Both panels render correctly with the full dataset

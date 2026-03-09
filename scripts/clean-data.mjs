@@ -94,13 +94,62 @@ const LABEL_NORMALIZE = {
   "rhino": "Rhino",
 };
 
+// ─── Artist Name Normalization ───────────────────────────────────────
+// Merge ensemble credits ("Bill Evans Trio") into base artist name.
+// Proper group names (Modern Jazz Quartet, Weather Report, etc.) are kept.
+
+const ARTIST_NORMALIZE = {
+  "Dr. Lonnie Smith": "Dr. Lonnie Smith", // handles "Lonnie Smith" -> "Dr. Lonnie Smith"
+};
+
+const ENSEMBLE_SUFFIXES = [" Trio", " Quartet", " Quintet", " Sextet", " Septet", " Octet", " Orchestra", " Big Band", " Band", " Group", " Ensemble"];
+
+const KEEP_AS_GROUP = new Set([
+  "Modern Jazz Quartet", "Weather Report", "Return to Forever",
+  "Mahavishnu Orchestra", "Art Ensemble of Chicago",
+]);
+
+function normalizeArtistName(name, allArtists) {
+  // Explicit overrides
+  if (name === "Lonnie Smith") return "Dr. Lonnie Smith";
+  if (ARTIST_NORMALIZE[name]) return ARTIST_NORMALIZE[name];
+
+  // "The X" -> "X" for groups
+  if (name.startsWith("The ")) {
+    const base = name.slice(4);
+    if (KEEP_AS_GROUP.has(base)) return base;
+    if (allArtists.has(base)) return base;
+  }
+
+  // "X Trio" -> "X" (skip proper groups)
+  for (const suffix of ENSEMBLE_SUFFIXES) {
+    if (name.endsWith(suffix)) {
+      const base = name.slice(0, -suffix.length);
+      if (KEEP_AS_GROUP.has(name) || KEEP_AS_GROUP.has(base)) return name;
+      if (allArtists.has(base)) return base;
+    }
+  }
+  return name;
+}
+
 const albums = JSON.parse(readFileSync(DATA_FILE, "utf8"));
 let cleaned = 0;
 let removed = 0;
 let labelsFixed = 0;
 let deduped = 0;
+let artistsNormalized = 0;
+
+// Build artist set for ensemble resolution
+const allArtists = new Set(albums.map((a) => a.artist));
 
 for (const album of albums) {
+  // Normalize artist name
+  const newArtist = normalizeArtistName(album.artist, allArtists);
+  if (newArtist !== album.artist) {
+    album.artist = newArtist;
+    artistsNormalized++;
+  }
+
   // Normalize label
   if (album.label) {
     const lk = album.label.toLowerCase();
@@ -154,6 +203,6 @@ writeFileSync(DATA_FILE, JSON.stringify(albums, null, 2));
 // Report
 const insts = new Set();
 albums.forEach((a) => a.lineup.forEach((m) => insts.add(m.instrument)));
-console.log(`Cleaned ${cleaned} instrument names, removed ${removed} non-instrument entries, fixed ${labelsFixed} labels, deduped ${deduped} lineup entries`);
+console.log(`Cleaned ${cleaned} instrument names, removed ${removed} non-instrument entries, fixed ${labelsFixed} labels, deduped ${deduped} lineup entries, normalized ${artistsNormalized} artist names`);
 console.log(`Unique instruments now: ${insts.size}`);
 console.log([...insts].sort().join(", "));

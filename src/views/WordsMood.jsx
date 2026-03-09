@@ -86,6 +86,8 @@ function RadialWheel({ moodData, onSelect, selected }) {
       if (catTotal === 0) return;
 
       const isSelected = selected?.category === cat;
+      const hasSelection = !!selected;
+      const faded = hasSelection && !isSelected;
 
       // Spoke line
       g.append("line")
@@ -94,7 +96,7 @@ function RadialWheel({ moodData, onSelect, selected }) {
         .attr("x2", cx + Math.cos(angle) * outerR)
         .attr("y2", cy + Math.sin(angle) * outerR)
         .attr("stroke", color)
-        .attr("stroke-opacity", isSelected ? 0.4 : 0.15)
+        .attr("stroke-opacity", faded ? 0.06 : isSelected ? 0.4 : 0.2)
         .attr("stroke-width", 1);
 
       // Category label at end of spoke
@@ -111,10 +113,11 @@ function RadialWheel({ moodData, onSelect, selected }) {
         .attr("y", ly)
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "middle")
-        .attr("fill", isSelected && !selected?.keyword ? color : "var(--fg-dim)")
+        .attr("fill", faded ? "var(--fg-ghost)" : color)
         .attr("font-family", "var(--font-mono)")
         .attr("font-size", 10)
         .attr("font-weight", isSelected && !selected?.keyword ? 700 : 400)
+        .attr("opacity", faded ? 0.4 : 1)
         .text(MOOD_LABELS[cat]);
 
       catGroup.append("text")
@@ -124,6 +127,7 @@ function RadialWheel({ moodData, onSelect, selected }) {
         .attr("fill", "var(--fg-ghost)")
         .attr("font-family", "var(--font-mono)")
         .attr("font-size", 8)
+        .attr("opacity", faded ? 0.3 : 1)
         .text(catTotal);
 
       // Word nodes along spoke
@@ -143,12 +147,14 @@ function RadialWheel({ moodData, onSelect, selected }) {
           .style("cursor", "pointer")
           .on("click", () => onSelect({ category: cat, keyword: word }));
 
+        const nodeFaded = faded || (isSelected && selected?.keyword && !isWordSelected);
+
         node.append("circle")
           .attr("cx", nx)
           .attr("cy", ny)
           .attr("r", nodeR)
           .attr("fill", color)
-          .attr("fill-opacity", isWordSelected ? 0.8 : 0.3)
+          .attr("fill-opacity", nodeFaded ? 0.08 : isWordSelected ? 0.9 : 0.65)
           .attr("stroke", isWordSelected ? color : "none")
           .attr("stroke-width", 1.5);
 
@@ -159,10 +165,11 @@ function RadialWheel({ moodData, onSelect, selected }) {
             .attr("y", ny)
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "middle")
-            .attr("fill", isWordSelected ? "#fff" : "var(--fg-dim)")
+            .attr("fill", nodeFaded ? "var(--fg-ghost)" : isWordSelected ? "#fff" : "var(--fg)")
             .attr("font-family", "var(--font-mono)")
             .attr("font-size", Math.min(nodeR * 0.9, 9))
             .attr("pointer-events", "none")
+            .attr("opacity", nodeFaded ? 0.3 : 1)
             .text(word);
         }
 
