@@ -1,6 +1,6 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.7"
+spec-version: "0.8"
 spec-format: nlspec-v2
 date: 2026-03-04
 status: active
@@ -256,7 +256,7 @@ Semantic mining of album and song titles — 15,000+ titles analyzed for recurri
 
 **Sub-views:**
 - **Geography** (`/words` default) — Place names extracted from titles, plotted on a stylized dark world map (D3 equirectangular or natural earth projection). Dots sized by frequency. Reveals jazz's geographic imagination — where the music dreams of.
-- **Mood** (`/words/mood`) — Keyword dictionaries for emotion categories (joy, melancholy, love, longing, night, freedom). Rendered as a force-directed cluster or terrain visualization. Shows the emotional landscape of jazz titles.
+- **Mood** (`/words/mood`) — Radial wheel visualization of emotional themes in album and track titles. 8 emotion categories (joy, love, melancholy, longing, peace, freedom, night, fire) arranged as spokes radiating from center, with keyword nodes along each spoke sized by frequency. Click any category or keyword to drill down into matching albums/tracks. Secondary view: "Mood by Decade" heatmap showing how jazz's emotional vocabulary shifted across eras — stacked area or heat grid with decade columns and mood rows. Title-based analysis using keyword dictionaries.
 - **Vocabulary** (`/words/vocabulary`) — Frequency of musical form words (blues, bossa, waltz, swing, ballad, groove) as a treemap or radial layout. Adjacent section for jazz slang (cookin', blowin', groovin', etc.) if data density supports it.
 - **Imagery** (`/words/imagery`) — Time-of-day, seasons, weather, celestial references extracted from titles. Rendered as a clock face, calendar wheel, or seasonal arc. When does jazz happen in its own imagination?
 

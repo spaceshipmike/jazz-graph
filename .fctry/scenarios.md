@@ -106,7 +106,9 @@ A user navigates to Words. They see a world map with place names from song/album
 
 **Satisfied when:**
 - Geography shows a dark-themed map with place name dots from titles
-- Mood shows emotion categories clustered visually
+- Mood shows a radial wheel with 8 emotion categories as spokes, keywords radiating outward sized by frequency
+- Clicking a mood category or keyword drills down to show matching album/track titles
+- Mood by Decade heatmap or stacked area shows emotional vocabulary shifts across eras
 - Vocabulary shows musical form word frequencies (blues, bossa, waltz, etc.)
 - Imagery shows time-of-day/season/nature references
 - Title analysis uses both album titles and track titles (15,000+ data points)
