@@ -94,10 +94,16 @@ A user navigates to Time. They see the chronological timeline. They switch to De
 - Filter bar is present and functional
 
 ## S8: Sound Category
-A user navigates to Sound. They see track duration distributions. By Era shows how durations changed over decades. Track Counts shows tracks-per-album distribution.
+A user navigates to Sound. They land on a Sankey diagram showing how lead instruments connect to sideman instruments across all sessions — the canonical combos of jazz made visible. They hover a lead instrument and see its connections highlighted. They click a ribbon and see the matching albums. They switch to Durations, By Era, and Track Counts for recording-structure views.
 
 **Satisfied when:**
-- Durations shows histogram/violin plot of track lengths
+- Combos (default) shows a lead-to-sideman Sankey diagram
+- Left column: lead instruments, right column: co-occurring sideman instruments
+- Ribbon width = number of albums sharing that lead-sideman pairing
+- Ribbons and nodes colored by instrument-family palette
+- Hover on a lead instrument highlights its connections, dimming others
+- Click on a ribbon shows the list of albums with that instrument pairing
+- Durations shows histogram of track lengths at `/sound/durations`
 - By Era shows average duration by decade
 - Track Counts shows tracks-per-album distribution
 - All panels handle albums without track data gracefully

@@ -1,14 +1,14 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.9"
+spec-version: "0.10"
 spec-format: nlspec-v2
-date: 2026-03-04
+date: 2026-03-09
 status: active
 author: mike
 synopsis:
   short: "Interactive visual encyclopedia exploring 2,000+ jazz albums through seven data dimensions — color, artists, instruments, labels, time, sound, and words"
   medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,000+ albums with full track listings, session lineups, and real cover art in a Blue Note-inspired dark aesthetic. A repeatable data quality audit catches reissues, compilations, and metadata gaps."
-  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,000+ albums (sourced from MusicBrainz), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing), Sound (durations and ensemble patterns), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. A post-build audit pipeline flags reissues, compilations, label-era mismatches, and metadata gaps with human-in-the-loop review and quarantine-based removal."
+  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,000+ albums (sourced from MusicBrainz), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing), Sound (instrument combinations and sonic texture), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. A post-build audit pipeline flags reissues, compilations, label-era mismatches, and metadata gaps with human-in-the-loop review and quarantine-based removal."
   stack:
     - JavaScript
     - React + Vite
@@ -243,10 +243,11 @@ Visualizations centered on when the music was made.
 
 ### 3.6 Sound (`/sound`)
 
-Visualizations derived from track-level data (durations, counts, structure).
+Visualizations centered on what the music sounds like — the sonic texture of jazz sessions, revealed through instrument combinations and ensemble voicings.
 
 **Sub-views:**
-- **Durations** (`/sound` default) — Track duration distribution. How long is a jazz track? Histogram or violin plot showing the spread, with notable outliers labeled.
+- **Combos** (`/sound` default) — Lead-to-sideman Sankey diagram. Left column: every instrument that appears as lead on an album. Right column: every other instrument on those sessions. Ribbons connect lead instruments to co-occurring sideman instruments, sized by album count. Colored by instrument-family palette. Reveals the canonical jazz combos: when trumpet leads, the band is piano + tenor sax + bass + drums; when guitar leads, it's a different world. Hover highlights a single lead's connections. Click a ribbon to see the matching albums.
+- **Durations** (`/sound/durations`) — Track duration distribution. How long is a jazz track? Histogram showing the spread, with median line and notable outliers labeled.
 - **By Era** (`/sound/by-era`) — Average track duration by decade. Did jazz tracks get longer over time? (Spoiler: yes, dramatically.)
 - **Track Counts** (`/sound/tracks`) — Distribution of tracks per album. Reveals format conventions (LP sides, CD-era expansion).
 
@@ -302,7 +303,8 @@ Client-side routing with nested paths:
 /time                    — Time: Timeline (default)
 /time/density            — Time: Density
 /time/ensembles          — Time: Ensembles
-/sound                   — Sound: Durations (default)
+/sound                   — Sound: Combos (default)
+/sound/durations         — Sound: Durations
 /sound/by-era            — Sound: By Era
 /sound/tracks            — Sound: Track Counts
 /words                   — Words: Geography (default)

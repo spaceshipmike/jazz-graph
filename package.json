@@ -21,6 +21,7 @@
   "dependencies": {
     "culori": "^4.0.2",
     "d3": "^7.9.0",
+    "d3-sankey": "^0.12.3",
     "node-vibrant": "^4.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
