@@ -98,6 +98,7 @@ const albums = JSON.parse(readFileSync(DATA_FILE, "utf8"));
 let cleaned = 0;
 let removed = 0;
 let labelsFixed = 0;
+let deduped = 0;
 
 for (const album of albums) {
   // Normalize label
@@ -131,8 +132,15 @@ for (const album of albums) {
       inst = "unknown";
     }
 
-    // Deduplicate by name within album
-    if (seen.has(m.name)) continue;
+    // Deduplicate by name within album — prefer lead entry
+    if (seen.has(m.name)) {
+      if (m.lead) {
+        const idx = newLineup.findIndex((x) => x.name === m.name);
+        if (idx !== -1) newLineup[idx] = { ...m, instrument: inst };
+      }
+      deduped++;
+      continue;
+    }
     seen.add(m.name);
 
     newLineup.push({ ...m, instrument: inst });
@@ -146,6 +154,6 @@ writeFileSync(DATA_FILE, JSON.stringify(albums, null, 2));
 // Report
 const insts = new Set();
 albums.forEach((a) => a.lineup.forEach((m) => insts.add(m.instrument)));
-console.log(`Cleaned ${cleaned} instrument names, removed ${removed} non-instrument entries, fixed ${labelsFixed} labels`);
+console.log(`Cleaned ${cleaned} instrument names, removed ${removed} non-instrument entries, fixed ${labelsFixed} labels, deduped ${deduped} lineup entries`);
 console.log(`Unique instruments now: ${insts.size}`);
 console.log([...insts].sort().join(", "));
