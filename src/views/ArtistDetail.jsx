@@ -183,8 +183,8 @@ function Timeline({ albums, artistName }) {
       .attr("cx", (d) => x(d.year))
       .attr("cy", inner.h / 2)
       .attr("r", (d) => d._lead ? 8 : 5)
-      .attr("fill", (d) => d._lead ? instrumentColor(d._inst) : "var(--fg-ghost)")
-      .attr("fill-opacity", (d) => d._lead ? 0.9 : 0.4)
+      .attr("fill", (d) => d._lead ? instrumentColor(d._inst) : "var(--fg-muted)")
+      .attr("fill-opacity", (d) => d._lead ? 0.9 : 0.7)
       .attr("stroke", (d) => d._lead ? instrumentColor(d._inst) : "none")
       .attr("stroke-width", 1.5)
       .attr("stroke-opacity", 0.5)
@@ -206,7 +206,7 @@ function Timeline({ albums, artistName }) {
       })
       .on("mouseout", (event, d) => {
         tip.style("display", "none");
-        d3.select(event.target).attr("fill-opacity", (d) => d._lead ? 0.9 : 0.4).attr("r", (d) => d._lead ? 8 : 5);
+        d3.select(event.target).attr("fill-opacity", (d) => d._lead ? 0.9 : 0.7).attr("r", (d) => d._lead ? 8 : 5);
       })
       .on("click", (event, d) => {
         navigate(`/album/${d.id}`);
