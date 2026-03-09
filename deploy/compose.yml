@@ -1,0 +1,18 @@
+services:
+  jazz:
+    image: ghcr.io/spaceshipmike/jazz-graph:latest
+    container_name: jazz
+    restart: unless-stopped
+    ports:
+      - "4600:80"
+    volumes:
+      - /home/mike/docker/volumes/jazz/data:/data:ro
+    networks:
+      - homelab_network
+    labels:
+      - "wud.display.name=jazz-graph"
+      - "wud.tag.include=^latest$$"
+
+networks:
+  homelab_network:
+    external: true

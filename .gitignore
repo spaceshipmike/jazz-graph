@@ -1,7 +1,9 @@
 node_modules/
 dist/
 data/images/
+data/images-webp/
 data/.fetch-progress.json
+data/.rebuild-progress.json
 .env
 .DS_Store
 *.log

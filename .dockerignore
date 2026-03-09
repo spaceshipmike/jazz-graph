@@ -1,0 +1,11 @@
+node_modules
+dist
+data
+deploy
+.git
+.github
+.fctry
+scripts
+*.md
+.env
+.DS_Store

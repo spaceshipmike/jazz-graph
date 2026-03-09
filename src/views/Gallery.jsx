@@ -121,7 +121,7 @@ export default function Gallery() {
       <div style={{ marginBottom: "var(--space-lg)" }}>
         <h1 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1, margin: "4px 0" }}>
           {filtered.length}{" "}
-          <span style={{ fontWeight: 400, fontStyle: "italic", color: "var(--fg-dim)" }}>
+          <span style={{ fontWeight: 400, color: "var(--fg-dim)" }}>
             album{filtered.length !== 1 ? "s" : ""}
           </span>
         </h1>
