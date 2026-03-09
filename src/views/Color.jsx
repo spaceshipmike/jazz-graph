@@ -72,10 +72,10 @@ export default function Color() {
       else if (mono) {
         if (avgL < 30) tier = 0;
         else if (avgL > 70) tier = 4;
-        else tier = avgL < 50 ? 1 : 3;
+        else tier = avgL < 55 ? 1 : 3;
       } else {
-        const l = album.vibrant.oklch.l;
-        tier = l < 0.3 ? 1 : l > 0.75 ? 3 : 2;
+        // Use palette-weighted avgL, not vibrant swatch (which picks one bright color)
+        tier = avgL < 30 ? 1 : avgL > 75 ? 3 : 2;
       }
 
       // Dominant chromatic hue from palette, fallback to vibrant
