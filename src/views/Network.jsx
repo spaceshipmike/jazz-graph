@@ -1,167 +1,334 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../App";
-import { instrumentColor, labelColor, slugify } from "../data";
+import { instrumentColor, slugify } from "../data";
 import * as d3 from "d3";
+
+const MIN_ALBUMS = 4; // minimum albums to appear as a node
+const MIN_SHARED = 2; // minimum shared albums to draw an edge
 
 export default function Network() {
   const { albums, index } = useData();
   const navigate = useNavigate();
-  const svgRef = useRef(null);
-  const [dims, setDims] = useState({ w: 900, h: 560 });
+  const canvasRef = useRef(null);
+  const simRef = useRef(null);
+  const nodesRef = useRef([]);
+  const linksRef = useRef([]);
+  const transformRef = useRef(d3.zoomIdentity);
+  const hoverRef = useRef(null);
+  const [dims, setDims] = useState({ w: 900, h: 600 });
   const [tip, setTip] = useState(null);
   const [instFilter, setInstFilter] = useState(null);
 
-  useEffect(() => {
-    setDims({
-      w: Math.min(window.innerWidth - 64, 1400),
-      h: Math.min(window.innerHeight - 200, 700),
-    });
-  }, []);
+  // Build musician-to-musician collaboration graph
+  const { nodes, links, instruments } = useMemo(() => {
+    if (!index) return { nodes: [], links: [], instruments: [] };
 
-  useEffect(() => {
-    if (!svgRef.current || !index) return;
-    const { w, h } = dims;
-    const { musicians } = index;
+    const musicians = index.musicians.filter((m) => m.albums.length >= MIN_ALBUMS && m.primary !== "unknown");
+    const nameToIdx = new Map();
+    musicians.forEach((m, i) => nameToIdx.set(m.name, i));
 
-    const svg = d3.select(svgRef.current);
-    svg.selectAll("*").remove();
-
-    const tops = musicians.filter((m) => m.albums.length >= 2);
-    const albumNodes = albums.map((a) => ({
-      id: a.id,
-      type: "album",
-      data: a,
-      r: 4 + Math.min(a.lineup.length * 1.2, 12),
-    }));
-    const musicianNodes = tops
-      .filter((m) => m.albums.some((ma) => albums.find((a) => a.id === ma.id)))
-      .map((m) => ({
-        id: "m_" + m.name,
-        type: "musician",
-        data: m,
-        r: 3 + Math.min(m.albums.length * 1.5, 14),
-      }));
-
-    const nodeMap = new Map();
-    [...albumNodes, ...musicianNodes].forEach((n) => nodeMap.set(n.id, n));
-
-    const links = [];
-    for (const a of albums) {
-      for (const m of a.lineup) {
-        if (nodeMap.has("m_" + m.name)) {
-          links.push({ source: a.id, target: "m_" + m.name, inst: m.instrument });
+    // Build co-appearance edges
+    const edgeMap = new Map();
+    for (const album of albums) {
+      const members = album.lineup
+        .map((m) => m.name)
+        .filter((n) => nameToIdx.has(n));
+      for (let i = 0; i < members.length; i++) {
+        for (let j = i + 1; j < members.length; j++) {
+          const key = [members[i], members[j]].sort().join("|||");
+          edgeMap.set(key, (edgeMap.get(key) || 0) + 1);
         }
       }
     }
 
-    const nodes = [...nodeMap.values()];
+    const links = [];
+    for (const [key, weight] of edgeMap) {
+      if (weight < MIN_SHARED) continue;
+      const [a, b] = key.split("|||");
+      links.push({ source: nameToIdx.get(a), target: nameToIdx.get(b), weight });
+    }
 
-    // Defs
-    const defs = svg.append("defs");
-    const glow = defs.append("filter").attr("id", "netglow");
-    glow.append("feGaussianBlur").attr("stdDeviation", "3").attr("result", "blur");
-    const merge = glow.append("feMerge");
-    merge.append("feMergeNode").attr("in", "blur");
-    merge.append("feMergeNode").attr("in", "SourceGraphic");
+    // Only keep musicians that have at least one edge
+    const connected = new Set();
+    for (const l of links) {
+      connected.add(l.source);
+      connected.add(l.target);
+    }
 
-    const g = svg.append("g");
-    svg.call(d3.zoom().scaleExtent([0.2, 5]).on("zoom", (e) => g.attr("transform", e.transform)));
-
-    const link = g.append("g").selectAll("line").data(links).join("line")
-      .attr("stroke", (d) => instFilter ? (d.inst === instFilter ? instrumentColor(d.inst) : "#111") : "#1a1a1e")
-      .attr("stroke-width", 0.5)
-      .attr("stroke-opacity", (d) => instFilter ? (d.inst === instFilter ? 0.6 : 0.05) : 0.3);
-
-    const node = g.append("g").selectAll("circle").data(nodes).join("circle")
-      .attr("r", (d) => d.r)
-      .attr("fill", (d) => d.type === "musician" ? instrumentColor(d.data.primary) : labelColor(d.data.label))
-      .attr("fill-opacity", (d) => d.type === "album" ? 0.85 : 0.3)
-      .attr("stroke", (d) => d.type === "musician" ? instrumentColor(d.data.primary) : "none")
-      .attr("stroke-width", (d) => d.type === "musician" ? 1.5 : 0)
-      .attr("stroke-opacity", 0.5)
-      .attr("filter", (d) => d.r > 10 ? "url(#netglow)" : null)
-      .style("cursor", "pointer")
-      .on("mouseover", function (event, d) {
-        d3.select(this).attr("fill-opacity", 1).attr("stroke-opacity", 1);
-        const conn = new Set();
-        links.forEach((l) => {
-          const s = typeof l.source === "object" ? l.source.id : l.source;
-          const t = typeof l.target === "object" ? l.target.id : l.target;
-          if (s === d.id) conn.add(t);
-          if (t === d.id) conn.add(s);
-        });
-        node.attr("fill-opacity", (n) => n.id === d.id ? 1 : conn.has(n.id) ? 0.8 : 0.04);
-        link.attr("stroke-opacity", (l) => {
-          const s = typeof l.source === "object" ? l.source.id : l.source;
-          const t = typeof l.target === "object" ? l.target.id : l.target;
-          return s === d.id || t === d.id ? 0.8 : 0.02;
-        }).attr("stroke", (l) => {
-          const s = typeof l.source === "object" ? l.source.id : l.source;
-          const t = typeof l.target === "object" ? l.target.id : l.target;
-          return s === d.id || t === d.id ? instrumentColor(l.inst) : "#1a1a1e";
-        });
-        const text = d.type === "album"
-          ? `${d.data.title} (${d.data.year || "?"})\n${d.data.artist} · ${d.data.label || "?"}`
-          : `${d.data.name}\n${d.data.instruments.join(", ")}\n${d.data.albums.length} albums`;
-        setTip({ x: event.pageX, y: event.pageY, text });
-      })
-      .on("mouseout", function () {
-        node.attr("fill-opacity", (d) => d.type === "album" ? 0.85 : 0.3).attr("stroke-opacity", 0.5);
-        link.attr("stroke-opacity", (d) => instFilter ? (d.inst === instFilter ? 0.6 : 0.05) : 0.3)
-          .attr("stroke", (d) => instFilter ? (d.inst === instFilter ? instrumentColor(d.inst) : "#111") : "#1a1a1e");
-        setTip(null);
-      })
-      .on("click", (e, d) => {
-        if (d.type === "album") navigate(`/album/${d.data.id}`);
-        else navigate(`/artist/${d.data.slug}`);
+    const oldToNew = new Map();
+    const nodes = [];
+    musicians.forEach((m, i) => {
+      if (!connected.has(i)) return;
+      oldToNew.set(i, nodes.length);
+      nodes.push({
+        idx: nodes.length,
+        name: m.name,
+        slug: m.slug || slugify(m.name),
+        primary: m.primary,
+        instruments: m.instruments,
+        albumCount: m.albums.length,
+        r: 3 + Math.sqrt(m.albums.length) * 2.5,
       });
+    });
 
-    // Labels for large nodes
-    g.append("g").selectAll("text").data(nodes.filter((n) => n.r > 10)).join("text")
-      .text((d) => d.type === "album" ? d.data.title : d.data.name)
-      .attr("font-size", 7.5)
-      .attr("font-family", "'JetBrains Mono', monospace")
-      .attr("fill", "#555")
-      .attr("text-anchor", "middle")
-      .attr("dy", (d) => d.r + 10)
-      .style("pointer-events", "none");
+    const remapped = links
+      .filter((l) => oldToNew.has(l.source) && oldToNew.has(l.target))
+      .map((l) => ({
+        source: oldToNew.get(l.source),
+        target: oldToNew.get(l.target),
+        weight: l.weight,
+      }));
 
-    const sim = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id((d) => d.id).distance(36).strength(0.2))
-      .force("charge", d3.forceManyBody().strength((d) => d.type === "album" ? -60 : -25))
+    const instSet = new Set();
+    nodes.forEach((n) => instSet.add(n.primary));
+
+    return {
+      nodes,
+      links: remapped,
+      instruments: [...instSet].sort(),
+    };
+  }, [albums, index]);
+
+  // Resize
+  useEffect(() => {
+    const update = () => setDims({
+      w: Math.min(window.innerWidth - 64, 1600),
+      h: Math.min(window.innerHeight - 200, 800),
+    });
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Draw function
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const { w, h } = dims;
+
+    ctx.save();
+    ctx.clearRect(0, 0, w * dpr, h * dpr);
+    ctx.scale(dpr, dpr);
+
+    const t = transformRef.current;
+    ctx.translate(t.x, t.y);
+    ctx.scale(t.k, t.k);
+
+    const hovered = hoverRef.current;
+    const hoveredConns = new Set();
+    if (hovered != null) {
+      for (const l of linksRef.current) {
+        const si = typeof l.source === "object" ? l.source.idx : l.source;
+        const ti = typeof l.target === "object" ? l.target.idx : l.target;
+        if (si === hovered) hoveredConns.add(ti);
+        if (ti === hovered) hoveredConns.add(si);
+      }
+    }
+
+    // Links
+    for (const l of linksRef.current) {
+      const s = typeof l.source === "object" ? l.source : nodesRef.current[l.source];
+      const tgt = typeof l.target === "object" ? l.target : nodesRef.current[l.target];
+      if (!s || !tgt) continue;
+
+      const si = s.idx;
+      const ti = tgt.idx;
+      const matchFilter = !instFilter || nodesRef.current[si]?.primary === instFilter || nodesRef.current[ti]?.primary === instFilter;
+      const isHoverLink = hovered != null && (si === hovered || ti === hovered);
+
+      if (hovered != null && !isHoverLink) {
+        ctx.globalAlpha = 0.03;
+        ctx.strokeStyle = "#1a1a1e";
+      } else if (!matchFilter) {
+        ctx.globalAlpha = 0.03;
+        ctx.strokeStyle = "#1a1a1e";
+      } else {
+        ctx.globalAlpha = isHoverLink ? 0.7 : Math.min(0.1 + l.weight * 0.06, 0.5);
+        ctx.strokeStyle = isHoverLink ? instrumentColor(nodesRef.current[si === hovered ? ti : si]?.primary) : "#2a2a2e";
+      }
+
+      ctx.lineWidth = Math.min(0.5 + l.weight * 0.3, 3);
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(tgt.x, tgt.y);
+      ctx.stroke();
+    }
+
+    // Nodes
+    for (const n of nodesRef.current) {
+      const matchFilter = !instFilter || n.primary === instFilter;
+      const isHovered = hovered === n.idx;
+      const isConn = hovered != null && hoveredConns.has(n.idx);
+      const isDimmed = hovered != null && !isHovered && !isConn;
+
+      ctx.globalAlpha = isDimmed ? 0.06 : !matchFilter ? 0.1 : isHovered ? 1 : isConn ? 0.9 : 0.7;
+      ctx.fillStyle = instrumentColor(n.primary);
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (isHovered || isConn) {
+        ctx.strokeStyle = instrumentColor(n.primary);
+        ctx.lineWidth = isHovered ? 2 : 1;
+        ctx.globalAlpha = isHovered ? 1 : 0.5;
+        ctx.stroke();
+      }
+    }
+
+    // Labels for hovered + connections
+    if (hovered != null) {
+      ctx.globalAlpha = 1;
+      ctx.font = "10px 'JetBrains Mono', monospace";
+      ctx.textAlign = "center";
+
+      const h_node = nodesRef.current[hovered];
+      if (h_node) {
+        ctx.fillStyle = "#e8e4dc";
+        ctx.fillText(h_node.name, h_node.x, h_node.y - h_node.r - 6);
+      }
+
+      ctx.fillStyle = "#888";
+      for (const ci of hoveredConns) {
+        const cn = nodesRef.current[ci];
+        if (cn && cn.r > 4) {
+          ctx.fillText(cn.name, cn.x, cn.y - cn.r - 4);
+        }
+      }
+    }
+
+    ctx.restore();
+  }, [dims, instFilter]);
+
+  // Simulation
+  useEffect(() => {
+    if (!nodes.length) return;
+    const { w, h } = dims;
+
+    nodesRef.current = nodes.map((n) => ({ ...n }));
+    linksRef.current = links.map((l) => ({ ...l }));
+
+    const sim = d3.forceSimulation(nodesRef.current)
+      .force("link", d3.forceLink(linksRef.current)
+        .id((d) => d.idx)
+        .distance((d) => 40 / Math.sqrt(d.weight))
+        .strength((d) => Math.min(0.1 + d.weight * 0.03, 0.5)))
+      .force("charge", d3.forceManyBody()
+        .strength((d) => -30 - d.albumCount * 2))
       .force("center", d3.forceCenter(w / 2, h / 2))
-      .force("collision", d3.forceCollide().radius((d) => d.r + 2))
-      .force("x", d3.forceX(w / 2).strength(0.04))
-      .force("y", d3.forceY(h / 2).strength(0.04))
-      .on("tick", () => {
-        link.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
-          .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
-        node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-        g.selectAll("text").attr("x", (d) => d.x).attr("y", (d) => d.y);
+      .force("collision", d3.forceCollide().radius((d) => d.r + 1.5))
+      .force("x", d3.forceX(w / 2).strength(0.03))
+      .force("y", d3.forceY(h / 2).strength(0.03))
+      .alphaDecay(0.02)
+      .on("tick", draw);
+
+    simRef.current = sim;
+    return () => sim.stop();
+  }, [nodes, links, dims, draw]);
+
+  // Redraw on filter/hover change
+  useEffect(() => { draw(); }, [instFilter, draw]);
+
+  // Canvas interaction
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const dpr = window.devicePixelRatio || 1;
+
+    function hitTest(px, py) {
+      const t = transformRef.current;
+      const x = (px - t.x) / t.k;
+      const y = (py - t.y) / t.k;
+      for (let i = nodesRef.current.length - 1; i >= 0; i--) {
+        const n = nodesRef.current[i];
+        const dx = n.x - x, dy = n.y - y;
+        if (dx * dx + dy * dy < (n.r + 3) * (n.r + 3)) return n;
+      }
+      return null;
+    }
+
+    // Zoom
+    const zoom = d3.zoom()
+      .scaleExtent([0.2, 6])
+      .on("zoom", (e) => {
+        transformRef.current = e.transform;
+        draw();
       });
 
-    node.call(
-      d3.drag()
-        .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
-        .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
-        .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }),
-    );
+    d3.select(canvas).call(zoom);
 
-    return () => sim.stop();
-  }, [albums, index, dims, instFilter, navigate]);
+    // Hover
+    function onMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      const px = (e.clientX - rect.left);
+      const py = (e.clientY - rect.top);
+      const hit = hitTest(px, py);
+      const newHover = hit ? hit.idx : null;
+      if (newHover !== hoverRef.current) {
+        hoverRef.current = newHover;
+        draw();
+        if (hit) {
+          setTip({
+            x: e.clientX,
+            y: e.clientY,
+            text: `${hit.name}\n${hit.instruments.join(", ")}\n${hit.albumCount} albums`,
+          });
+          canvas.style.cursor = "pointer";
+        } else {
+          setTip(null);
+          canvas.style.cursor = "grab";
+        }
+      } else if (hit && tip) {
+        setTip({ x: e.clientX, y: e.clientY, text: tip.text });
+      }
+    }
 
-  const usedInstruments = useMemo(() => {
-    const s = new Set();
-    albums.forEach((a) => a.lineup.forEach((m) => s.add(m.instrument)));
-    return [...s].sort();
-  }, [albums]);
+    function onClick(e) {
+      const rect = canvas.getBoundingClientRect();
+      const hit = hitTest(e.clientX - rect.left, e.clientY - rect.top);
+      if (hit) navigate(`/artist/${hit.slug}`);
+    }
+
+    canvas.addEventListener("mousemove", onMove);
+    canvas.addEventListener("click", onClick);
+    canvas.addEventListener("mouseleave", () => {
+      hoverRef.current = null;
+      setTip(null);
+      draw();
+    });
+
+    return () => {
+      canvas.removeEventListener("mousemove", onMove);
+      canvas.removeEventListener("click", onClick);
+    };
+  }, [draw, navigate, tip]);
+
+  // Set canvas resolution
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = dims.w * dpr;
+    canvas.height = dims.h * dpr;
+    draw();
+  }, [dims, draw]);
 
   return (
     <div style={{ padding: "var(--space-md) var(--space-xl)" }}>
-      {/* Legend */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "var(--space-sm)" }}>
+        <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Collaboration Network</h1>
+        <span className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)" }}>
+          {nodes.length} musicians · {links.length} connections
+        </span>
+      </div>
+
+      {/* Instrument filter */}
       <div className="mono" style={{ display: "flex", flexWrap: "wrap", gap: "4px 12px", fontSize: 10, color: "var(--fg-muted)", marginBottom: "var(--space-sm)" }}>
-        {usedInstruments.map((inst) => (
+        {instruments.map((inst) => (
           <span
             key={inst}
             style={{
@@ -180,7 +347,12 @@ export default function Network() {
         ))}
       </div>
 
-      <svg ref={svgRef} width={dims.w} height={dims.h} style={{ display: "block", borderRadius: "var(--radius-md)", background: "#0c0c0e" }} />
+      <canvas
+        ref={canvasRef}
+        width={dims.w}
+        height={dims.h}
+        style={{ display: "block", width: dims.w, height: dims.h, borderRadius: "var(--radius-md)", background: "#0c0c0e" }}
+      />
 
       {tip && (
         <div className="mono" style={{
@@ -194,7 +366,7 @@ export default function Network() {
       )}
 
       <p className="mono" style={{ textAlign: "center", fontSize: 10, color: "var(--fg-ghost)", marginTop: "var(--space-sm)" }}>
-        Drag nodes · Scroll to zoom · Click to view details · Click legend to filter
+        Scroll to zoom · Hover to explore · Click to view artist · Click legend to filter by instrument
       </p>
     </div>
   );

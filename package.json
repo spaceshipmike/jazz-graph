@@ -12,7 +12,11 @@
     "fetch-covers": "node scripts/fetch-covers.mjs",
     "fetch-tracks": "node scripts/fetch-tracks.mjs",
     "extract-colors": "node scripts/extract-colors.mjs",
-    "pipeline": "npm run fetch-data && npm run fetch-spotify-covers && npm run fetch-covers && npm run extract-colors"
+    "fix-labels": "node scripts/fix-labels.mjs",
+    "fix-labels-discogs": "node scripts/fix-labels-discogs.mjs --prune",
+    "fix-missing-labels": "node scripts/fix-missing-labels.mjs --prune",
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "pipeline": "npm run fetch-data && npm run fetch-spotify-covers && npm run fetch-covers && npm run extract-colors && npm run fix-labels && npm run fix-missing-labels && npm run fix-labels-discogs && npm run optimize-images"
   },
   "dependencies": {
     "culori": "^4.0.2",

@@ -24,7 +24,7 @@ export default function LabelsOverview() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4 }}>Labels</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Labels</h1>
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}>
         {albums.length} albums across {new Set(albums.map((a) => a.label || "Unknown")).size} labels
       </p>

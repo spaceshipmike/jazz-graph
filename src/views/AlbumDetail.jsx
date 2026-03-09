@@ -59,7 +59,7 @@ export default function AlbumDetail() {
           )}
         </div>
         <div style={{ flex: 1, minWidth: 200 }}>
-          <h1 style={{ fontSize: 32, fontWeight: 900, lineHeight: 1.1, marginBottom: 8 }}>{album.title}</h1>
+          <h1 style={{ fontSize: 32, fontWeight: 300, lineHeight: 1.1, marginBottom: 8 }}>{album.title}</h1>
           <Link to={`/artist/${slugify(album.artist)}`} className="mono" style={{ fontSize: 14, color: labelColor(album.label), marginBottom: 4, display: "block", textDecoration: "none" }}>
             {album.artist}
           </Link>

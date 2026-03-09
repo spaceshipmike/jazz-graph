@@ -97,7 +97,7 @@ export default function WordsGeography() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4 }}>Geography</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Geography</h1>
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}>
         Place names in {titleCount.toLocaleString()} song and album titles — {placeCount} locations found
       </p>

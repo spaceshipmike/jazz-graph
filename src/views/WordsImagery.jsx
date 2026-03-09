@@ -130,7 +130,7 @@ export default function WordsImagery() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)", overflowX: "auto" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4 }}>Imagery</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Imagery</h1>
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}>
         Time, seasons, weather, and nature in jazz titles
       </p>

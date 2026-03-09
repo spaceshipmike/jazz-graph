@@ -59,7 +59,7 @@ export default function ArtistDetail() {
           </div>
         )}
         <div>
-          <h1 style={{ fontSize: 36, fontWeight: 900, lineHeight: 1.1, marginBottom: 8 }}>{artist.name}</h1>
+          <h1 style={{ fontSize: 36, fontWeight: 300, lineHeight: 1.1, marginBottom: 8 }}>{artist.name}</h1>
           <div style={{ display: "flex", gap: 6, marginBottom: 8, flexWrap: "wrap" }}>
             {artist.instruments.map((inst) => (
               <span key={inst} className="pill" style={{ background: instrumentColor(inst), color: "#fff", fontSize: 10 }}>

@@ -119,7 +119,7 @@ export default function ArtistsConnections() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4 }}>Six Degrees of Jazz</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Six Degrees of Jazz</h1>
       <p
         className="mono"
         style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}

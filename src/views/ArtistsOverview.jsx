@@ -22,7 +22,7 @@ export default function ArtistsOverview() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4 }}>Artists</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Artists</h1>
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}>
         {index ? index.musicians.length : 0} musicians across {albums.length} albums
       </p>

@@ -115,7 +115,7 @@ export default function WordsMood() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)", overflowX: "auto" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 4 }}>Mood</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Mood</h1>
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}>
         Emotional themes in song and album titles
       </p>

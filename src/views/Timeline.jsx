@@ -55,7 +55,7 @@ export default function Timeline() {
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)", maxWidth: 1000, margin: "0 auto" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 900, marginBottom: 0 }}>Timeline</h1>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 0 }}>Timeline</h1>
 
       <FilterBar
         family={familyFilter}
