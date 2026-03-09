@@ -42,9 +42,12 @@ export default function Color() {
 
       // Monochrome detection
       let mono = false;
+      let chromaticPct = 0;
       if (p) {
         const maxChroma = Math.max(...p.map(labChroma));
-        if (maxChroma <= 12 || wChroma <= 8) mono = true;
+        chromaticPct = p.filter(c => labChroma(c) >= 15).reduce((s, c) => s + c.pct, 0);
+        if (maxChroma <= 12 || wChroma <= 10) mono = true;
+        else if (chromaticPct < 20) mono = true; // too little color to be "chromatic"
         else if (Math.max(...p.map(c => c.s)) <= 10) mono = true;
         else {
           let dkPct = 0, ltPct = 0;
@@ -76,11 +79,14 @@ export default function Color() {
       }
 
       // Dominant chromatic hue from palette, fallback to vibrant
+      // Weight by chroma * coverage so small bright swatches don't dominate
       let hue = album.vibrant.oklch.h || 0;
       if (p) {
         const chromatic = p.filter(c => labChroma(c) >= 15);
         if (chromatic.length > 0) {
-          const biggest = chromatic.reduce((a, b) => a.pct > b.pct ? a : b);
+          const biggest = chromatic.reduce((a, b) =>
+            labChroma(a) * a.pct > labChroma(b) * b.pct ? a : b
+          );
           if (biggest.lab) {
             const h = Math.atan2(biggest.lab.b, biggest.lab.a) * (180 / Math.PI);
             hue = h < 0 ? h + 360 : h;
@@ -88,7 +94,7 @@ export default function Color() {
         }
       }
 
-      keys.set(album, { tier, avgL, hue, accentHue: album.vibrant.oklch.h || 0 });
+      keys.set(album, { tier, avgL, hue, wChroma, accentHue: album.vibrant.oklch.h || 0 });
     }
 
     withColor.sort((a, b) => {
@@ -101,7 +107,10 @@ export default function Color() {
         return kA.avgL - kB.avgL;
       }
 
-      // Color tiers: sort by dominant palette hue, then lightness
+      // Color tiers: coarse hue bin → chroma (saturated first) → fine hue
+      const binA = Math.floor(kA.hue / 15), binB = Math.floor(kB.hue / 15);
+      if (binA !== binB) return binA - binB;
+      if (Math.abs(kA.wChroma - kB.wChroma) > 3) return kB.wChroma - kA.wChroma;
       if (kA.hue !== kB.hue) return kA.hue - kB.hue;
       return a.vibrant.oklch.l - b.vibrant.oklch.l;
     });
