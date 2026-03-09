@@ -60,8 +60,10 @@ export default function Color() {
       }
 
       // Tier: 0=black, 1=dark, 2=mid, 3=light, 4=white
+      // High chroma always goes to color tier — saturated yellows have high L in CIELAB
       let tier;
-      if (avgL < 25) tier = avgL < 15 ? 0 : 1;
+      if (!mono && wChroma >= 25) tier = 2;
+      else if (avgL < 25) tier = avgL < 15 ? 0 : 1;
       else if (avgL > 85) tier = 4;
       else if (darkNPct >= 70) tier = 1;
       else if (lightNPct >= 70) tier = avgL > 85 ? 4 : 3;
