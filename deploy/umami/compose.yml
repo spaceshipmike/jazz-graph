@@ -1,0 +1,41 @@
+services:
+  umami:
+    image: docker.umami.is/umami-software/umami:postgresql-latest
+    container_name: umami
+    restart: unless-stopped
+    ports:
+      - "4601:3000"
+    environment:
+      DATABASE_URL: postgresql://umami:${POSTGRES_PASSWORD}@umami-db:5432/umami
+      APP_SECRET: ${APP_SECRET}
+      TRACKER_SCRIPT_NAME: "s.js"
+    depends_on:
+      umami-db:
+        condition: service_healthy
+    networks:
+      - homelab_network
+    labels:
+      - "wud.display.name=umami"
+      - "wud.tag.include=^postgresql-latest$$"
+
+  umami-db:
+    image: postgres:16-alpine
+    container_name: umami-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - /home/mike/docker/volumes/umami/db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U umami"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - homelab_network
+
+networks:
+  homelab_network:
+    external: true

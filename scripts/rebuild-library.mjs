@@ -459,7 +459,12 @@ async function main() {
     console.log(`  Failed:         ${failed}`);
     console.log(`  Total:          ${albums.length}`);
     console.log(`  API calls:      ${apiCalls}`);
-    console.log(`\n  Next: node scripts/fetch-covers.mjs && node scripts/extract-colors.mjs`);
+    console.log(`\n  Next steps:`);
+    console.log(`    1. node scripts/fetch-spotify-covers.mjs   # Spotify covers (primary)`);
+    console.log(`    2. node scripts/fetch-covers.mjs            # Cover Art Archive fallback`);
+    console.log(`    3. node scripts/fetch-wikipedia-covers.mjs  # Wikipedia fallback`);
+    console.log(`    4. node scripts/extract-colors.mjs          # dominant color extraction`);
+    console.log(`    5. node scripts/optimize-images.mjs         # convert to WebP`);
   }
 }
 

@@ -30,9 +30,11 @@ data/                — pipeline output (gitignored images)
 scripts/             — data pipeline scripts
   rebuild-library.mjs     — full rebuild from artist roster (--browse, --resume)
   filter-catalog.mjs      — filter catalog between browse and fetch phases
-  fetch-spotify-covers.mjs — Spotify 640px cover art (primary)
-  fetch-covers.mjs         — Cover Art Archive fallback
-  extract-colors.mjs       — dominant color extraction (HSL)
+  fetch-spotify-covers.mjs    — Spotify 640px cover art (primary)
+  fetch-covers.mjs            — Cover Art Archive fallback
+  fetch-wikipedia-covers.mjs  — Wikipedia/Wikimedia Commons fallback
+  spotify-upgrade-covers.mjs  — slow background Spotify upgrader (--batch, resumable)
+  extract-colors.mjs          — dominant color extraction (HSL)
   clean-data.mjs           — instrument/label normalization
   fix-dates.mjs            — automated date correction
   fix-labels.mjs           — label corrections

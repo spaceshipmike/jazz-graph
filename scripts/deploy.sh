@@ -6,9 +6,11 @@ set -euo pipefail
 #   ./scripts/deploy.sh              # full deploy (app + data)
 #   ./scripts/deploy.sh --app-only   # just the app (no image sync)
 #   ./scripts/deploy.sh --data-only  # just sync data/images
+#   ./scripts/deploy.sh --umami      # deploy/start Umami analytics
 
 NAS="mike@192.168.10.10"
 NAS_SERVICE_DIR="docker/services/jazz"
+NAS_UMAMI_DIR="docker/services/umami"
 NAS_DATA_DIR="docker/volumes/jazz/data"
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
@@ -16,11 +18,13 @@ cd "$PROJECT_DIR"
 
 app_only=false
 data_only=false
+umami_only=false
 
 for arg in "$@"; do
   case $arg in
     --app-only) app_only=true ;;
     --data-only) data_only=true ;;
+    --umami) umami_only=true ;;
   esac
 done
 
@@ -91,9 +95,47 @@ deploy_app() {
   ssh "$NAS" "docker ps --filter name=jazz --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
 }
 
+# ── Deploy Umami analytics ──────────────────────────────────────
+
+deploy_umami() {
+  echo "==> Deploying Umami analytics..."
+
+  ssh "$NAS" "mkdir -p ~/$NAS_UMAMI_DIR ~/$HOME/docker/volumes/umami/db"
+
+  # Generate .env if it doesn't exist on NAS
+  local has_env
+  has_env=$(ssh "$NAS" "test -f ~/$NAS_UMAMI_DIR/.env && echo yes || echo no")
+  if [ "$has_env" = "no" ]; then
+    echo "    Generating secrets..."
+    local app_secret pg_password
+    app_secret=$(openssl rand -hex 32)
+    pg_password=$(openssl rand -hex 16)
+    ssh "$NAS" "cat > ~/$NAS_UMAMI_DIR/.env << EOF
+APP_SECRET=$app_secret
+POSTGRES_PASSWORD=$pg_password
+EOF"
+    echo "    Created .env with generated secrets."
+  else
+    echo "    .env already exists, keeping existing secrets."
+  fi
+
+  # Copy compose file
+  cat deploy/umami/compose.yml | ssh "$NAS" "cat > ~/$NAS_UMAMI_DIR/compose.yml"
+
+  # Pull and start
+  ssh "$NAS" "cd ~/$NAS_UMAMI_DIR && docker compose pull && docker compose up -d"
+
+  echo "    Umami deployed on port 4601."
+  echo "    Default login: admin / umami"
+  echo "    Set up reverse proxy for umami.h3r3.com → localhost:4601"
+  ssh "$NAS" "docker ps --filter name=umami --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
+}
+
 # ── Main ────────────────────────────────────────────────────────
 
-if [ "$data_only" = true ]; then
+if [ "$umami_only" = true ]; then
+  deploy_umami
+elif [ "$data_only" = true ]; then
   sync_data
 elif [ "$app_only" = true ]; then
   deploy_app
