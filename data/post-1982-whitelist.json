@@ -1,0 +1,220 @@
+{
+  "_instructions": "Mark albums KEEP to rescue from the post-1982 cutoff. Delete or leave entries you want cut. Only KEEP entries will survive.",
+
+  "Miles Davis — real 80s/90s studio albums": [
+    { "KEEP": true, "year": 1983, "title": "Star People", "label": "Columbia" },
+    { "KEEP": true, "year": 1984, "title": "Decoy", "label": "Columbia" },
+    { "KEEP": true, "year": 1985, "title": "You're Under Arrest", "label": "Columbia" },
+    { "CUT": true, "year": 1985, "title": "Miles Under Arrest: Live 1985", "label": "[no label]", "note": "bootleg" },
+    { "KEEP": true, "year": 1986, "title": "Tutu", "label": "Warner Bros." },
+    { "KEEP": true, "year": 1987, "title": "Cookin' at the Plugged Nickel", "label": "Columbia", "note": "1965 recording, reissue" },
+    { "KEEP": true, "year": 1987, "title": "Music From Siesta", "label": "Warner Bros." },
+    { "KEEP": true, "year": 1989, "title": "Aura", "label": "Columbia" },
+    { "KEEP": true, "year": 1989, "title": "Amandla", "label": "Warner Bros." },
+    { "CUT": true, "year": 1990, "title": "Jazz at the Plaza", "label": "Columbia", "note": "1958 recording, reissue" },
+    { "CUT": true, "year": 1990, "title": "At Last!", "label": "Contemporary Records", "note": "1956 recording, reissue" },
+    { "KEEP": true, "year": 1991, "title": "Dingo", "label": "Warner Bros." },
+    { "KEEP": true, "year": 1992, "title": "Doo‐Bop", "label": "Warner Bros.", "note": "last studio album, recorded 1991" }
+  ],
+
+  "Miles Davis — posthumous": [
+    { "CUT": true, "year": 1992, "title": "Miles! Miles! Miles!", "label": "Columbia", "note": "compilation" },
+    { "CUT": true, "year": 1992, "title": "Our Delight", "label": "Prestige", "note": "1956 reissue" },
+    { "CUT": true, "year": 1993, "title": "Miles & Quincy Live at Montreux", "label": "Warner Bros." },
+    { "CUT": true, "year": 1994, "title": "Live at Newport", "label": "Columbia" },
+    { "CUT": true, "year": 1994, "title": "Miles Davis en concert avec Europe 1", "label": "Trema" },
+    { "CUT": true, "year": 1995, "title": "Highlights from the Plugged Nickel", "label": "Columbia Records" },
+    { "CUT": true, "year": 1996, "title": "Live Around the World", "label": "Warner Bros." }
+  ],
+
+  "Bill Evans — posthumous (all real recordings, wrong dates)": [
+    { "KEEP": true, "year": 1983, "title": "The Canadian Concert of Bill Evans", "label": "Can-Am Records" },
+    { "KEEP": true, "year": 1984, "title": "More From The Vanguard", "label": "Milestone" },
+    { "KEEP": true, "year": 1985, "title": "Bill Evans Trio With Symphony Orchestra", "label": "Verve" },
+    { "KEEP": true, "year": 1987, "title": "Jazzhouse", "label": "Milestone" },
+    { "KEEP": true, "year": 1988, "title": "You're Gonna Hear From Me", "label": "Milestone" },
+    { "KEEP": true, "year": 1989, "title": "The Paris Concert, Edition Two", "label": "Elektra" }
+  ],
+
+  "Art Blakey — posthumous": [
+    { "CUT": true, "year": 1992, "title": "In This Korner", "label": "Concord Jazz" },
+    { "CUT": true, "year": 1992, "title": "Art Blakey & Friends: Wynton Marsalis", "label": "SpotLite" },
+    { "CUT": true, "year": 1994, "title": "Au Théâtre des Champs-Élysées", "label": "BMG" },
+    { "CUT": true, "year": 1995, "title": "Art Blakey & His Jazz Messangers", "label": "Bluebird" },
+    { "CUT": true, "year": 1997, "title": "Orgy in Rhythm, Volumes One & Two", "label": "Blue Note", "note": "1957 recordings, repackage" },
+    { "CUT": true, "year": 1997, "title": "Orgy In Rhythm", "label": "Blue Note", "note": "1957 recordings, repackage" },
+    { "CUT": true, "year": 1999, "title": "Drums Around the Corner", "label": "Blue Note" }
+  ],
+
+  "Art Pepper — posthumous": [
+    { "KEEP": true, "year": 1983, "title": "A Night in Tunisia", "label": "Trio" },
+    { "KEEP": true, "year": 1983, "title": "I'll Remember April", "label": "Trio" },
+    { "CUT": true, "year": 1984, "title": "Straight Life - The Savoy Sessions", "label": "Savoy Jazz", "note": "1950s sessions" },
+    { "CUT": true, "year": 1985, "title": "Stardust", "label": "Victor" },
+    { "CUT": true, "year": 1985, "title": "Artworks", "label": "Victor" },
+    { "CUT": true, "year": 1985, "title": "New York Album", "label": "Carrère" },
+    { "CUT": true, "year": 1986, "title": "Art Pepper With Warne Marsh", "label": "Contemporary Records" },
+    { "CUT": true, "year": 1988, "title": "Among Friends", "label": "Discovery Records" },
+    { "CUT": true, "year": 1988, "title": "Live In Japan Vol. 1 - Ophelia", "label": "Storyville Records" },
+    { "CUT": true, "year": 1988, "title": "Live In Japan Vol. 2 - The Summer Knows", "label": "Storyville Records" },
+    { "CUT": true, "year": 1990, "title": "The Art of Pepper, Volume 3", "label": "Blue Note" },
+    { "CUT": true, "year": 1991, "title": "One September Afternoon", "label": "Galaxy" },
+    { "CUT": true, "year": 1991, "title": "Tokyo Encore", "label": "Disques Dreyfus" }
+  ],
+
+  "Chet Baker — posthumous": [
+    { "CUT": true, "year": 1989, "title": "Cool Cat", "label": "Timeless Records" },
+    { "CUT": true, "year": 1989, "title": "The Best Thing for You", "label": "A&M Records" },
+    { "CUT": true, "year": 1989, "title": "Chet On Poetry", "label": "Novus" },
+    { "CUT": true, "year": 1989, "title": "Chet Baker Sings and Plays From the Film \"Let's Get Lost\"", "label": "RCA" },
+    { "CUT": true, "year": 1989, "title": "Live in Sweden", "label": "Dragon" },
+    { "CUT": true, "year": 1989, "title": "Four: Chet Baker in Tokyo", "label": "Paddle Wheel" },
+    { "CUT": true, "year": 1990, "title": "The Italian Sessions", "label": "BMG" },
+    { "CUT": true, "year": 1990, "title": "As Time Goes By", "label": "Timeless Records" },
+    { "CUT": true, "year": 1990, "title": "Straight From the Heart: The Great Last Concert, Volume II", "label": "enja" },
+    { "CUT": true, "year": 1990, "title": "The Last Great Concert: My Favorite Songs, Vol. I & II", "label": "enja" },
+    { "CUT": true, "year": 1990, "title": "Deep In A Dream Of You", "label": "Moon Records" },
+    { "CUT": true, "year": 1991, "title": "Chet Baker with Strings / Heartbreak", "label": "Timeless Records" },
+    { "CUT": true, "year": 1991, "title": "Chet Baker & The Boto Brasilian Quartet", "label": "Disques Dreyfus" },
+    { "CUT": true, "year": 1991, "title": "Two a Day", "label": "Dreyfus Jazz" },
+    { "CUT": true, "year": 1991, "title": "Chet Baker - Steve Houben", "label": "52e rue est" },
+    { "CUT": true, "year": 1991, "title": "Out of Nowhere", "label": "Milestone" },
+    { "CUT": true, "year": 1991, "title": "Live At Fat Tuesday's", "label": "Fresh Sound Records" },
+    { "CUT": true, "year": 1991, "title": "Burnin' at Backstreet", "label": "Fresh Sound Records" },
+    { "CUT": true, "year": 1992, "title": "In Bologna", "label": "Dreyfus Jazz" },
+    { "CUT": true, "year": 1992, "title": "Unusual Chet: Naima, Volume 1", "label": "Philology" },
+    { "CUT": true, "year": 1993, "title": "Chet Baker in Europe", "label": "B&W Music" },
+    { "CUT": true, "year": 1996, "title": "At Capolinea", "label": "Red Records" },
+    { "CUT": true, "year": 1996, "title": "The Legacy, Volume 2: I Remember You", "label": "enja" },
+    { "CUT": true, "year": 1996, "title": "Love For Sale: Live at Ronnie Scott's", "label": "DRG Records" },
+    { "CUT": true, "year": 1997, "title": "White Blues", "label": "Camden" },
+    { "CUT": true, "year": 1997, "title": "Jazz Profile", "label": "Blue Note" },
+    { "CUT": true, "year": 1998, "title": "Hazy Hugs", "label": "Challenge Records" },
+    { "CUT": true, "year": 1998, "title": "'Round Midnight", "label": "Challenge Records" }
+  ],
+
+  "Count Basie — posthumous": [
+    { "CUT": true, "year": 1986, "title": "Get Together", "label": "Pablo" },
+    { "CUT": true, "year": 1986, "title": "Yessir, That's My Baby", "label": "Pablo" },
+    { "CUT": true, "year": 1986, "title": "Mostly Blues...and Some Others", "label": "Pablo" },
+    { "CUT": true, "year": 1988, "title": "Basie and Friends", "label": "Pablo" },
+    { "CUT": true, "year": 1989, "title": "Count Basie Jam / Montreux '77", "label": "Pablo Live" },
+    { "CUT": true, "year": 1989, "title": "Flip, Flop & Fly", "label": "Pablo" },
+    { "CUT": true, "year": 1991, "title": "Loose Walk", "label": "Pablo" },
+    { "CUT": true, "year": 1991, "title": "Basie One More Time", "label": "Roulette Jazz" },
+    { "CUT": true, "year": 1992, "title": "Basie's Basement", "label": "Bluebird" },
+    { "CUT": true, "year": 1992, "title": "Kansas City 7", "label": "Pablo" },
+    { "CUT": true, "year": 1992, "title": "Basie Jam #3", "label": "Pablo" },
+    { "CUT": true, "year": 1993, "title": "Count Basie and His Great Vocalists", "label": "Columbia" },
+    { "CUT": true, "year": 1993, "title": "Count Basie Swings, Joe Williams Sings", "label": "Verve" },
+    { "CUT": true, "year": 1994, "title": "Listen... You Shall Hear", "label": "HEP Records" },
+    { "CUT": true, "year": 1994, "title": "Basie's Bag", "label": "Telarc Jazz" }
+  ],
+
+  "Dexter Gordon — posthumous": [
+    { "CUT": true, "year": 1992, "title": "Dexter Rides Again", "label": "Savoy Jazz" },
+    { "CUT": true, "year": 1992, "title": "Jazz West Coast Live / Hollywood Jazz Vol.1", "label": "Savoy Records" },
+    { "CUT": true, "year": 1994, "title": "Cry Me a River", "label": "SteepleChase" },
+    { "CUT": true, "year": 1994, "title": "Swiss Nights, Volume 2", "label": "SteepleChase" },
+    { "CUT": true, "year": 1996, "title": "Live at the Montmartre Jazzhus", "label": "Black Lion Records" },
+    { "CUT": true, "year": 1997, "title": "Tenor Titans", "label": "Storyville Records" },
+    { "CUT": true, "year": 1997, "title": "The Resurgence of Dexter Gordon", "label": "Jazzland" },
+    { "CUT": true, "year": 1997, "title": "The Squirrel", "label": "Blue Note" },
+    { "CUT": true, "year": 1998, "title": "Live at Carnegie Hall", "label": "Columbia" }
+  ],
+
+  "Dizzy Gillespie — posthumous": [
+    { "CUT": true, "year": 1994, "title": "Lady Be Good", "label": "4 Star Records" },
+    { "CUT": true, "year": 1995, "title": "The Bop Session", "label": "Gazell Records AB" },
+    { "CUT": true, "year": 1995, "title": "Dizzy Gillespie In Paris, Volume 1", "label": "BMG Classics" },
+    { "CUT": true, "year": 1996, "title": "The Cool World / Dizzy Goes Hollywood", "label": "Verve" },
+    { "CUT": true, "year": 1997, "title": "Bird Songs", "label": "Telarc Jazz" },
+    { "CUT": true, "year": 1997, "title": "The Winter in Lisbon", "label": "Milan Jazz" },
+    { "CUT": true, "year": 1997, "title": "Dizzy for President", "label": "Knitting Factory Works" },
+    { "CUT": true, "year": 1998, "title": "Something Old, Something New", "label": "Verve" },
+    { "CUT": true, "year": 1998, "title": "Closer to the Source", "label": "Atlantic" }
+  ],
+
+  "Ella Fitzgerald — posthumous": [
+    { "CUT": true, "year": 1997, "title": "Sings Christmas", "label": "EMI" },
+    { "CUT": true, "year": 1998, "title": "Lullabies of Birdland / Sweet and Hot", "label": "MCA Records" },
+    { "CUT": true, "year": 1999, "title": "Rhythm Is My Business", "label": "Verve" },
+    { "CUT": true, "year": 1999, "title": "Ella in Budapest", "label": "Pablo" },
+    { "CUT": true, "year": 2000, "title": "In the Groove", "label": "Buddha Records" },
+    { "CUT": true, "year": 2001, "title": "Sophisticated Lady", "label": "Pablo" },
+    { "CUT": true, "year": 2006, "title": "The Reprise Years", "label": "Rhino" },
+    { "CUT": true, "year": 2006, "title": "Live in San Francisco", "label": "MPS" }
+  ],
+
+  "Jaco Pastorius — posthumous": [
+    { "CUT": true, "year": 1989, "title": "Jazz Street", "label": "Timeless Records" },
+    { "CUT": true, "year": 1990, "title": "Live in New York City, Volume 1: Punk Jazz", "label": "Big World Music" },
+    { "CUT": true, "year": 1991, "title": "Live In New York City, Volume 3: Promise Land", "label": "Big World Music" },
+    { "CUT": true, "year": 1991, "title": "Live in New York City, Volume 2: Trio", "label": "Big World Music" },
+    { "CUT": true, "year": 1991, "title": "Honestly Live - Solo", "label": "jazzpoint" },
+    { "CUT": true, "year": 1991, "title": "Live in Italy", "label": "jazzpoint" },
+    { "CUT": true, "year": 1991, "title": "Blackbird", "label": "Alfa Jazz" },
+    { "CUT": true, "year": 1992, "title": "Live In New York City, Volume 4: Trio...2", "label": "Big World Music" },
+    { "CUT": true, "year": 1992, "title": "Heavy'n Jazz", "label": "jazzpoint" },
+    { "CUT": true, "year": 1993, "title": "Holiday for Pans", "label": "Japan's Sound Hills" },
+    { "CUT": true, "year": 1993, "title": "Live in New York City, Volume 5: Raça", "label": "Big World Music" },
+    { "CUT": true, "year": 1996, "title": "Curtain Call", "label": "Anansi Records" },
+    { "CUT": true, "year": 1997, "title": "Golden Roads", "label": "Sound Hills Records" },
+    { "CUT": true, "year": 1997, "title": "A Good Stitch For Golden Roads", "label": "Sound Hills Records" }
+  ],
+
+  "Sarah Vaughan — posthumous": [
+    { "CUT": true, "year": 1991, "title": "Sarah Slightly Classical", "label": "Roulette Jazz" },
+    { "CUT": true, "year": 1992, "title": "Time & Again", "label": "Musicraft" },
+    { "CUT": true, "year": 1994, "title": "I Love Brazil!", "label": "Pablo" },
+    { "CUT": true, "year": 1999, "title": "In the City of Lights", "label": "Justin Time Records Inc." },
+    { "CUT": true, "year": 1999, "title": "Linger Awhile: Live at Newport and More", "label": "Pablo" }
+  ],
+
+  "Stan Getz — posthumous": [
+    { "CUT": true, "year": 1992, "title": "L.A. Get-Together!", "label": "Fresh Sound Records" },
+    { "CUT": true, "year": 1992, "title": "Sweetie Pie", "label": "Philology" },
+    { "CUT": true, "year": 1992, "title": "Spring Is Here", "label": "Bellaphon" },
+    { "CUT": true, "year": 1992, "title": "Another World", "label": "Columbia" },
+    { "CUT": true, "year": 1992, "title": "People Time", "label": "Verve" },
+    { "CUT": true, "year": 1994, "title": "The Peacocks", "label": "Columbia" },
+    { "CUT": true, "year": 1994, "title": "Nobody Else But Me", "label": "PolyGram" },
+    { "CUT": true, "year": 1994, "title": "Stan Getz", "label": "EMI" },
+    { "CUT": true, "year": 1995, "title": "Blue Skies", "label": "Concord Jazz" },
+    { "CUT": true, "year": 1996, "title": "Stan Meets Chet", "label": "Verve" },
+    { "CUT": true, "year": 1996, "title": "Stan Getz & Arthur Fiedler at Tanglewood", "label": "RCA" },
+    { "CUT": true, "year": 1996, "title": "Stan's Party", "label": "SteepleChase" },
+    { "CUT": true, "year": 1997, "title": "Soul Eyes", "label": "Concord Jazz" },
+    { "CUT": true, "year": 1998, "title": "What the World Needs Now: Stan Getz Plays Bacharach and David", "label": "Verve by Request" },
+    { "CUT": true, "year": 1998, "title": "Ultimate Stan Getz", "label": "Verve" },
+    { "CUT": true, "year": 1998, "title": "Jazz 'Round Midnight: Bossa Nova", "label": "PolyGram" },
+    { "CUT": true, "year": 1998, "title": "Music from the Sound Track of \"Mickey One\"", "label": "Verve" },
+    { "CUT": true, "year": 1999, "title": "The Steamer", "label": "Verve" },
+    { "CUT": true, "year": 1999, "title": "Imported From Europe", "label": "Verve" },
+    { "CUT": true, "year": 1999, "title": "The Stockholm Concerts", "label": "Verve Records" },
+    { "CUT": true, "year": 2000, "title": "Award Winner", "label": "Verve Music Group" },
+    { "CUT": true, "year": 2000, "title": "The Final Concert Recording", "label": "Eagle Records" },
+    { "CUT": true, "year": 2001, "title": "Poetry", "label": "Blue Note" }
+  ],
+
+  "Sun Ra — posthumous": [
+    { "CUT": true, "year": 1998, "title": "Somewhere Else", "label": "Zensor" },
+    { "CUT": true, "year": 1998, "title": "Spaceways", "label": "Freedom" },
+    { "CUT": true, "year": 1999, "title": "Janus", "label": "1201 music" },
+    { "CUT": true, "year": 2000, "title": "Standards", "label": "1201 music" },
+    { "CUT": true, "year": 2000, "title": "The Great Lost Sun Ra Albums", "label": "Evidence" },
+    { "CUT": true, "year": 2003, "title": "Spaceship Lullaby", "label": "Atavistic" },
+    { "CUT": true, "year": 2003, "title": "Piano Recital: Teatro la Fenice", "label": "Golden Years of New Jazz" },
+    { "CUT": true, "year": 2003, "title": "Nuits de la Fondation Maeght Vol.2", "label": "Universe" },
+    { "CUT": true, "year": 2003, "title": "Nuits de la Fondation Maeght Vol.1", "label": "Universe" }
+  ],
+
+  "Thelonious Monk — posthumous": [
+    { "CUT": true, "year": 1984, "title": "Blues Five Spot", "label": "Milestone" },
+    { "CUT": true, "year": 1985, "title": "More Genius of Thelonious Monk", "label": "Blue Note" },
+    { "CUT": true, "year": 1985, "title": "European Tour", "label": "DENON" },
+    { "CUT": true, "year": 1987, "title": "The Paris Concert", "label": "Affinity" },
+    { "CUT": true, "year": 1988, "title": "The London Collection", "label": "Black Lion" },
+    { "CUT": true, "year": 1988, "title": "Monk: On Tour in Europe", "label": "Affinity" }
+  ]
+}
