@@ -96,7 +96,7 @@ function Nav() {
   const isAbout = location.pathname === "/about";
 
   return (
-    <header style={{ padding: "20px var(--space-xl) 0", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+    <header className="site-header">
       <div style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
         {isDetail && (
           <button
@@ -122,26 +122,17 @@ function Nav() {
         </NavLink>
       </div>
       {!isDetail && (
-        <nav style={{ display: "flex", gap: 4, alignItems: "center", marginBottom: 2 }}>
+        <nav className="site-nav">
           {CATEGORIES.map(({ to, label, exact }) => (
             <NavLink
               key={to}
               to={to}
               end={exact}
-              className="mono"
+              className="mono nav-pill"
               style={({ isActive }) => ({
-                padding: "7px 18px",
-                border: "1px solid",
-                borderRadius: "var(--radius-pill)",
                 borderColor: isActive ? "var(--fg)" : "var(--fg-ghost)",
                 background: isActive ? "var(--fg)" : "transparent",
                 color: isActive ? "var(--bg)" : "var(--fg-dim)",
-                fontSize: 11,
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                textDecoration: "none",
-                transition: "var(--ease-default)",
               })}
             >
               {label}
@@ -149,29 +140,21 @@ function Nav() {
           ))}
           <NavLink
             to="/search"
-            className="mono"
+            className="nav-icon"
             style={({ isActive }) => ({
-              padding: "7px 12px",
-              fontSize: 11,
               color: isActive ? "var(--fg)" : "var(--fg-muted)",
-              textDecoration: "none",
-              marginLeft: 4,
-              transition: "var(--ease-default)",
             })}
+            aria-label="Search"
           >
-            Search
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
           </NavLink>
           <NavLink
             to="/about"
-            className="mono"
-            style={{
-              padding: "7px 12px",
-              fontSize: 11,
-              color: "var(--fg-muted)",
-              textDecoration: "none",
-              marginLeft: 0,
-              transition: "var(--ease-default)",
-            }}
+            className="mono nav-icon"
+            style={{ color: "var(--fg-muted)" }}
           >
             ?
           </NavLink>

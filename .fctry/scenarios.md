@@ -152,10 +152,10 @@ Across all views, the design feels cohesive — dark background, instrument-fami
 - Dark theme has sufficient contrast
 
 ## S15: Global Search
-A user clicks "Search" in the nav header. They land on `/search` with an autofocused text input. They type "monk" and see grouped results: Albums (albums with "monk" in the title), Artists (musicians named "Monk" or matching), and Tracks (track titles containing "monk"). Each section shows its count. They click an album result and navigate to the album detail page. They click an artist result and navigate to the artist detail page. They click a track result and navigate to the parent album's detail page.
+A user clicks the magnifying glass search icon in the nav header. They land on `/search` with an autofocused text input. They type "monk" and see grouped results: Albums (albums with "monk" in the title), Artists (musicians named "Monk" or matching), and Tracks (track titles containing "monk"). Each section shows its count. They click an album result and navigate to the album detail page. They click an artist result and navigate to the artist detail page. They click a track result and navigate to the parent album's detail page.
 
 **Satisfied when:**
-- "Search" link appears in the nav header alongside the 7 category pills
+- Magnifying glass search icon appears in the nav header alongside the 7 category pills
 - `/search` page loads with an autofocused text input
 - Typing a query shows results grouped into Albums, Artists, and Tracks sections
 - Each section header shows the result count (e.g., "Albums (3)")
@@ -179,3 +179,15 @@ The app loads and navigates fluidly with 2,000+ albums. View switches are instan
 - Search/filter results appear within 100ms
 - D3 visualizations render within 1 second
 - Total bundle size (excluding images) under 500KB
+
+## S16: Responsive Nav on Narrow Screens
+A user opens The Jazz Graph on a phone or narrow browser window (<=768px). The nav title sits on its own row, and the 7 category pills plus search icon wrap to a second row below. All pills are visible without horizontal scrolling. The user taps "Labels" and sees the Labels category with sub-nav. They rotate to landscape and the layout adjusts — pills may fit on fewer rows.
+
+**Satisfied when:**
+- At viewport width <=768px, the nav pills wrap below the title to one or more additional rows
+- No horizontal scroll is required to access any category pill
+- All 7 category pills and the magnifying glass search icon remain visible and tappable
+- The search icon is a magnifying glass (not the word "Search")
+- Sub-nav pills also remain accessible on narrow viewports
+- Active category indication works the same as on desktop
+- The wrapping breakpoint is 768px (standard tablet/phone threshold)

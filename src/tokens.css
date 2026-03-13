@@ -214,6 +214,72 @@ img {
   background: var(--fg-muted);
 }
 
+/* ── Site Header & Nav ──────────────────────────────────────────────── */
+
+.site-header {
+  padding: 20px var(--space-xl) 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.nav-pill {
+  padding: 7px 18px;
+  border: 1px solid;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: var(--ease-default);
+  white-space: nowrap;
+}
+
+.nav-icon {
+  padding: 7px 12px;
+  font-size: 11px;
+  text-decoration: none;
+  transition: var(--ease-default);
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon:hover {
+  color: var(--fg) !important;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 16px var(--space-md) 0;
+    gap: 12px;
+  }
+
+  .site-header h1 {
+    font-size: 28px !important;
+  }
+
+  .site-nav {
+    width: 100%;
+    gap: 6px;
+  }
+
+  .nav-pill {
+    padding: 6px 14px;
+    font-size: 10px;
+  }
+}
+
 /* ── Search Results ────────────────────────────────────────────────── */
 
 .search-row {

@@ -1,6 +1,6 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.11"
+spec-version: "0.12"
 spec-format: nlspec-v2
 date: 2026-03-09
 status: active
@@ -182,8 +182,10 @@ Unrecognized labels use neutral gray (#888).
 
 The app uses a **two-level navigation** system:
 
-- **Primary nav** (top bar): 7 category pills — Color · Artists · Instruments · Labels · Time · Sound · Words — plus a "Search" link
+- **Primary nav** (top bar): 7 category pills — Color · Artists · Instruments · Labels · Time · Sound · Words — plus a magnifying glass search icon (links to `/search`). Active category indicated. "The Jazz Graph" title links home.
 - **Sub-nav** (secondary pill row below primary): switches between visualization panels within the active category. One panel visible at a time.
+
+**Responsive behavior (screens <=768px):** The nav pills wrap to a second row below the title instead of overflowing offscreen. The title sits on the first row; the category pills and search icon flow onto the next row(s). No hamburger menu, no horizontal scroll — all pills remain visible and tappable.
 
 Sub-nav selections are encoded in the URL as path segments (e.g., `/labels/flow`, `/instruments/eras`). The first sub-view in each category is the default when navigating to the category root.
 
@@ -307,7 +309,7 @@ Sections with zero results for the current query are hidden.
 
 **No-results state:** When a query matches nothing across all three types, a message indicates no results were found.
 
-**Nav behavior:** The Search page shows the primary nav bar (with "Search" visually active) but no sub-nav row.
+**Nav behavior:** The Search page shows the primary nav bar (with the search icon visually active) but no sub-nav row.
 
 ## 4. Navigation & Routing
 
@@ -340,7 +342,7 @@ Client-side routing with nested paths:
 /artist/:slug            — Artist Detail
 ```
 
-**Primary nav bar:** 7 category pills at top, plus a "Search" link. Active category indicated. "The Jazz Graph" title links home.
+**Primary nav bar:** 7 category pills at top, plus a magnifying glass search icon. Active category indicated. "The Jazz Graph" title links home. On screens <=768px, pills wrap below the title to a second row — no hamburger menu, no horizontal scroll.
 
 **Sub-nav bar:** Secondary row of smaller pills below primary nav, showing available panels for the active category. Active panel indicated. Only visible on category pages (hidden on detail pages and Color home).
 
@@ -407,7 +409,7 @@ Transitions:
 ## 7. Future Enhancements (Not in v1)
 
 - Audio preview integration
-- Mobile-optimized layout
+- Mobile-optimized layout (beyond nav — visualization-specific responsive work)
 - Artist birthplace/nationality data from MusicBrainz
 - Genre/style tags from MusicBrainz
 - Recording location/studio data
