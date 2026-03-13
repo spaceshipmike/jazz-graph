@@ -1,6 +1,6 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.10"
+spec-version: "0.11"
 spec-format: nlspec-v2
 date: 2026-03-09
 status: active
@@ -182,7 +182,7 @@ Unrecognized labels use neutral gray (#888).
 
 The app uses a **two-level navigation** system:
 
-- **Primary nav** (top bar): 7 category pills — Color · Artists · Instruments · Labels · Time · Sound · Words
+- **Primary nav** (top bar): 7 category pills — Color · Artists · Instruments · Labels · Time · Sound · Words — plus a "Search" link
 - **Sub-nav** (secondary pill row below primary): switches between visualization panels within the active category. One panel visible at a time.
 
 Sub-nav selections are encoded in the URL as path segments (e.g., `/labels/flow`, `/instruments/eras`). The first sub-view in each category is the default when navigating to the category root.
@@ -285,6 +285,30 @@ A dedicated full page for each artist.
 
 **Discography:** Grid of album covers (all appearances), sortable by year.
 
+### 3.10 Search (`/search`) {#search}
+
+A dedicated search page for finding albums, artists, and tracks across the entire dataset.
+
+**Route:** `/search?q=...`
+
+**Input:** A text input field, autofocused on page load. The query string is reflected in the URL's `q` parameter so search results are bookmarkable and shareable.
+
+**Search method:** Client-side substring matching against the existing data index (`buildIndex()` output). Searches album titles, artist/musician names, and track titles. Results appear within 100ms of typing.
+
+**Results display:** Results are grouped into three sections, each with a count in the section header:
+
+- **Albums** — Cover art thumbnail, title, artist name, year. Each result links to `/album/:slug`.
+- **Artists** — Name, primary instrument, album count. Each result links to `/artist/:slug`.
+- **Tracks** — Track title, album title, artist name. Each result links to the parent album at `/album/:slug`.
+
+Sections with zero results for the current query are hidden.
+
+**Empty state:** When no query has been entered, the page shows instructional text inviting the user to search.
+
+**No-results state:** When a query matches nothing across all three types, a message indicates no results were found.
+
+**Nav behavior:** The Search page shows the primary nav bar (with "Search" visually active) but no sub-nav row.
+
 ## 4. Navigation & Routing
 
 Client-side routing with nested paths:
@@ -311,11 +335,12 @@ Client-side routing with nested paths:
 /words/mood              — Words: Mood
 /words/vocabulary        — Words: Vocabulary
 /words/imagery           — Words: Imagery
+/search                  — Global Search
 /album/:slug             — Album Detail
 /artist/:slug            — Artist Detail
 ```
 
-**Primary nav bar:** 7 category pills at top. Active category indicated. "The Jazz Graph" title links home.
+**Primary nav bar:** 7 category pills at top, plus a "Search" link. Active category indicated. "The Jazz Graph" title links home.
 
 **Sub-nav bar:** Secondary row of smaller pills below primary nav, showing available panels for the active category. Active panel indicated. Only visible on category pages (hidden on detail pages and Color home).
 

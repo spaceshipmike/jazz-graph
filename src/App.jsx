@@ -13,6 +13,7 @@ import WordsCategory from "./views/WordsCategory";
 import AlbumDetail from "./views/AlbumDetail";
 import ArtistDetail from "./views/ArtistDetail";
 import About from "./views/About";
+import Search from "./views/Search";
 
 // Global data context
 const DataContext = createContext(null);
@@ -63,6 +64,7 @@ export default function App() {
           <Route path="/words/*" element={<WordsCategory />} />
           <Route path="/album/:slug" element={<AlbumDetail />} />
           <Route path="/artist/:slug" element={<ArtistDetail />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
@@ -146,6 +148,20 @@ function Nav() {
             </NavLink>
           ))}
           <NavLink
+            to="/search"
+            className="mono"
+            style={({ isActive }) => ({
+              padding: "7px 12px",
+              fontSize: 11,
+              color: isActive ? "var(--fg)" : "var(--fg-muted)",
+              textDecoration: "none",
+              marginLeft: 4,
+              transition: "var(--ease-default)",
+            })}
+          >
+            Search
+          </NavLink>
+          <NavLink
             to="/about"
             className="mono"
             style={{
@@ -153,7 +169,7 @@ function Nav() {
               fontSize: 11,
               color: "var(--fg-muted)",
               textDecoration: "none",
-              marginLeft: 4,
+              marginLeft: 0,
               transition: "var(--ease-default)",
             }}
           >

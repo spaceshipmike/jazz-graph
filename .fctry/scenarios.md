@@ -151,6 +151,25 @@ Across all views, the design feels cohesive — dark background, instrument-fami
 - Interactive elements share consistent patterns
 - Dark theme has sufficient contrast
 
+## S15: Global Search
+A user clicks "Search" in the nav header. They land on `/search` with an autofocused text input. They type "monk" and see grouped results: Albums (albums with "monk" in the title), Artists (musicians named "Monk" or matching), and Tracks (track titles containing "monk"). Each section shows its count. They click an album result and navigate to the album detail page. They click an artist result and navigate to the artist detail page. They click a track result and navigate to the parent album's detail page.
+
+**Satisfied when:**
+- "Search" link appears in the nav header alongside the 7 category pills
+- `/search` page loads with an autofocused text input
+- Typing a query shows results grouped into Albums, Artists, and Tracks sections
+- Each section header shows the result count (e.g., "Albums (3)")
+- Album results show cover art thumbnail, title, artist name, and year
+- Artist results show name, primary instrument, and album count
+- Track results show track title, album title, and artist name
+- Album results link to `/album/:slug`
+- Artist results link to `/artist/:slug`
+- Track results link to the parent album's `/album/:slug`
+- Empty state (no query entered) shows instructional text
+- No-results state shows a message when the query matches nothing
+- Results appear within 100ms of typing (client-side substring matching)
+- Search works across the full dataset (~3,300 albums, ~3,600 musicians, ~3,600 tracks)
+
 ## S13: Performant with Full Dataset
 The app loads and navigates fluidly with 2,000+ albums. View switches are instant. Visualizations render without jank.
 

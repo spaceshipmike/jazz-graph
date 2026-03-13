@@ -213,3 +213,13 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--fg-muted);
 }
+
+/* ── Search Results ────────────────────────────────────────────────── */
+
+.search-row {
+  transition: background var(--ease-default);
+}
+
+.search-row:hover {
+  background: var(--surface-hover);
+}
