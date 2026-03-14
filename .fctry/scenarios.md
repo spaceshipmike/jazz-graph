@@ -191,3 +191,23 @@ A user opens The Jazz Graph on a phone or narrow browser window (<=768px). The n
 - Sub-nav pills also remain accessible on narrow viewports
 - Active category indication works the same as on desktop
 - The wrapping breakpoint is 768px (standard tablet/phone threshold)
+
+## S17: Subgenre Enrichment and Display
+A developer runs the subgenre enrichment script. Each album receives subgenre classifications from Discogs styles, MusicBrainz release-group genres, and MusicBrainz artist genres. A user then browses the app and sees subgenre information woven throughout: shape pills in filter bars, badges on detail pages, evolution markers on the timeline, and subgenre-aware search results.
+
+**Satisfied when:**
+- `enrich-subgenres.mjs` enriches albums from three sources (Discogs primary, MB release-group secondary, MB artist fallback)
+- Each enriched album has a `subgenres: string[]` field with canonical names and a `discogsStyles: string[]` field for provenance
+- The canonical taxonomy contains exactly 15 subgenres: hard bop, bebop, cool jazz, post-bop, modal jazz, free jazz, soul jazz, jazz fusion, jazz-funk, latin jazz, avant-garde jazz, big band, spiritual jazz, swing, bossa nova
+- Source-specific strings are normalized to canonical names via a mapping table
+- The script is resumable and rate-limited; running it twice produces the same result
+- **Filter bar:** Labels and Time filter bars include subgenre shape pills alongside family and label pills
+- Clicking a subgenre pill filters the view to albums of that subgenre; multiple pills can be active (union)
+- **Album Detail:** Subgenre badges (shape icon + name text) appear in the header metadata area near year/label
+- Albums without subgenre data show no badges (no empty state or placeholder)
+- **Artist Detail:** Subgenre badges in the header show the distinct subgenres across the artist's discography
+- **Timeline:** Subgenre evolution markers show the year of first and last appearance for each subgenre in the library
+- Markers use the subgenre's geometric shape icon
+- **Search:** Typing a subgenre name (e.g., "bossa", "fusion") returns matching albums in search results
+- All subgenre shapes are rendered as inline SVGs, not Unicode glyphs
+- Shape colors use `--fg-dim` / `--fg-muted` — never instrument-family colors

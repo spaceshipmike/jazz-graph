@@ -1,13 +1,13 @@
 # The Jazz Graph
 
-Interactive visual encyclopedia of jazz — 2,000+ albums, real cover art, seven thematic visualization categories, Blue Note-inspired dark aesthetic.
+Interactive visual encyclopedia of jazz — 2,200+ albums, real cover art, seven thematic visualization categories, 15-subgenre taxonomy with shape iconography, Blue Note-inspired dark aesthetic.
 
 ## Factory Contract
 
 This project uses the factory spec model. The spec is the source of truth for what to build.
 
 - **Spec:** `.fctry/spec.md` — read before implementing anything
-- **Scenarios:** `.fctry/scenarios.md` — 13 end-to-end scenarios that define "done"
+- **Scenarios:** `.fctry/scenarios.md` — 17 end-to-end scenarios that define "done"
 - **State:** `.fctry/state.json` — current workflow step and progress
 
 If requirements shift, update the spec first (via `/fctry:evolve`), then implement.
@@ -25,7 +25,7 @@ If requirements shift, update the spec first (via `/fctry:evolve`), then impleme
 .fctry/              — spec, scenarios, config, references
 data/                — pipeline output (gitignored images)
   artist-roster.json — curated artist list (source of truth for rebuild)
-  albums.json        — 2,000+ albums with metadata + lineup + tracks + dominantColor
+  albums.json        — 2,200+ albums with metadata + lineup + tracks + dominantColor + subgenres
   images/covers/     — album cover art JPGs
 scripts/             — data pipeline scripts
   rebuild-library.mjs     — full rebuild from artist roster (--browse, --resume)
@@ -40,6 +40,7 @@ scripts/             — data pipeline scripts
   fix-labels.mjs           — label corrections
   fix-leads.mjs            — leader instrument resolution
   add-artist.mjs           — interactive single-artist addition
+  enrich-subgenres.mjs     — subgenre enrichment (Discogs + MusicBrainz, resumable)
   audit-library.mjs        — post-build quality audit (reissues, dates, lineup, tracks)
 src/                 — application source
   App.jsx            — router, two-level nav, data context
@@ -63,9 +64,10 @@ src/                 — application source
 ## Key Decisions
 
 - **Stack:** React + Vite + D3.js + React Router
-- **Data:** Pre-fetched from MusicBrainz + Spotify + Cover Art Archive, bundled as static JSON + images
+- **Data:** Pre-fetched from MusicBrainz + Discogs + Spotify + Cover Art Archive, bundled as static JSON + images
+- **Subgenres:** 15 canonical subgenres with geometric shape icon families (circle/triangle/diamond/square/hexagon) — filterable, searchable, shown on detail pages and timeline
 - **Architecture:** Static SPA, no backend, client-side routing
-- **Design:** Dark theme, Playfair Display + JetBrains Mono, instrument-family color system
+- **Design:** Dark theme, Oswald Light + Source Serif 4 + SF Mono, instrument-family color system
 - **Navigation:** Two-level — 7 category pills (Color, Artists, Instruments, Labels, Time, Sound, Words) + sub-nav tabs per category
 - **Routing:** Path segments for sub-views (e.g., `/labels/flow`, `/instruments/eras`)
 - **Detail pages:** Full pages for album/artist, not modals

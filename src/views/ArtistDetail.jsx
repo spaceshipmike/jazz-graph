@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, labelColor, slugify } from "../data";
+import { SubgenreBadge } from "../components/SubgenreIcon";
 import { useMemo, useRef, useEffect } from "react";
 import * as d3 from "d3";
 
@@ -71,6 +72,14 @@ export default function ArtistDetail() {
             {artist.albums.length} albums · {artist.leadAlbums.length} as leader
             {yearRange[0] && ` · ${yearRange[0]}–${yearRange[1]}`}
           </p>
+          {(() => {
+            const sgs = [...new Set(sortedAlbums.flatMap((a) => a.subgenres || []))].sort();
+            return sgs.length > 0 ? (
+              <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: 8 }}>
+                {sgs.map((sg) => <SubgenreBadge key={sg} name={sg} />)}
+              </div>
+            ) : null;
+          })()}
         </div>
       </div>
 

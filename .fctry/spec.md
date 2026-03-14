@@ -1,33 +1,37 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.13"
+spec-version: "0.14"
 spec-format: nlspec-v2
-date: 2026-03-09
+date: 2026-03-13
 status: active
 author: mike
 synopsis:
-  short: "Interactive visual encyclopedia exploring 2,000+ jazz albums through seven data dimensions — color, artists, instruments, labels, time, sound, and words"
-  medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,000+ albums with full track listings, session lineups, and real cover art in a Blue Note-inspired dark aesthetic. A repeatable data quality audit catches reissues, compilations, and metadata gaps."
-  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,000+ albums (sourced from MusicBrainz), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing), Sound (instrument combinations and sonic texture), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. A post-build audit pipeline flags reissues, compilations, label-era mismatches, and metadata gaps with human-in-the-loop review and quarantine-based removal."
+  short: "Interactive visual encyclopedia exploring 2,200+ jazz albums through seven data dimensions with subgenre taxonomy and shape iconography"
+  medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,200+ albums with full track listings, session lineups, subgenre classifications, and real cover art in a Blue Note-inspired dark aesthetic. A 15-subgenre taxonomy with geometric shape icons threads through filters, detail pages, timeline markers, and search."
+  readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,200+ albums (sourced from MusicBrainz, enriched via Discogs and Spotify), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing with subgenre evolution markers), Sound (instrument combinations and sonic texture), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. A 15-subgenre taxonomy — from bebop to bossa nova — uses geometric shape families to communicate stylistic lineage, appearing as filterable pills, detail page badges, timeline markers, and searchable metadata. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. A post-build audit pipeline flags reissues, compilations, label-era mismatches, and metadata gaps with human-in-the-loop review and quarantine-based removal."
   stack:
     - JavaScript
     - React + Vite
     - D3.js
     - MusicBrainz API
+    - Discogs API (subgenre styles)
     - Spotify API (cover art)
     - Static site deployment
   patterns:
     - Static SPA with pre-built data
     - Build-time data pipeline
+    - Multi-source data enrichment (MusicBrainz + Discogs + Spotify)
     - Client-side routing with nested sub-navigation
     - Category + sub-view navigation model
     - Multiple specialized data visualizations
     - Design token system
+    - Geometric shape icon system for categorical identity
   goals:
     - Visualize jazz through seven thematic data dimensions with multiple viz types per dimension
     - Provide a browsable encyclopedia experience with real album art
+    - Classify albums by subgenre using a canonical 15-style taxonomy with geometric shape iconography
     - Maintain Blue Note-inspired visual identity across all views
-    - Perform fluidly with 2,000+ albums on commodity hardware
+    - Perform fluidly with 2,200+ albums on commodity hardware
     - Mine semantic meaning from 15,000+ song and album titles
 plugin-version: 0.28.0
 ```
@@ -75,8 +79,21 @@ node scripts/rebuild-library.mjs --resume   # Phase 2: fetch album details
 node scripts/fetch-spotify-covers.mjs       # Spotify 640px art (primary)
 node scripts/fetch-covers.mjs               # Cover Art Archive (fallback)
 node scripts/extract-colors.mjs             # Dominant color from covers
+node scripts/enrich-subgenres.mjs           # Subgenre enrichment (Discogs + MB)
 node scripts/audit-library.mjs              # Post-build quality audit (on-demand)
 ```
+
+**Subgenre enrichment pipeline (`scripts/enrich-subgenres.mjs`):**
+
+A post-build enrichment step that assigns subgenre classifications to each album using three sources in priority order:
+
+1. **Discogs styles** (primary, ~85-95% coverage) — Match albums to Discogs releases by artist + title. Discogs "styles" map directly to jazz subgenres. Stored as `discogsStyles: string[]` for provenance.
+2. **MusicBrainz release-group genres** (secondary, ~30-40% coverage) — Genre tags on the release group.
+3. **MusicBrainz artist genres** (fallback, ~100% of artists) — Genre tags on the credited artist, applied to albums that lack release-level data.
+
+The script is resumable and rate-limited, following the patterns of existing pipeline scripts. Progress is tracked in `data/.discogs-enrich-progress.json`. Total enrichment run time is approximately 90 minutes across all three sources.
+
+All source-specific genre/style strings are normalized through a canonical map (see Subgenre Taxonomy below) to produce the final `subgenres: string[]` field on each album.
 
 **Artist roster:** `data/artist-roster.json` contains a curated list of ~71 artists and label catalogs (e.g., Groove Merchant Records). New artists are added manually after reviewing sideman candidates that appear frequently in existing lineups.
 
@@ -125,6 +142,8 @@ Album {
   mbid: string (MusicBrainz release ID)
   rgid: string (MusicBrainz release-group ID)
   spotifyId: string | null
+  subgenres: string[] (canonical subgenre names, e.g. ["hard bop", "modal jazz"])
+  discogsStyles: string[] (raw Discogs style strings, for provenance)
   lineup: Musician[]
   tracks: Track[]
 }
@@ -173,6 +192,52 @@ Record labels have assigned brand colors used throughout the app.
 **Secondary labels (12):** Contemporary (#8a6e45), RCA Victor (#b5343c), Capitol (#9b4d6e), ESP-Disk' (#7a8a5c), Polydor (#c47830), United Artists (#6a7a9a), Debut (#5e8a6e), Vogue (#9a6080), A&M (#7a6a9a), Fantasy (#5a8a7a), Candid (#8a5a5a), Pacific Jazz (#5a7a8a).
 
 Unrecognized labels use neutral gray (#888).
+
+### Subgenre Taxonomy
+
+A canonical set of 15 jazz subgenres, normalized from Discogs styles and MusicBrainz genres into a unified lowercase taxonomy:
+
+**hard bop**, **bebop**, **cool jazz**, **post-bop**, **modal jazz**, **free jazz**, **soul jazz**, **jazz fusion**, **jazz-funk**, **latin jazz**, **avant-garde jazz**, **big band**, **spiritual jazz**, **swing**, **bossa nova**
+
+The normalization map merges variant spellings and casing across sources (e.g., Discogs "Hard Bop", "Post Bop", "Modal" and MB "hard bop", "post-bop", "modal jazz") into these canonical strings. Albums may have multiple subgenres.
+
+### Subgenre Shape System
+
+Each subgenre is identified by a small geometric shape icon, grouped into five shape families that communicate stylistic lineage. Shapes are rendered as inline SVGs for cross-browser consistency.
+
+**Circle family** (bop lineage):
+- Filled circle — bebop
+- Outline circle — hard bop
+- Half circle — post-bop
+- Dot-in-circle — modal jazz
+
+**Triangle family** (boundary-pushing / avant-garde):
+- Filled triangle — free jazz
+- Outline triangle — avant-garde jazz
+- Inverted triangle — spiritual jazz
+
+**Diamond family** (groove / feel-driven):
+- Filled diamond — soul jazz
+- Outline diamond — jazz-funk
+- Small diamond — bossa nova
+
+**Square family** (ensemble / fusion):
+- Filled square — big band
+- Outline square — swing
+- Half square — jazz fusion
+
+**Hexagon / other** (cool / latin):
+- Hexagon — cool jazz
+- Four-point star — latin jazz
+
+**Color:** All shapes use neutral tones (`--fg-dim` or `--fg-muted`) to avoid competing with the instrument-family color system. Shape families communicate stylistic relationships through geometry, not color.
+
+**Usage across the app:**
+- **FilterBar** — Subgenre shape pills as a new filter dimension (see Section 3.4, 3.5)
+- **Album Detail** — Subgenre badges with shape + label text (see Section 3.8)
+- **Artist Detail** — Subgenre badges summarizing the artist's stylistic range (see Section 3.9)
+- **Timeline** — First/last markers for each subgenre (see Section 3.5)
+- **Search** — Subgenre names as a searchable field (see Section 3.10)
 
 ## 3. Views
 
@@ -226,18 +291,18 @@ Visualizations centered on the business of jazz.
 - **Browse** (`/labels/browse`) — Filterable grid of album cards grouped by label with colored section headers. Search across title, artist, musician, instrument, label. Instrument family filter pills.
 - **Flow** (`/labels/flow`) — Alluvial diagram showing how musicians moved between labels across time periods (1949–55, 1956–60, 1961–65, 1966–70, 1971–75, 1976–80, 1981+). Nodes represent labels sized by musician count. Ribbons show transitions.
 
-**Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete. Filters apply across all sub-views.
+**Filter bar:** Instrument family pills, subgenre shape pills, top label pills with overflow, artist autocomplete. Filters apply across all sub-views. Subgenre pills display the shape icon alongside the subgenre name; clicking a subgenre pill filters the view to albums classified under that subgenre. Multiple subgenre pills can be active simultaneously (union filter — albums matching any selected subgenre are shown).
 
 ### 3.5 Time (`/time`)
 
 Visualizations centered on when the music was made.
 
 **Sub-views:**
-- **Timeline** (`/time` default) — Chronological view. Albums grouped by year, laid out vertically. Year headings as typographic anchors, album covers in horizontal rows. Deep-linking via `?year=YYYY`.
+- **Timeline** (`/time` default) — Chronological view. Albums grouped by year, laid out vertically. Year headings as typographic anchors, album covers in horizontal rows. Deep-linking via `?year=YYYY`. **Subgenre evolution markers:** For each subgenre in the canonical taxonomy, the timeline displays markers at the year of its first and last appearance in the library. These tell the story of how jazz styles emerged and faded — when hard bop first appeared, when swing's last recording was made, when fusion arrived. Markers use the subgenre's shape icon and are positioned along the year axis.
 - **Density** (`/time/density`) — Albums per year bar chart showing recording activity over time. Reveals boom periods and quiet years.
 - **Ensembles** (`/time/ensembles`) — Lineup size trend over decades. Shows whether jazz ensembles got bigger or smaller over time.
 
-**Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete.
+**Filter bar:** Instrument family pills, subgenre shape pills, top label pills with overflow, artist autocomplete. Subgenre pills display the shape icon alongside the subgenre name; clicking a pill filters to albums of that subgenre.
 
 ### 3.6 Sound (`/sound`)
 
@@ -263,7 +328,7 @@ Semantic mining of album and song titles — 15,000+ titles analyzed for recurri
 
 A dedicated full page for each album.
 
-**Header:** Large cover art, title, artist (links to artist page), year (links to `/time?year=YYYY`), label (links to `/labels/browse` filtered by label).
+**Header:** Large cover art, title, artist (links to artist page), year (links to `/time?year=YYYY`), label (links to `/labels/browse` filtered by label). **Subgenre badges:** Below the year/label metadata, the album's subgenres are displayed as badges — each showing the subgenre's shape icon alongside the name text. Albums without subgenre data show no badges (no empty state).
 
 **Track listing:** Full track list with titles and durations (when available).
 
@@ -275,7 +340,7 @@ A dedicated full page for each album.
 
 A dedicated full page for each artist.
 
-**Header:** Artist name, photo (if available), instrument badges, album count, leader count.
+**Header:** Artist name, photo (if available), instrument badges, album count, leader count. **Subgenre badges:** The header also shows subgenre badges representing the distinct subgenres across this artist's entire discography — each badge displays the shape icon and name. This reveals the artist's stylistic range (e.g., Miles Davis spanning bebop, hard bop, modal jazz, and jazz fusion).
 
 **Timeline:** Horizontal, year-axis. Each album is a node. Leader appearances are visually prominent, sideman appearances subdued.
 
@@ -291,7 +356,7 @@ A dedicated search page for finding albums, artists, and tracks across the entir
 
 **Input:** A text input field, autofocused on page load. The query string is reflected in the URL's `q` parameter so search results are bookmarkable and shareable.
 
-**Search method:** Client-side substring matching against the existing data index (`buildIndex()` output). Searches album titles, artist/musician names, and track titles. Results appear within 100ms of typing.
+**Search method:** Client-side substring matching against the existing data index (`buildIndex()` output). Searches album titles, artist/musician names, track titles, and subgenre names. A query like "bossa" matches albums classified under "bossa nova"; "fusion" matches "jazz fusion". Results appear within 100ms of typing.
 
 **Results display:** Results are grouped into three sections, each with a count in the section header:
 
@@ -392,6 +457,14 @@ Transitions:
   default:      200ms ease
   card-hover:   300ms cubic-bezier(0.2, 0, 0, 1)
   stagger:      40ms per item
+
+Subgenre shapes:
+  render:       inline SVG (not Unicode glyphs — cross-browser consistency)
+  color:        --fg-dim (#aaa) default, --fg-muted (#777) for inactive states
+  size:         14–16px inline with text (badges), 20–24px in filter pills
+  families:     circle (bop), triangle (avant-garde), diamond (groove),
+                square (ensemble/fusion), hexagon/star (cool/latin)
+  interaction:  filter pills are clickable, badges are display-only
 ```
 
 ## 6. Build Order
@@ -412,5 +485,4 @@ Transitions:
 - Audio preview integration
 - Mobile-optimized layout (beyond nav — visualization-specific responsive work)
 - Artist birthplace/nationality data from MusicBrainz
-- Genre/style tags from MusicBrainz
 - Recording location/studio data

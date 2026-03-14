@@ -17,7 +17,9 @@ export default function Search() {
     const s = query.toLowerCase();
 
     const matchedAlbums = albums.filter(
-      (a) => a.title.toLowerCase().includes(s) || a.artist.toLowerCase().includes(s)
+      (a) => a.title.toLowerCase().includes(s) ||
+        a.artist.toLowerCase().includes(s) ||
+        (a.subgenres || []).some((sg) => sg.includes(s))
     );
 
     const matchedArtists = index.musicians.filter(

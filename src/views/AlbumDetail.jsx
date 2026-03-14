@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, labelColor, slugify } from "../data";
+import { SubgenreBadge } from "../components/SubgenreIcon";
 import { useMemo } from "react";
 
 function formatDuration(ms) {
@@ -68,6 +69,11 @@ export default function AlbumDetail() {
             {" · "}
             <Link to={`/labels/browse?label=${encodeURIComponent(album.label || "")}`} style={{ color: "inherit", textDecoration: "none" }}>{album.label || "Unknown label"}</Link>
           </p>
+          {album.subgenres?.length > 0 && (
+            <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: 8 }}>
+              {album.subgenres.map((sg) => <SubgenreBadge key={sg} name={sg} />)}
+            </div>
+          )}
         </div>
       </div>
 

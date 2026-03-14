@@ -2,6 +2,8 @@ import { useMemo, useEffect, useRef, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentFamily, labelColor } from "../data";
+import { SUBGENRE_LIST } from "../subgenres";
+import SubgenreIcon from "../components/SubgenreIcon";
 import FilterBar from "../components/FilterBar";
 import StatCard from "../components/StatCard";
 
@@ -80,6 +82,30 @@ export default function Timeline() {
     };
   }, [albums]);
 
+  // Subgenre first/last appearance markers keyed by year
+  const subgenreMarkers = useMemo(() => {
+    const ranges = {};
+    for (const a of albums) {
+      if (!a.year || !a.subgenres) continue;
+      for (const sg of a.subgenres) {
+        if (!ranges[sg]) ranges[sg] = { first: a.year, last: a.year };
+        if (a.year < ranges[sg].first) ranges[sg].first = a.year;
+        if (a.year > ranges[sg].last) ranges[sg].last = a.year;
+      }
+    }
+    // Group markers by year: { 1955: [{ name, type: "first"|"last" }] }
+    const byYear = {};
+    for (const [sg, r] of Object.entries(ranges)) {
+      if (!byYear[r.first]) byYear[r.first] = [];
+      byYear[r.first].push({ name: sg, type: "first" });
+      if (r.last !== r.first) {
+        if (!byYear[r.last]) byYear[r.last] = [];
+        byYear[r.last].push({ name: sg, type: "last" });
+      }
+    }
+    return byYear;
+  }, [albums]);
+
   useEffect(() => {
     if (targetYear && yearRefs.current[targetYear]) {
       yearRefs.current[targetYear].scrollIntoView({ behavior: "smooth", block: "center" });
@@ -153,6 +179,29 @@ export default function Timeline() {
             >
               {year}
             </h2>
+            {subgenreMarkers[year] && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 8 }}>
+                {subgenreMarkers[year].map(({ name, type }) => (
+                  <span
+                    key={`${name}-${type}`}
+                    className="mono"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 4,
+                      fontSize: 9,
+                      color: type === "first" ? "var(--fg-dim)" : "var(--fg-ghost)",
+                      padding: "2px 7px",
+                      border: `1px ${type === "first" ? "solid" : "dashed"} var(--border-light)`,
+                      borderRadius: "var(--radius-pill)",
+                    }}
+                  >
+                    <SubgenreIcon name={name} size={10} />
+                    {type === "first" ? "↑" : "↓"} {name}
+                  </span>
+                ))}
+              </div>
+            )}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {items.map((album) => (
                 <Link
