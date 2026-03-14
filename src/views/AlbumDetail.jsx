@@ -66,7 +66,7 @@ export default function AlbumDetail() {
           <p className="mono" style={{ fontSize: 12, color: "var(--fg-muted)" }}>
             <Link to={`/time?year=${album.year}`} style={{ color: "inherit", textDecoration: "none" }}>{album.year || "?"}</Link>
             {" · "}
-            <Link to={`/?q=${encodeURIComponent(album.label || "")}`} style={{ color: "inherit", textDecoration: "none" }}>{album.label || "Unknown label"}</Link>
+            <Link to={`/labels/browse?label=${encodeURIComponent(album.label || "")}`} style={{ color: "inherit", textDecoration: "none" }}>{album.label || "Unknown label"}</Link>
           </p>
         </div>
       </div>

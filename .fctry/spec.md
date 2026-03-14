@@ -1,6 +1,6 @@
 ```yaml
 title: The Jazz Graph
-spec-version: "0.12"
+spec-version: "0.13"
 spec-format: nlspec-v2
 date: 2026-03-09
 status: active
@@ -46,7 +46,7 @@ The app is organized into **seven thematic categories**, each containing multipl
 
 Dark, high-contrast, typographically bold — inspired by Reid Miles' Blue Note Records covers from the 1950s-60s. This isn't a generic dashboard. It's a love letter to jazz presented through data.
 
-- **Typography:** Bold serif for headings (display weight), monospace for metadata and data labels
+- **Typography:** Oswald Light (sans-serif, weight 300) for headings, monospace for metadata and data labels, Source Serif 4 for body text
 - **Color:** Instrument-family color system (brass = warm orange/red, reeds = gold, keys = blue, rhythm = purple/green, strings = pink, mallets = teal). Label colors as accents.
 - **Texture:** Subtle film grain overlay. Deep blacks. Restrained use of glow on interactive elements.
 - **Layout:** Each visualization panel is its own distinct dataviz format. Inspired by the diversity of types at datavizproject.com.
@@ -78,7 +78,7 @@ node scripts/extract-colors.mjs             # Dominant color from covers
 node scripts/audit-library.mjs              # Post-build quality audit (on-demand)
 ```
 
-**Artist roster:** `data/artist-roster.json` contains a curated list of ~76 artists and label catalogs (e.g., Groove Merchant Records). New artists are added manually after reviewing sideman candidates that appear frequently in existing lineups.
+**Artist roster:** `data/artist-roster.json` contains a curated list of ~71 artists and label catalogs (e.g., Groove Merchant Records). New artists are added manually after reviewing sideman candidates that appear frequently in existing lineups.
 
 ### Data Quality Audit
 
@@ -88,7 +88,6 @@ A repeatable post-build audit scans the finished library for albums that weaken 
 
 | Check | Signal | Confidence |
 |-------|--------|------------|
-| MB secondary types | Compilation, Live, Remix, DJ-mix, Mixtape/Street | High |
 | Posthumous release | Album year > artist death + 10 years | High |
 | Reissue title patterns | "best of", "remastered", "complete sessions", etc. | High |
 | Junk/budget label | Known reissue imprints (Waxtime, Laserlight, etc.) | High |
@@ -103,8 +102,6 @@ A repeatable post-build audit scans the finished library for albums that weaken 
 1. `node scripts/audit-library.mjs` — scans library, produces `data/audit-report.json` with issue type, action (REMOVE / FIX_DATE / FLAG), confidence, and reason
 2. `node scripts/audit-library.mjs --review` — interactive terminal review: displays each flagged album, user approves or rejects the recommended action
 3. `node scripts/audit-library.mjs --apply` — executes approved actions: removals go to `data/quarantine.json` (restorable), date fixes update in-place
-
-**One-time backfill:** `node scripts/audit-library.mjs --backfill-types` fetches MusicBrainz secondary types for all existing albums (via release-group lookup) and stores them in the album record as `secondaryTypes: string[]`. After backfill, the MB type check runs locally without API calls.
 
 **Output files:**
 - `data/audit-report.json` — flagged albums with reasons and recommended actions
@@ -123,9 +120,10 @@ Album {
   label: string
   coverPath: string | null (local image path)
   dominantColor: { h: number, s: number, l: number } | null
+  vibrant: { rgb: string, oklch: string, swatch: [r,g,b] } | null
+  palette: { lab: [L,a,b], pct: number }[] | null
   mbid: string (MusicBrainz release ID)
   rgid: string (MusicBrainz release-group ID)
-  secondaryTypes: string[] (MB release-group types: Compilation, Live, etc.)
   spotifyId: string | null
   lineup: Musician[]
   tracks: Track[]
@@ -170,7 +168,7 @@ Instruments not in the map fall through to a neutral gray (#888) and "other" fam
 
 Record labels have assigned brand colors used throughout the app.
 
-**Primary labels (11):** Blue Note (#0070c0), Columbia (#c41e3a), Impulse! (#e8740c), Prestige (#6b3fa0), Riverside (#2d8659), Atlantic (#cc9b26), ECM (#5a7d8c), Verve (#b38600), EmArcy (#8b5e3c), Warner Bros. (#3d6b4f), Mercury (#7a4466).
+**Primary labels (16):** Blue Note (#0070c0), Columbia (#c41e3a), Impulse! (#e8740c), Prestige (#6b3fa0), Riverside (#2d8659), Atlantic (#cc9b26), ECM (#5a7d8c), Verve (#b38600), Pablo (#c27830), Milestone (#8a5a3c), Groove Merchant (#4a8a6e), EmArcy (#8b5e3c), Warner Bros. (#3d6b4f), Mercury Records (#7a4466), Telarc Jazz (#6a7a3a), Savoy Records (#9a6a4a).
 
 **Secondary labels (12):** Contemporary (#8a6e45), RCA Victor (#b5343c), Capitol (#9b4d6e), ESP-Disk' (#7a8a5c), Polydor (#c47830), United Artists (#6a7a9a), Debut (#5e8a6e), Vogue (#9a6080), A&M (#7a6a9a), Fantasy (#5a8a7a), Candid (#8a5a5a), Pacific Jazz (#5a7a8a).
 
@@ -197,7 +195,7 @@ The landing page. A dense, edge-to-edge grid of album covers sorted by dominant 
 
 **Layout:** Square cover images tiled with zero padding/gap. No text or overlays.
 
-**Sort order:** Albums sorted by dominant hue. Albums without covers placed at end.
+**Sort order:** Albums sorted using CIELAB color analysis — covers are tiered by luminance (black, dark, chromatic, light, white) then sorted by weighted chromatic hue from palette data. This produces a visually coherent spectrum rather than naive HSL hue sorting. Albums without covers placed at end.
 
 **Interaction:** Click navigates to album detail. Hover shows subtle brightness shift.
 
@@ -206,8 +204,8 @@ The landing page. A dense, edge-to-edge grid of album covers sorted by dominant 
 Visualizations centered on the people who made the music.
 
 **Sub-views:**
-- **Overview** (`/artists` default) — Radial bar chart of top artists by album count, colored by primary instrument family. Shows the most prolific musicians at a glance.
-- **Network** (`/artists/network`) — Force-directed graph showing musician-album connections. Nodes are albums (colored by label) and musicians (colored by primary instrument). Edges connect musicians to albums. Zoom, pan, drag. Hover highlights connections. Click navigates to detail pages.
+- **Overview** (`/artists` default) — Horizontal bar chart of top artists by album count, colored by primary instrument family. Shows the most prolific musicians at a glance. Includes stat cards and an instrument breakdown section.
+- **Network** (`/artists/network`) — Force-directed graph showing musician-to-musician collaboration connections. Nodes are musicians colored by primary instrument. Edges connect musicians who shared an album. Zoom, pan, drag. Hover highlights connections. Click navigates to detail pages.
 - **Connections** (`/artists/connections`) — Six Degrees of Jazz. Two autocomplete inputs let you pick any two musicians; a BFS path-finder shows the shortest chain of shared albums connecting them. Includes a "most connected" leaderboard.
 - **Careers** (`/artists/careers`) — Career span chart showing each artist's first to last album as a horizontal bar on a year axis. Sorted by career start date. Reveals generational clusters and longevity patterns.
 
@@ -216,17 +214,15 @@ Visualizations centered on the people who made the music.
 Visualizations centered on what was played.
 
 **Sub-views:**
-- **Overview** (`/instruments` default) — Radial bar chart of lead instruments by album count, colored by instrument family. Shows which instruments dominate jazz leadership. Below the main chart, a "Rare Instruments" section displays all instruments appearing fewer than 5 times — the long tail of jazz's instrumental palette (koto, uilleann pipes, berimbau, ocarina, etc.). Each rare instrument links to the album(s) it appears on.
+- **Overview** (`/instruments` default) — Horizontal bar chart of lead instruments by album count, colored by instrument family. Shows which instruments dominate jazz leadership. Below the main chart, a "Rare Instruments" section displays all instruments appearing fewer than 5 times — the long tail of jazz's instrumental palette (koto, uilleann pipes, berimbau, ocarina, etc.). Each rare instrument links to the album(s) it appears on.
 - **Eras** (`/instruments/eras`) — Streamgraph showing instrument family prevalence across the jazz timeline. D3 stack with `stackOffsetWiggle` and `curveBasis`. Each stream colored by family. Hover shows family/year/count. Reveals how jazz's instrumental palette shifted over decades.
-
-**Filter bar:** Instrument family pills, top label pills with overflow, artist autocomplete. Filters apply across all sub-views.
 
 ### 3.4 Labels (`/labels`)
 
 Visualizations centered on the business of jazz.
 
 **Sub-views:**
-- **Overview** (`/labels` default) — Radial bar chart of labels by album count, using label brand colors. Shows the landscape of jazz recording.
+- **Overview** (`/labels` default) — Horizontal bar chart of labels by album count, using label brand colors. Shows the landscape of jazz recording.
 - **Browse** (`/labels/browse`) — Filterable grid of album cards grouped by label with colored section headers. Search across title, artist, musician, instrument, label. Instrument family filter pills.
 - **Flow** (`/labels/flow`) — Alluvial diagram showing how musicians moved between labels across time periods (1949–55, 1956–60, 1961–65, 1966–70, 1971–75, 1976–80, 1981+). Nodes represent labels sized by musician count. Ribbons show transitions.
 
@@ -258,10 +254,10 @@ Visualizations centered on what the music sounds like — the sonic texture of j
 Semantic mining of album and song titles — 15,000+ titles analyzed for recurring themes.
 
 **Sub-views:**
-- **Geography** (`/words` default) — Place names extracted from titles, plotted on a stylized dark world map (D3 equirectangular or natural earth projection). Dots sized by frequency. Reveals jazz's geographic imagination — where the music dreams of.
+- **Geography** (`/words` default) — Place names extracted from titles, displayed as a circle-pack cartogram grouped by region. Circles sized by frequency. Click to see matching albums. Includes venue-reference filtering. Reveals jazz's geographic imagination — where the music dreams of.
 - **Mood** (`/words/mood`) — Radial wheel visualization of emotional themes in album and track titles. 8 emotion categories (joy, love, melancholy, longing, peace, freedom, night, fire) arranged as spokes radiating from center, with keyword nodes along each spoke sized by frequency. Click any category or keyword to drill down into matching albums/tracks. Secondary view: "Mood by Decade" heatmap showing how jazz's emotional vocabulary shifted across eras — stacked area or heat grid with decade columns and mood rows. Title-based analysis using keyword dictionaries.
 - **Vocabulary** (`/words/vocabulary`) — Frequency of musical form words (blues, bossa, waltz, swing, ballad, groove) as a treemap or radial layout. Adjacent section for jazz slang (cookin', blowin', groovin', etc.) if data density supports it.
-- **Imagery** (`/words/imagery`) — Time-of-day, seasons, weather, celestial references extracted from titles. Rendered as a clock face, calendar wheel, or seasonal arc. When does jazz happen in its own imagination?
+- **Imagery** (`/words/imagery`) — Time-of-day, seasons, weather, celestial, and nature references extracted from titles. Grouped horizontal bar chart by category. When does jazz happen in its own imagination?
 
 ### 3.8 Album Detail (`/album/:slug`)
 
@@ -340,13 +336,16 @@ Client-side routing with nested paths:
 /search                  — Global Search
 /album/:slug             — Album Detail
 /artist/:slug            — Artist Detail
+/about                   — About
 ```
 
 **Primary nav bar:** 7 category pills at top, plus a magnifying glass search icon. Active category indicated. "The Jazz Graph" title links home. On screens <=768px, pills wrap below the title to a second row — no hamburger menu, no horizontal scroll.
 
 **Sub-nav bar:** Secondary row of smaller pills below primary nav, showing available panels for the active category. Active panel indicated. Only visible on category pages (hidden on detail pages and Color home).
 
-**Detail pages:** Primary and sub-nav hidden. Title remains as home link. "← Back" link for navigation context.
+**Detail pages:** Sub-nav hidden. Primary nav remains visible. Title remains as home link. "← Back" button for navigation context.
+
+**About page** (`/about`): Accessible via "?" icon in the nav bar. Describes the project, data sources, and credits.
 
 **Behavior:**
 - Browser back/forward works correctly
@@ -361,12 +360,14 @@ Client-side routing with nested paths:
 ```
 Colors:
   bg:           #08080a
-  surface:      #111114
+  surface:      #0e0e11
+  surface-hover:#141417
   border:       #1e1e22
+  border-light: #2a2a2e
   fg:           #e8e4dc
-  fg-dim:       #888
-  fg-muted:     #555
-  fg-ghost:     #333
+  fg-dim:       #aaa
+  fg-muted:     #777
+  fg-ghost:     #555
 
   brass:        #e85d3a
   reeds:        #d4a843
@@ -378,9 +379,9 @@ Colors:
   vocals:       #d48db0
 
 Typography:
-  heading:      Bold serif (Playfair Display or similar), 700-900 weight
-  body:         System serif stack
-  mono:         JetBrains Mono or similar, for metadata/labels/data
+  heading:      Oswald Light (300 weight, sans-serif)
+  body:         Source Serif 4 (serif)
+  mono:         SF Mono / Menlo / Consolas, for metadata/labels/data
 
 Spacing:
   page-padding: 32px
@@ -398,12 +399,12 @@ Transitions:
 1. **Data pipeline** — Metadata, tracks, cover art, color extraction for 2,000+ albums
 2. **Navigation scaffold** — Two-level nav system with category + sub-view routing
 3. **Color mosaic** — Dense cover grid sorted by hue (home page)
-4. **Labels category** — Overview radial bar, Browse grid, Flow alluvial
-5. **Instruments category** — Overview radial bar, Eras streamgraph
-6. **Artists category** — Overview radial bar, Network graph, Careers chart
+4. **Labels category** — Overview bars, Browse grid, Flow alluvial
+5. **Instruments category** — Overview bars, Eras streamgraph
+6. **Artists category** — Overview bars, Network graph, Careers chart
 7. **Time category** — Timeline, Density chart, Ensembles trend
 8. **Sound category** — Duration distribution, By Era chart, Track Counts
-9. **Words category** — Geography map, Mood landscape, Vocabulary treemap, Imagery wheel
+9. **Words category** — Geography cartogram, Mood wheel, Vocabulary treemap, Imagery bars
 10. **Polish** — Performance, responsive tweaks, animation refinement
 
 ## 7. Future Enhancements (Not in v1)
