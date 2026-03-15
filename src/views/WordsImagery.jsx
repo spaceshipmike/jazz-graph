@@ -50,9 +50,9 @@ export default function WordsImagery() {
     const svg = d3.select(clockRef.current);
     svg.selectAll("*").remove();
 
-    const size = 300;
+    const size = 500;
     const cx = size / 2, cy = size / 2;
-    const outerR = 130, innerR = 40;
+    const outerR = 210, innerR = 60;
     const color = CATEGORY_COLORS["time-of-day"];
 
     svg.attr("width", size).attr("height", size).attr("viewBox", `0 0 ${size} ${size}`);
@@ -70,7 +70,7 @@ export default function WordsImagery() {
     // Hour tick marks
     for (let h = 0; h < 24; h++) {
       const angle = (h / 24) * Math.PI * 2 - Math.PI / 2;
-      const r1 = outerR + 2, r2 = outerR + (h % 6 === 0 ? 7 : 4);
+      const r1 = outerR + 3, r2 = outerR + (h % 6 === 0 ? 10 : 6);
       g.append("line")
         .attr("x1", cx + r1 * Math.cos(angle)).attr("y1", cy + r1 * Math.sin(angle))
         .attr("x2", cx + r2 * Math.cos(angle)).attr("y2", cy + r2 * Math.sin(angle))
@@ -79,7 +79,7 @@ export default function WordsImagery() {
 
     // Keyword bubbles
     const maxCount = d3.max(Object.values(data)) || 1;
-    const rScale = d3.scaleSqrt().domain([1, maxCount]).range([6, 28]);
+    const rScale = d3.scaleSqrt().domain([1, maxCount]).range([8, 42]);
 
     const words = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
@@ -87,7 +87,9 @@ export default function WordsImagery() {
       const hour = CLOCK_POSITIONS[word];
       if (hour === undefined) continue;
       const angle = (hour / 24) * Math.PI * 2 - Math.PI / 2;
-      const dist = innerR + (outerR - innerR) * 0.55;
+      // Stagger night(23h) inward and midnight(0h) outward to avoid overlap
+      const stagger = word === "night" ? 0.35 : word === "midnight" ? 0.72 : 0.55;
+      const dist = innerR + (outerR - innerR) * stagger;
       const bx = cx + dist * Math.cos(angle);
       const by = cy + dist * Math.sin(angle);
       const r = rScale(count);
@@ -97,39 +99,39 @@ export default function WordsImagery() {
         .attr("fill", color).attr("fill-opacity", 0.25)
         .attr("stroke", color).attr("stroke-opacity", 0.6).attr("stroke-width", 1);
 
-      if (r > 10) {
+      if (r > 14) {
         g.append("text")
-          .attr("x", bx).attr("y", by - 1)
+          .attr("x", bx).attr("y", by - 2)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", color).attr("font-family", "var(--font-mono)")
-          .attr("font-size", Math.min(9, r * 0.7))
+          .attr("font-size", Math.min(12, r * 0.6))
           .text(word);
         g.append("text")
-          .attr("x", bx).attr("y", by + 8)
+          .attr("x", bx).attr("y", by + 11)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
-          .attr("font-size", 7)
+          .attr("font-size", 9)
           .text(count);
       } else {
         // Small label outside
-        const lDist = dist + r + 10;
+        const lDist = dist + r + 14;
         g.append("text")
           .attr("x", cx + lDist * Math.cos(angle)).attr("y", cy + lDist * Math.sin(angle))
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
-          .attr("font-size", 8)
+          .attr("font-size", 10)
           .text(`${word} ${count}`);
       }
     }
 
     // Center label
-    g.append("text").attr("x", cx).attr("y", cy - 4)
+    g.append("text").attr("x", cx).attr("y", cy - 6)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-dim)")
-      .attr("font-family", "var(--font-mono)").attr("font-size", 9).attr("font-weight", 600)
+      .attr("font-family", "var(--font-mono)").attr("font-size", 12).attr("font-weight", 600)
       .text("time");
-    g.append("text").attr("x", cx).attr("y", cy + 8)
+    g.append("text").attr("x", cx).attr("y", cy + 10)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-ghost)")
-      .attr("font-family", "var(--font-mono)").attr("font-size", 8)
+      .attr("font-family", "var(--font-mono)").attr("font-size", 10)
       .text("of day");
 
   }, [imageryData]);
@@ -143,9 +145,9 @@ export default function WordsImagery() {
     const svg = d3.select(seasonRef.current);
     svg.selectAll("*").remove();
 
-    const size = 300;
+    const size = 500;
     const cx = size / 2, cy = size / 2;
-    const outerR = 120, innerR = 50;
+    const outerR = 195, innerR = 75;
     const seasonColor = CATEGORY_COLORS["seasons"];
     const weatherColor = CATEGORY_COLORS["weather"];
 
@@ -200,13 +202,13 @@ export default function WordsImagery() {
 
       // Season label
       const midAngle = startAngle + wedgeAngle / 2;
-      const labelR = outerR + 16;
+      const labelR = outerR + 24;
       g.append("text")
         .attr("x", cx + labelR * Math.cos(midAngle))
         .attr("y", cy + labelR * Math.sin(midAngle))
         .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
         .attr("fill", seasonColor).attr("font-family", "var(--font-mono)")
-        .attr("font-size", 9).attr("font-weight", 600)
+        .attr("font-size", 11).attr("font-weight", 600)
         .text(seasonLabels[season]);
 
       // Count inside wedge
@@ -217,7 +219,7 @@ export default function WordsImagery() {
           .attr("y", cy + countR * Math.sin(midAngle))
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-dim)").attr("font-family", "var(--font-mono)")
-          .attr("font-size", 10)
+          .attr("font-size", 13)
           .text(count);
       }
 
@@ -234,8 +236,8 @@ export default function WordsImagery() {
 
         weatherInSeason.forEach(([word, wCount], j) => {
           const wAngle = weatherStartAngle + (j + 0.5) * (weatherSpread / weatherInSeason.length);
-          const wR = outerR - 15;
-          const wr = d3.scaleSqrt().domain([1, maxW]).range([3, 10])(wCount);
+          const wR = outerR - 25;
+          const wr = d3.scaleSqrt().domain([1, maxW]).range([5, 16])(wCount);
 
           g.append("circle")
             .attr("cx", cx + wR * Math.cos(wAngle))
@@ -244,13 +246,13 @@ export default function WordsImagery() {
             .attr("fill", weatherColor).attr("fill-opacity", 0.3)
             .attr("stroke", weatherColor).attr("stroke-opacity", 0.5).attr("stroke-width", 0.5);
 
-          if (wr > 5) {
+          if (wr > 7) {
             g.append("text")
               .attr("x", cx + wR * Math.cos(wAngle))
               .attr("y", cy + wR * Math.sin(wAngle))
               .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
               .attr("fill", weatherColor).attr("font-family", "var(--font-mono)")
-              .attr("font-size", 7)
+              .attr("font-size", 9)
               .text(word);
           }
         });
@@ -258,13 +260,13 @@ export default function WordsImagery() {
     }
 
     // Center label
-    g.append("text").attr("x", cx).attr("y", cy - 4)
+    g.append("text").attr("x", cx).attr("y", cy - 6)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-dim)")
-      .attr("font-family", "var(--font-mono)").attr("font-size", 9).attr("font-weight", 600)
+      .attr("font-family", "var(--font-mono)").attr("font-size", 12).attr("font-weight", 600)
       .text("seasons");
-    g.append("text").attr("x", cx).attr("y", cy + 8)
+    g.append("text").attr("x", cx).attr("y", cy + 10)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-ghost)")
-      .attr("font-family", "var(--font-mono)").attr("font-size", 8)
+      .attr("font-family", "var(--font-mono)").attr("font-size", 10)
       .text("& weather");
 
   }, [imageryData]);
@@ -278,7 +280,7 @@ export default function WordsImagery() {
     const svg = d3.select(natureRef.current);
     svg.selectAll("*").remove();
 
-    const size = 300;
+    const size = 500;
     svg.attr("width", size).attr("height", size).attr("viewBox", `0 0 ${size} ${size}`);
 
     const celestialColor = CATEGORY_COLORS["celestial"];
@@ -299,9 +301,9 @@ export default function WordsImagery() {
       ],
     }).sum((d) => d.value || 0).sort((a, b) => (b.value || 0) - (a.value || 0));
 
-    d3.pack().size([size - 20, size - 20]).padding(4)(root);
+    d3.pack().size([size - 40, size - 40]).padding(8)(root);
 
-    const g = svg.append("g").attr("transform", "translate(10,10)");
+    const g = svg.append("g").attr("transform", "translate(20,20)");
 
     // Group circles
     root.children?.forEach((group) => {
@@ -314,10 +316,10 @@ export default function WordsImagery() {
 
       // Group label
       g.append("text")
-        .attr("x", gc.x).attr("y", gc.y - gc.r + 12)
+        .attr("x", gc.x).attr("y", gc.y - gc.r + 16)
         .attr("text-anchor", "middle")
         .attr("fill", gc.data.name === "celestial" ? celestialColor : natureColor)
-        .attr("font-family", "var(--font-mono)").attr("font-size", 9).attr("font-weight", 600)
+        .attr("font-family", "var(--font-mono)").attr("font-size", 11).attr("font-weight", 600)
         .attr("fill-opacity", 0.6)
         .text(gc.data.name);
     });
@@ -331,25 +333,25 @@ export default function WordsImagery() {
         .attr("fill", color).attr("fill-opacity", 0.2)
         .attr("stroke", color).attr("stroke-opacity", 0.5).attr("stroke-width", 1);
 
-      if (leaf.r > 10) {
+      if (leaf.r > 16) {
         g.append("text")
-          .attr("x", leaf.x).attr("y", leaf.y - 1)
+          .attr("x", leaf.x).attr("y", leaf.y - 2)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", color).attr("font-family", "var(--font-mono)")
-          .attr("font-size", Math.min(9, leaf.r * 0.65))
+          .attr("font-size", Math.min(12, leaf.r * 0.55))
           .text(leaf.data.name);
         g.append("text")
-          .attr("x", leaf.x).attr("y", leaf.y + 8)
+          .attr("x", leaf.x).attr("y", leaf.y + 11)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
-          .attr("font-size", 7)
+          .attr("font-size", 9)
           .text(leaf.data.value);
-      } else if (leaf.r > 5) {
+      } else if (leaf.r > 8) {
         g.append("text")
           .attr("x", leaf.x).attr("y", leaf.y)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
-          .attr("font-size", 7)
+          .attr("font-size", 9)
           .text(leaf.data.name);
       }
     });
@@ -362,16 +364,10 @@ export default function WordsImagery() {
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-xl)" }}>
         When and where does jazz happen in its own imagination?
       </p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-xl)", justifyContent: "center", alignItems: "flex-start" }}>
-        <div style={{ textAlign: "center" }}>
-          <svg ref={clockRef} />
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <svg ref={seasonRef} />
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <svg ref={natureRef} />
-        </div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-2xl)" }}>
+        <svg ref={clockRef} style={{ maxWidth: "100%" }} />
+        <svg ref={seasonRef} style={{ maxWidth: "100%" }} />
+        <svg ref={natureRef} style={{ maxWidth: "100%" }} />
       </div>
     </div>
   );
