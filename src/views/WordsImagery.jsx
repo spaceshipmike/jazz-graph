@@ -314,14 +314,15 @@ export default function WordsImagery() {
         .attr("stroke", gc.data.name === "celestial" ? celestialColor : natureColor)
         .attr("stroke-opacity", 0.15).attr("stroke-width", 1);
 
-      // Group label
+      // Group label — outside the circle
       g.append("text")
-        .attr("x", gc.x).attr("y", gc.y - gc.r + 16)
+        .attr("x", gc.x).attr("y", gc.y - gc.r - 10)
         .attr("text-anchor", "middle")
         .attr("fill", gc.data.name === "celestial" ? celestialColor : natureColor)
-        .attr("font-family", "var(--font-mono)").attr("font-size", 11).attr("font-weight", 600)
-        .attr("fill-opacity", 0.6)
-        .text(gc.data.name);
+        .attr("font-family", "var(--font-mono)").attr("font-size", 12).attr("font-weight", 600)
+        .attr("fill-opacity", 0.7)
+        .attr("text-transform", "uppercase")
+        .text(gc.data.name.charAt(0).toUpperCase() + gc.data.name.slice(1));
     });
 
     // Leaf circles
