@@ -280,7 +280,7 @@ export default function WordsImagery() {
     const svg = d3.select(natureRef.current);
     svg.selectAll("*").remove();
 
-    const size = 500;
+    const size = 700;
     svg.attr("width", size).attr("height", size).attr("viewBox", `0 0 ${size} ${size}`);
 
     const celestialColor = CATEGORY_COLORS["celestial"];
@@ -301,9 +301,9 @@ export default function WordsImagery() {
       ],
     }).sum((d) => d.value || 0).sort((a, b) => (b.value || 0) - (a.value || 0));
 
-    d3.pack().size([size - 40, size - 40]).padding(8)(root);
+    d3.pack().size([size - 60, size - 60]).padding(12)(root);
 
-    const g = svg.append("g").attr("transform", "translate(20,20)");
+    const g = svg.append("g").attr("transform", "translate(30,30)");
 
     // Group circles
     root.children?.forEach((group) => {
