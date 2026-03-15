@@ -246,15 +246,15 @@ export default function WordsImagery() {
             .attr("fill", weatherColor).attr("fill-opacity", 0.3)
             .attr("stroke", weatherColor).attr("stroke-opacity", 0.5).attr("stroke-width", 0.5);
 
-          if (wr > 7) {
-            g.append("text")
-              .attr("x", cx + wR * Math.cos(wAngle))
-              .attr("y", cy + wR * Math.sin(wAngle))
-              .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
-              .attr("fill", weatherColor).attr("font-family", "var(--font-mono)")
-              .attr("font-size", 9)
-              .text(word);
-          }
+          const labelR = wr > 7 ? wR : wR + wr + 10;
+          g.append("text")
+            .attr("x", cx + labelR * Math.cos(wAngle))
+            .attr("y", cy + labelR * Math.sin(wAngle))
+            .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+            .attr("fill", wr > 7 ? weatherColor : "var(--fg-ghost)")
+            .attr("font-family", "var(--font-mono)")
+            .attr("font-size", wr > 7 ? 9 : 8)
+            .text(word);
         });
       }
     }
