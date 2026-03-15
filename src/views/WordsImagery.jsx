@@ -11,130 +11,368 @@ const CATEGORY_COLORS = {
   nature: "#45a67d",
 };
 
-const CATEGORY_LABELS = {
-  "time-of-day": "Time of Day",
-  seasons: "Seasons",
-  weather: "Weather",
-  celestial: "Celestial",
-  nature: "Nature",
+// Clock positions for time-of-day keywords (hours on 24h clock)
+const CLOCK_POSITIONS = {
+  dawn: 5, sunrise: 6, morning: 8, noon: 12, afternoon: 14,
+  evening: 18, sunset: 19, dusk: 20, twilight: 21, night: 23, midnight: 0,
+};
+
+// Season angles (radians, starting from top)
+const SEASON_ANGLES = {
+  spring: 0, summer: Math.PI / 2, autumn: Math.PI, fall: Math.PI, winter: (3 * Math.PI) / 2,
+};
+
+// Weather keywords → season affinity
+const WEATHER_SEASON = {
+  rain: "spring", rainy: "spring", storm: "summer", stormy: "summer",
+  thunder: "summer", lightning: "summer", wind: "autumn", windy: "autumn",
+  cloud: "autumn", clouds: "autumn", cloudy: "autumn",
+  snow: "winter", fog: "winter", mist: "winter",
+  sunshine: "summer", sunny: "summer",
 };
 
 export default function WordsImagery() {
   const { albums } = useData();
-  const svgRef = useRef(null);
+  const clockRef = useRef(null);
+  const seasonRef = useRef(null);
+  const natureRef = useRef(null);
 
   const imageryData = useMemo(() => {
     const titles = getAllTitles(albums);
-    const counts = countKeywords(titles, IMAGERY_CATEGORIES);
-
-    const sections = [];
-    for (const [cat, wordCounts] of Object.entries(counts)) {
-      const words = Object.entries(wordCounts)
-        .map(([word, count]) => ({ word, count }))
-        .sort((a, b) => b.count - a.count);
-      if (words.length > 0) {
-        sections.push({ category: cat, words });
-      }
-    }
-    return sections;
+    return countKeywords(titles, IMAGERY_CATEGORIES);
   }, [albums]);
 
+  // Clock face — time of day
   useEffect(() => {
-    if (imageryData.length === 0) return;
+    const data = imageryData["time-of-day"];
+    if (!data || !clockRef.current) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = d3.select(clockRef.current);
     svg.selectAll("*").remove();
 
-    const margin = { top: 10, right: 30, bottom: 20, left: 90 };
-    const barHeight = 16;
-    const sectionGap = 30;
-    const sectionLabelHeight = 24;
-    const width = 700;
+    const size = 300;
+    const cx = size / 2, cy = size / 2;
+    const outerR = 130, innerR = 40;
+    const color = CATEGORY_COLORS["time-of-day"];
 
-    // Calculate total height
-    let totalRows = 0;
-    for (const s of imageryData) totalRows += s.words.length;
-    const height = margin.top + margin.bottom +
-      totalRows * (barHeight + 2) +
-      imageryData.length * (sectionGap + sectionLabelHeight);
-
-    svg.attr("width", width).attr("height", height);
-
-    const maxCount = d3.max(imageryData.flatMap((s) => s.words.map((w) => w.count)));
-
-    const x = d3.scaleLinear()
-      .domain([0, maxCount])
-      .range([margin.left, width - margin.right]);
-
+    svg.attr("width", size).attr("height", size).attr("viewBox", `0 0 ${size} ${size}`);
     const g = svg.append("g");
 
-    let yOffset = margin.top;
+    // Dark/light background gradient — night is dark, day is lighter
+    const defs = svg.append("defs");
+    const grad = defs.append("radialGradient").attr("id", "clock-bg");
+    grad.append("stop").attr("offset", "0%").attr("stop-color", "var(--surface)");
+    grad.append("stop").attr("offset", "100%").attr("stop-color", "var(--bg)");
 
-    for (const section of imageryData) {
-      const color = CATEGORY_COLORS[section.category] || "#888";
-      const label = CATEGORY_LABELS[section.category] || section.category;
+    g.append("circle").attr("cx", cx).attr("cy", cy).attr("r", outerR + 8)
+      .attr("fill", "url(#clock-bg)").attr("stroke", "var(--border)").attr("stroke-width", 0.5);
 
-      // Section label
-      g.append("text")
-        .attr("x", margin.left)
-        .attr("y", yOffset + 14)
-        .attr("fill", color)
-        .attr("font-family", "var(--font-mono)")
-        .attr("font-size", 11)
-        .attr("font-weight", 700)
-        .attr("text-transform", "uppercase")
-        .text(label);
+    // Hour tick marks
+    for (let h = 0; h < 24; h++) {
+      const angle = (h / 24) * Math.PI * 2 - Math.PI / 2;
+      const r1 = outerR + 2, r2 = outerR + (h % 6 === 0 ? 7 : 4);
+      g.append("line")
+        .attr("x1", cx + r1 * Math.cos(angle)).attr("y1", cy + r1 * Math.sin(angle))
+        .attr("x2", cx + r2 * Math.cos(angle)).attr("y2", cy + r2 * Math.sin(angle))
+        .attr("stroke", "var(--border-light)").attr("stroke-width", h % 6 === 0 ? 1 : 0.5);
+    }
 
-      yOffset += sectionLabelHeight;
+    // Keyword bubbles
+    const maxCount = d3.max(Object.values(data)) || 1;
+    const rScale = d3.scaleSqrt().domain([1, maxCount]).range([6, 28]);
 
-      // Bars
-      for (const word of section.words) {
-        // Bar
-        g.append("rect")
-          .attr("x", margin.left)
-          .attr("y", yOffset)
-          .attr("width", x(word.count) - margin.left)
-          .attr("height", barHeight)
-          .attr("fill", color)
-          .attr("opacity", 0.5)
-          .attr("rx", 2);
+    const words = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
-        // Word label
+    for (const [word, count] of words) {
+      const hour = CLOCK_POSITIONS[word];
+      if (hour === undefined) continue;
+      const angle = (hour / 24) * Math.PI * 2 - Math.PI / 2;
+      const dist = innerR + (outerR - innerR) * 0.55;
+      const bx = cx + dist * Math.cos(angle);
+      const by = cy + dist * Math.sin(angle);
+      const r = rScale(count);
+
+      g.append("circle")
+        .attr("cx", bx).attr("cy", by).attr("r", r)
+        .attr("fill", color).attr("fill-opacity", 0.25)
+        .attr("stroke", color).attr("stroke-opacity", 0.6).attr("stroke-width", 1);
+
+      if (r > 10) {
         g.append("text")
-          .attr("x", margin.left - 6)
-          .attr("y", yOffset + barHeight / 2)
-          .attr("dy", "0.35em")
-          .attr("text-anchor", "end")
-          .attr("fill", "var(--fg-dim)")
-          .attr("font-family", "var(--font-mono)")
-          .attr("font-size", 9)
-          .text(word.word);
-
-        // Count
+          .attr("x", bx).attr("y", by - 1)
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", color).attr("font-family", "var(--font-mono)")
+          .attr("font-size", Math.min(9, r * 0.7))
+          .text(word);
         g.append("text")
-          .attr("x", x(word.count) + 5)
-          .attr("y", yOffset + barHeight / 2)
-          .attr("dy", "0.35em")
-          .attr("fill", "var(--fg-ghost)")
-          .attr("font-family", "var(--font-mono)")
+          .attr("x", bx).attr("y", by + 8)
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
+          .attr("font-size", 7)
+          .text(count);
+      } else {
+        // Small label outside
+        const lDist = dist + r + 10;
+        g.append("text")
+          .attr("x", cx + lDist * Math.cos(angle)).attr("y", cy + lDist * Math.sin(angle))
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
           .attr("font-size", 8)
-          .text(word.count);
+          .text(`${word} ${count}`);
+      }
+    }
 
-        yOffset += barHeight + 2;
+    // Center label
+    g.append("text").attr("x", cx).attr("y", cy - 4)
+      .attr("text-anchor", "middle").attr("fill", "var(--fg-dim)")
+      .attr("font-family", "var(--font-mono)").attr("font-size", 9).attr("font-weight", 600)
+      .text("time");
+    g.append("text").attr("x", cx).attr("y", cy + 8)
+      .attr("text-anchor", "middle").attr("fill", "var(--fg-ghost)")
+      .attr("font-family", "var(--font-mono)").attr("font-size", 8)
+      .text("of day");
+
+  }, [imageryData]);
+
+  // Seasonal arc — seasons + weather
+  useEffect(() => {
+    const seasonData = imageryData["seasons"] || {};
+    const weatherData = imageryData["weather"] || {};
+    if (!seasonRef.current) return;
+
+    const svg = d3.select(seasonRef.current);
+    svg.selectAll("*").remove();
+
+    const size = 300;
+    const cx = size / 2, cy = size / 2;
+    const outerR = 120, innerR = 50;
+    const seasonColor = CATEGORY_COLORS["seasons"];
+    const weatherColor = CATEGORY_COLORS["weather"];
+
+    svg.attr("width", size).attr("height", size).attr("viewBox", `0 0 ${size} ${size}`);
+    const g = svg.append("g");
+
+    // Background ring
+    g.append("circle").attr("cx", cx).attr("cy", cy).attr("r", outerR + 4)
+      .attr("fill", "none").attr("stroke", "var(--border)").attr("stroke-width", 0.5);
+
+    // 4 season wedges
+    const seasons = ["spring", "summer", "autumn", "winter"];
+    const seasonLabels = { spring: "Spring", summer: "Summer", autumn: "Autumn", winter: "Winter" };
+    const wedgeAngle = Math.PI / 2;
+
+    // Merge "fall" into "autumn"
+    const mergedSeasons = { ...seasonData };
+    if (mergedSeasons["fall"]) {
+      mergedSeasons["autumn"] = (mergedSeasons["autumn"] || 0) + mergedSeasons["fall"];
+      delete mergedSeasons["fall"];
+    }
+
+    const maxSeasonCount = d3.max(Object.values(mergedSeasons)) || 1;
+
+    for (let i = 0; i < seasons.length; i++) {
+      const season = seasons[i];
+      const count = mergedSeasons[season] || 0;
+      const startAngle = i * wedgeAngle - Math.PI / 2;
+      const endAngle = startAngle + wedgeAngle;
+
+      // Wedge fill proportional to count
+      const fillR = innerR + (outerR - innerR) * Math.min(1, count / maxSeasonCount);
+
+      const arc = d3.arc()
+        .innerRadius(innerR).outerRadius(fillR)
+        .startAngle(startAngle + Math.PI / 2).endAngle(endAngle + Math.PI / 2);
+
+      g.append("path").attr("d", arc())
+        .attr("transform", `translate(${cx},${cy})`)
+        .attr("fill", seasonColor).attr("fill-opacity", 0.2)
+        .attr("stroke", seasonColor).attr("stroke-opacity", 0.4).attr("stroke-width", 1);
+
+      // Outline for full wedge
+      const arcOutline = d3.arc()
+        .innerRadius(innerR).outerRadius(outerR)
+        .startAngle(startAngle + Math.PI / 2).endAngle(endAngle + Math.PI / 2);
+
+      g.append("path").attr("d", arcOutline())
+        .attr("transform", `translate(${cx},${cy})`)
+        .attr("fill", "none")
+        .attr("stroke", "var(--border)").attr("stroke-width", 0.5);
+
+      // Season label
+      const midAngle = startAngle + wedgeAngle / 2;
+      const labelR = outerR + 16;
+      g.append("text")
+        .attr("x", cx + labelR * Math.cos(midAngle))
+        .attr("y", cy + labelR * Math.sin(midAngle))
+        .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+        .attr("fill", seasonColor).attr("font-family", "var(--font-mono)")
+        .attr("font-size", 9).attr("font-weight", 600)
+        .text(seasonLabels[season]);
+
+      // Count inside wedge
+      if (count > 0) {
+        const countR = innerR + (fillR - innerR) / 2;
+        g.append("text")
+          .attr("x", cx + countR * Math.cos(midAngle))
+          .attr("y", cy + countR * Math.sin(midAngle))
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", "var(--fg-dim)").attr("font-family", "var(--font-mono)")
+          .attr("font-size", 10)
+          .text(count);
       }
 
-      yOffset += sectionGap;
+      // Weather keywords in this season's wedge
+      const weatherInSeason = Object.entries(weatherData)
+        .filter(([w]) => WEATHER_SEASON[w] === season);
+
+      if (weatherInSeason.length > 0) {
+        const weatherStartAngle = startAngle + 0.15;
+        const weatherSpread = wedgeAngle - 0.3;
+
+        weatherInSeason.sort((a, b) => b[1] - a[1]);
+        const maxW = d3.max(weatherInSeason.map((w) => w[1])) || 1;
+
+        weatherInSeason.forEach(([word, wCount], j) => {
+          const wAngle = weatherStartAngle + (j + 0.5) * (weatherSpread / weatherInSeason.length);
+          const wR = outerR - 15;
+          const wr = d3.scaleSqrt().domain([1, maxW]).range([3, 10])(wCount);
+
+          g.append("circle")
+            .attr("cx", cx + wR * Math.cos(wAngle))
+            .attr("cy", cy + wR * Math.sin(wAngle))
+            .attr("r", wr)
+            .attr("fill", weatherColor).attr("fill-opacity", 0.3)
+            .attr("stroke", weatherColor).attr("stroke-opacity", 0.5).attr("stroke-width", 0.5);
+
+          if (wr > 5) {
+            g.append("text")
+              .attr("x", cx + wR * Math.cos(wAngle))
+              .attr("y", cy + wR * Math.sin(wAngle))
+              .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+              .attr("fill", weatherColor).attr("font-family", "var(--font-mono)")
+              .attr("font-size", 7)
+              .text(word);
+          }
+        });
+      }
     }
+
+    // Center label
+    g.append("text").attr("x", cx).attr("y", cy - 4)
+      .attr("text-anchor", "middle").attr("fill", "var(--fg-dim)")
+      .attr("font-family", "var(--font-mono)").attr("font-size", 9).attr("font-weight", 600)
+      .text("seasons");
+    g.append("text").attr("x", cx).attr("y", cy + 8)
+      .attr("text-anchor", "middle").attr("fill", "var(--fg-ghost)")
+      .attr("font-family", "var(--font-mono)").attr("font-size", 8)
+      .text("& weather");
+
+  }, [imageryData]);
+
+  // Circle pack — celestial + nature
+  useEffect(() => {
+    const celestialData = imageryData["celestial"] || {};
+    const natureData = imageryData["nature"] || {};
+    if (!natureRef.current) return;
+
+    const svg = d3.select(natureRef.current);
+    svg.selectAll("*").remove();
+
+    const size = 300;
+    svg.attr("width", size).attr("height", size).attr("viewBox", `0 0 ${size} ${size}`);
+
+    const celestialColor = CATEGORY_COLORS["celestial"];
+    const natureColor = CATEGORY_COLORS["nature"];
+
+    // Build hierarchy
+    const root = d3.hierarchy({
+      name: "root",
+      children: [
+        {
+          name: "celestial",
+          children: Object.entries(celestialData).map(([word, count]) => ({ name: word, value: count, cat: "celestial" })),
+        },
+        {
+          name: "nature",
+          children: Object.entries(natureData).map(([word, count]) => ({ name: word, value: count, cat: "nature" })),
+        },
+      ],
+    }).sum((d) => d.value || 0).sort((a, b) => (b.value || 0) - (a.value || 0));
+
+    d3.pack().size([size - 20, size - 20]).padding(4)(root);
+
+    const g = svg.append("g").attr("transform", "translate(10,10)");
+
+    // Group circles
+    root.children?.forEach((group) => {
+      const gc = group;
+      g.append("circle")
+        .attr("cx", gc.x).attr("cy", gc.y).attr("r", gc.r)
+        .attr("fill", "none")
+        .attr("stroke", gc.data.name === "celestial" ? celestialColor : natureColor)
+        .attr("stroke-opacity", 0.15).attr("stroke-width", 1);
+
+      // Group label
+      g.append("text")
+        .attr("x", gc.x).attr("y", gc.y - gc.r + 12)
+        .attr("text-anchor", "middle")
+        .attr("fill", gc.data.name === "celestial" ? celestialColor : natureColor)
+        .attr("font-family", "var(--font-mono)").attr("font-size", 9).attr("font-weight", 600)
+        .attr("fill-opacity", 0.6)
+        .text(gc.data.name);
+    });
+
+    // Leaf circles
+    root.leaves().forEach((leaf) => {
+      const color = leaf.parent?.data.name === "celestial" ? celestialColor : natureColor;
+
+      g.append("circle")
+        .attr("cx", leaf.x).attr("cy", leaf.y).attr("r", leaf.r)
+        .attr("fill", color).attr("fill-opacity", 0.2)
+        .attr("stroke", color).attr("stroke-opacity", 0.5).attr("stroke-width", 1);
+
+      if (leaf.r > 10) {
+        g.append("text")
+          .attr("x", leaf.x).attr("y", leaf.y - 1)
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", color).attr("font-family", "var(--font-mono)")
+          .attr("font-size", Math.min(9, leaf.r * 0.65))
+          .text(leaf.data.name);
+        g.append("text")
+          .attr("x", leaf.x).attr("y", leaf.y + 8)
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
+          .attr("font-size", 7)
+          .text(leaf.data.value);
+      } else if (leaf.r > 5) {
+        g.append("text")
+          .attr("x", leaf.x).attr("y", leaf.y)
+          .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+          .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
+          .attr("font-size", 7)
+          .text(leaf.data.name);
+      }
+    });
 
   }, [imageryData]);
 
   return (
-    <div className="fade-in" style={{ padding: "var(--space-xl)", overflowX: "auto" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Imagery</h1>
-      <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-lg)" }}>
-        Time, seasons, weather, and nature in jazz titles
+    <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
+      <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>imagery</h1>
+      <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-xl)" }}>
+        When and where does jazz happen in its own imagination?
       </p>
-      <svg ref={svgRef} />
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-xl)", justifyContent: "center", alignItems: "flex-start" }}>
+        <div style={{ textAlign: "center" }}>
+          <svg ref={clockRef} />
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <svg ref={seasonRef} />
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <svg ref={natureRef} />
+        </div>
+      </div>
     </div>
   );
 }
