@@ -11,6 +11,8 @@
     "fetch-spotify-covers": "node scripts/fetch-spotify-covers.mjs",
     "fetch-covers": "node scripts/fetch-covers.mjs",
     "fetch-tracks": "node scripts/fetch-tracks.mjs",
+    "audit-reggae-subgenres": "node scripts/audit-reggae-subgenres.mjs",
+    "enrich-spotify-playback": "node scripts/enrich-spotify-playback.mjs",
     "extract-colors": "node scripts/extract-colors.mjs",
     "fix-labels": "node scripts/fix-labels.mjs",
     "fix-labels-discogs": "node scripts/fix-labels-discogs.mjs --prune",

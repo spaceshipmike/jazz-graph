@@ -1,0 +1,2546 @@
+[
+  {
+    "id": "charlie-parker-charlie-parker-with-strings",
+    "title": "Charlie Parker With Strings",
+    "artist": "Charlie Parker",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type",
+      "MB: 7 releases (many reissues)"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "eric-dolphy-out-there",
+    "title": "Out There",
+    "artist": "Eric Dolphy",
+    "year": 2011,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-blakey-and-the-jazz-messengers-the-best-of",
+    "title": "The Best Of",
+    "artist": "Art Blakey & The Jazz Messengers",
+    "year": 1988,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-blakey-and-the-jazz-messengers-meet-you-at-the-jazz-corner-of-the-world",
+    "title": "Meet You at the Jazz Corner of the World",
+    "artist": "Art Blakey & The Jazz Messengers",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-blakey-and-the-jazz-messengers-keystone-3",
+    "title": "Keystone 3",
+    "artist": "Art Blakey & The Jazz Messengers",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-original-jazz-classics",
+    "title": "Original Jazz Classics",
+    "artist": "Art Pepper",
+    "year": 1997,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-san-francisco-samba",
+    "title": "San Francisco Samba",
+    "artist": "Art Pepper",
+    "year": 1997,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-the-art-of-the-ballad",
+    "title": "The Art of the Ballad",
+    "artist": "Art Pepper",
+    "year": 1998,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1956"
+    ],
+    "suggestedYear": 1956
+  },
+  {
+    "id": "art-pepper-renascence",
+    "title": "Renascence",
+    "artist": "Art Pepper",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-art-pepper-collection",
+    "title": "Art Pepper Collection",
+    "artist": "Art Pepper",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-young-art",
+    "title": "Young Art",
+    "artist": "Art Pepper",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-the-intimate-art-pepper",
+    "title": "The Intimate Art Pepper",
+    "artist": "Art Pepper",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "art-pepper-the-complete-free-wheeling-sessions",
+    "title": "The Complete Free Wheeling Sessions",
+    "artist": "Art Pepper",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "bill-evans-from-left-to-right",
+    "title": "From Left to Right",
+    "artist": "Bill Evans",
+    "year": 1998,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1971-01-01"
+    ],
+    "suggestedYear": 1971
+  },
+  {
+    "id": "bill-evans-loose-blues",
+    "title": "Loose Blues",
+    "artist": "Bill Evans",
+    "year": 1992,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1982-01-01",
+      "Wiki: recorded 1962"
+    ],
+    "suggestedYear": 1962
+  },
+  {
+    "id": "bill-evans-midnight-mood",
+    "title": "Midnight Mood",
+    "artist": "Bill Evans",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "bill-evans-we-will-meet-again",
+    "title": "We Will Meet Again",
+    "artist": "Bill Evans",
+    "year": 1993,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1979-01-01"
+    ],
+    "suggestedYear": 1979
+  },
+  {
+    "id": "bill-evans-tenderly-an-informal-session",
+    "title": "Tenderly: An Informal Session",
+    "artist": "Bill Evans",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "bill-evans-whats-new",
+    "title": "What's New",
+    "artist": "Bill Evans",
+    "year": 2003,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1969-01-01"
+    ],
+    "suggestedYear": 1969
+  },
+  {
+    "id": "bill-evans-nardis",
+    "title": "Nardis",
+    "artist": "Bill Evans",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "bill-evans-play-the-arrangements-of-jimmy-giuffre",
+    "title": "Play the Arrangements of Jimmy Giuffre",
+    "artist": "Bill Evans",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "bill-evans-complete-quartet-recordings",
+    "title": "Complete Quartet Recordings",
+    "artist": "Bill Evans",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "bill-evans-theme-from-the-v-i-p-s-and-other-great-songs",
+    "title": "Theme From The V.I.P.s and Other Great Songs",
+    "artist": "Bill Evans",
+    "year": 2008,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1963"
+    ],
+    "suggestedYear": 1963
+  },
+  {
+    "id": "billie-holiday-billie-holiday",
+    "title": "Billie Holiday",
+    "artist": "Billie Holiday",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-music-for-torching",
+    "title": "Music for Torching",
+    "artist": "Billie Holiday",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type",
+      "WD: publication date 1955-10-01"
+    ],
+    "suggestedYear": 1955
+  },
+  {
+    "id": "billie-holiday-dont-explain",
+    "title": "Don't Explain",
+    "artist": "Billie Holiday",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-the-voice",
+    "title": "The voice",
+    "artist": "Billie Holiday",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-on-the-sentimental-side",
+    "title": "On The Sentimental Side",
+    "artist": "Billie Holiday",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-love-me-or-leave-me",
+    "title": "Love Me Or Leave Me",
+    "artist": "Billie Holiday",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-40-great-songs",
+    "title": "40 Great Songs",
+    "artist": "Billie Holiday",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-in-europe-1954-1958",
+    "title": "In Europe 1954 - 1958",
+    "artist": "Billie Holiday",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-billie-holiday-star-power",
+    "title": "Billie Holiday: Star Power",
+    "artist": "Billie Holiday",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-billie-holiday-the-greatestjazz-singer-of-all-time",
+    "title": "Billie Holiday: The GreatestJazz Singer of All Time!",
+    "artist": "Billie Holiday",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-singing-love-songs",
+    "title": "Singing Love Songs",
+    "artist": "Billie Holiday",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-billie-holiday-the-essential",
+    "title": "Billie Holiday – The Essential",
+    "artist": "Billie Holiday",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-les-plus-beaux-moments-jazz",
+    "title": "Les Plus Beaux Moments Jazz",
+    "artist": "Billie Holiday",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "billie-holiday-the-love-songs",
+    "title": "The Love Songs",
+    "artist": "Billie Holiday",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "cannonball-adderley-salle-pleyel-nov-25th-1960-olympia-apr-15th-1961",
+    "title": "SALLE PLEYEL Nov. 25th, 1960 - OLYMPIA Apr. 15th, 1961",
+    "artist": "Cannonball Adderley",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "cannonball-adderley-cannonball-plays-zawinul",
+    "title": "Cannonball Plays Zawinul",
+    "artist": "Cannonball Adderley",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "cannonball-adderley-jazz",
+    "title": "Jazz Profile",
+    "artist": "Cannonball Adderley",
+    "year": 1997,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "cannonball-adderley-the-david-axelrod-years",
+    "title": "The David Axelrod Years",
+    "artist": "Cannonball Adderley",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "cannonball-adderley-jazz-six-pack",
+    "title": "Jazz Six Pack",
+    "artist": "Cannonball Adderley",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charles-mingus-jazzical-moods",
+    "title": "Jazzical Moods",
+    "artist": "Charles Mingus",
+    "year": 2012,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charles-mingus-with-orchestra",
+    "title": "With Orchestra",
+    "artist": "Charles Mingus",
+    "year": 1990,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1971-01-14"
+    ],
+    "suggestedYear": 1971
+  },
+  {
+    "id": "charles-mingus-stormy-funky-blues",
+    "title": "Stormy & Funky Blues",
+    "artist": "Charles Mingus",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-charlie-parker",
+    "title": "Charlie Parker",
+    "artist": "Charlie Parker",
+    "year": 1998,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-the-charlie-parker-story",
+    "title": "The Charlie Parker Story",
+    "artist": "Charlie Parker",
+    "year": 1991,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-royal-roost-bop",
+    "title": "Royal Roost Bop",
+    "artist": "Charlie Parker",
+    "year": 1982,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-fragments",
+    "title": "Fragments",
+    "artist": "Charlie Parker",
+    "year": 1982,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-charlie-parker-in-sweden-1950",
+    "title": "Charlie Parker in Sweden 1950",
+    "artist": "Charlie Parker",
+    "year": 1986,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-jam-session",
+    "title": "Jam Session",
+    "artist": "Charlie Parker",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-bird-s-night",
+    "title": "Bird’s Night",
+    "artist": "Charlie Parker",
+    "year": 1991,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-an-evening-at-home-with-the-bird",
+    "title": "An Evening At Home With The Bird",
+    "artist": "Charlie Parker",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-bird-on-the-wing",
+    "title": "Bird on the Wing",
+    "artist": "Charlie Parker and the Jazz All Stars",
+    "year": 1993,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-jazz-do-it",
+    "title": "Jazz Do It",
+    "artist": "Charlie Parker",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-jazz-greats-volume-11-charlie-parker-out-of-nowhere",
+    "title": "Jazz Greats, Volume 11: Charlie Parker: Out of Nowhere",
+    "artist": "Charlie Parker",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-super-session",
+    "title": "Super Session",
+    "artist": "Charlie Parker",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-birds-nest",
+    "title": "Bird's Nest",
+    "artist": "Charlie Parker",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "charlie-parker-night-in-tunisia",
+    "title": "Night in Tunisia",
+    "artist": "Charlie Parker",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-you-can-t-go-home-again",
+    "title": "You Can’t Go Home Again",
+    "artist": "Chet Baker",
+    "year": 2000,
+    "action": "KEEP",
+    "confidence": "medium",
+    "reason": [
+      "MB: Compilation type",
+      "Wiki: mentions \"unreleased recordings\"",
+      "Wiki: recorded 1977"
+    ],
+    "suggestedYear": 1977
+  },
+  {
+    "id": "chet-baker-the-best-of-chet-baker-plays",
+    "title": "The Best of Chet Baker Plays",
+    "artist": "Chet Baker",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-jazz-profile",
+    "title": "Jazz Profile",
+    "artist": "Chet Baker",
+    "year": 1997,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-chet-baker-the-jazz-masters",
+    "title": "Chet Baker - The Jazz Masters",
+    "artist": "Chet Baker",
+    "year": 1997,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-i-remember",
+    "title": "I Remember...",
+    "artist": "Chet Baker",
+    "year": 1999,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1955"
+    ],
+    "suggestedYear": 1955
+  },
+  {
+    "id": "chet-baker-i-remember-you",
+    "title": "I Remember You",
+    "artist": "Chet Baker",
+    "year": 1999,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-live-at-new-morning",
+    "title": "Live At New Morning",
+    "artist": "Chet Baker",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-a-man-who-used-to-be",
+    "title": "A Man Who Used To Be",
+    "artist": "Chet Baker",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-i-grandi-del-jazz-chet-baker-jazz-round-midnight",
+    "title": "I Grandi Del Jazz - Chet Baker - Jazz Round Midnight",
+    "artist": "Chet Baker",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-sentimental-walk-in-paris",
+    "title": "Sentimental Walk in Paris",
+    "artist": "Chet Baker",
+    "year": 2002,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1980"
+    ],
+    "suggestedYear": 1980
+  },
+  {
+    "id": "chet-baker-but-not-for-me",
+    "title": "But not For Me",
+    "artist": "Chet Baker",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-oh-you-crazy-moon",
+    "title": "Oh You Crazy Moon",
+    "artist": "Chet Baker",
+    "year": 2003,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1978"
+    ],
+    "suggestedYear": 1978
+  },
+  {
+    "id": "chet-baker-le-prince-de-la-ballade",
+    "title": "Le Prince De La Ballade",
+    "artist": "Chet Baker",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-nights-at-the-turntable",
+    "title": "Nights At The Turntable",
+    "artist": "Chet Baker and Gerry Mulligan",
+    "year": 2003,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1952"
+    ],
+    "suggestedYear": 1952
+  },
+  {
+    "id": "chet-baker-quartet-featuring-dick-twardzik",
+    "title": "Quartet Featuring Dick Twardzik",
+    "artist": "Chet Baker",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-chet-baker-sings-and-plays-remastered-2004",
+    "title": "Chet Baker Sings And Plays (Remastered 2004)",
+    "artist": "Chet Baker",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "Wiki: mentions \"posthumous\"",
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-chet-baker-sings-again-vol-2",
+    "title": "Chet Baker - Sings Again Vol. 2",
+    "artist": "Chet Baker",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-complete-studio-sessions-with-dick-twardzik",
+    "title": "Complete Studio Sessions with Dick Twardzik",
+    "artist": "Chet Baker",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-night-birds-broken-wings",
+    "title": "Night Birds & Broken Wings",
+    "artist": "Chet Baker",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-riverside-profiles",
+    "title": "Riverside Profiles",
+    "artist": "Chet Baker",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-in-paris-the-complete-1955-1956-barclay-sessions",
+    "title": "In Paris: The Complete 1955-1956 Barclay Sessions",
+    "artist": "Chet Baker",
+    "year": 2007,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-lets-get-lost-cool-and-iconic-sides",
+    "title": "Let's Get Lost - Cool and Iconic Sides",
+    "artist": "Chet Baker",
+    "year": 2007,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-chet-in-chicago",
+    "title": "Chet In Chicago",
+    "artist": "Chet Baker",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-original-sessions-1952-1953",
+    "title": "Original Sessions 1952–1953",
+    "artist": "Gerry Mulligan Quartet",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-chet-bakers-finest",
+    "title": "Chet Baker's Finest",
+    "artist": "Chet Baker",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "Wiki: mentions \"posthumous\"",
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-the-complete-chet-baker",
+    "title": "The Complete Chet Baker",
+    "artist": "Chet Baker",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-sings-sessions",
+    "title": "Sings Sessions",
+    "artist": "Chet Baker",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "chet-baker-the-sesjun-radio-shows",
+    "title": "The Sesjun Radio Shows",
+    "artist": "Chet Baker",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "Wiki: mentions \"posthumous\"",
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-sing-along-with-basie",
+    "title": "4 Originals (Chairman Of The Board - Memories Ad-Lib - Sing Along With Basie - Basie In London)",
+    "artist": "Count Basie",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-pop-classics",
+    "title": "Pop Classics",
+    "artist": "Count Basie",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-blues-alley",
+    "title": "Blues Alley",
+    "artist": "Count Basie",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-me-and-you",
+    "title": "Me and You",
+    "artist": "Count Basie",
+    "year": 1996,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1983-01-01"
+    ],
+    "suggestedYear": 1983
+  },
+  {
+    "id": "count-basie-farmers-market-barbecue",
+    "title": "Farmers Market Barbecue",
+    "artist": "Count Basie",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-afrique",
+    "title": "Afrique",
+    "artist": "Count Basie",
+    "year": 1996,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1971-01-01"
+    ],
+    "suggestedYear": 1971
+  },
+  {
+    "id": "count-basie-kansas-city-5",
+    "title": "Kansas City 5",
+    "artist": "Count Basie",
+    "year": 1996,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1977-01-01",
+      "Wiki: recorded 1962"
+    ],
+    "suggestedYear": 1962
+  },
+  {
+    "id": "count-basie-satch-josh-again",
+    "title": "Satch & Josh... Again",
+    "artist": "Count Basie",
+    "year": 1998,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1978-01-01"
+    ],
+    "suggestedYear": 1978
+  },
+  {
+    "id": "count-basie-swingstation",
+    "title": "Swingstation",
+    "artist": "Count Basie",
+    "year": 1998,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-swingsation",
+    "title": "Swingsation",
+    "artist": "Count Basie",
+    "year": 1998,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-too-marvelous-for-words",
+    "title": "Too Marvelous for Words",
+    "artist": "Count Basie",
+    "year": 1999,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-cool-too",
+    "title": "Cool Too",
+    "artist": "Count Basie",
+    "year": 1999,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-midnite-jazz-blues-blue-sentimental",
+    "title": "Midnite Jazz & Blues: Blue & Sentimental",
+    "artist": "Count Basie",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-the-lang-worth-transcriptions",
+    "title": "The Lang-Worth Transcriptions",
+    "artist": "Count Basie",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-class-of-54",
+    "title": "Class of '54",
+    "artist": "Count Basie",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-kansas-city-powerhouse",
+    "title": "Kansas City Powerhouse",
+    "artist": "Count Basie",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-i-grandi-del-jazz-count-basie-verve-jazz-masters-2",
+    "title": "I Grandi Del Jazz - Count Basie - Verve Jazz Masters 2",
+    "artist": "Count Basie",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "count-basie-chairman-of-the-board",
+    "title": "Chairman of the Board",
+    "artist": "Count Basie",
+    "year": 2003,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1959-04-18"
+    ],
+    "suggestedYear": 1959
+  },
+  {
+    "id": "count-basie-basie-jam-2",
+    "title": "Basie Jam 2",
+    "artist": "Count Basie",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dave-brubeck-re-union",
+    "title": "Re-Union",
+    "artist": "Paul Desmond",
+    "year": 1994,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dave-brubeck-take-five-the-essential-dave-brubeck",
+    "title": "Take Five (The Essential Dave Brubeck)",
+    "artist": "Dave Brubeck",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-more-than-you-know",
+    "title": "More Than You Know",
+    "artist": "Dexter Gordon",
+    "year": 2025,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1975"
+    ],
+    "suggestedYear": 1975
+  },
+  {
+    "id": "dexter-gordon-dexter-gordon-on-dial-the-complete-sessions",
+    "title": "Dexter Gordon on Dial – The Complete Sessions",
+    "artist": "Dexter Gordon",
+    "year": 1994,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-the-rainbow-people",
+    "title": "The Rainbow People",
+    "artist": "Dexter Gordon",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-misty",
+    "title": "Misty",
+    "artist": "Dexter Gordon",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-ladybird",
+    "title": "Ladybird",
+    "artist": "Dexter Gordon",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-duels",
+    "title": "Duels",
+    "artist": "Dexter Gordon",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-dextivity",
+    "title": "Dextivity",
+    "artist": "Dexter Gordon",
+    "year": 2007,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-the-complete-hamburg-concert-1974",
+    "title": "The Complete Hamburg Concert 1974",
+    "artist": "Dexter Gordon",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dexter-gordon-the-real-thing-happened-to-me",
+    "title": "The Real Thing Happened to Me",
+    "artist": "Dexter Gordon",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-jazz-tribune-nr-2-dizzy-gillespie-1946-1949-cd2",
+    "title": "Jazz Tribune Nr 2 Dizzy Gillespie (1946-1949) CD2",
+    "artist": "Dizzy Gillespie",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-jazz-tribune-nr-2-dizzy-gillespie-1946-1949-cd1",
+    "title": "Jazz Tribune Nr 2 Dizzy Gillespie (1946-1949) CD1",
+    "artist": "Dizzy Gillespie",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-jazz-studies-the-best-of-the-perception-years",
+    "title": "Jazz Studies: The Best of the Perception Years",
+    "artist": "Dizzy Gillespie",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-i-grandi-del-jazz-dizzie-gillespie-ultimate-dizzy-gillespie",
+    "title": "I Grandi Del Jazz - Dizzie Gillespie - Ultimate Dizzy Gillespie",
+    "artist": "Dizzy Gillespie",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-bd-music-presents-dizzy-gillespie",
+    "title": "BD Music Presents: Dizzy Gillespie",
+    "artist": "Dizzy Gillespie",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-the-discovery-of-jazz-dizzy-gillespie",
+    "title": "The Discovery of Jazz: Dizzy Gillespie",
+    "artist": "Dizzy Gillespie",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-the-best-of-dizzy-gillespie",
+    "title": "The Best of Dizzy Gillespie",
+    "artist": "Dizzy Gillespie",
+    "year": 1987,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type",
+      "Wiki: recorded 1984"
+    ],
+    "suggestedYear": 1984
+  },
+  {
+    "id": "dizzy-gillespie-the-verve-philips-small-group-sessions",
+    "title": "The Verve & Philips Small Group Sessions",
+    "artist": "Dizzy Gillespie",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-live-in-paris-copenhagen-1974",
+    "title": "Live in Paris & Copenhagen 1974",
+    "artist": "Dizzy Gillespie",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-featuring-charlie-parker",
+    "title": "Featuring Charlie Parker",
+    "artist": "Dizzy Gillespie",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-diggin-dizz",
+    "title": "Diggin' Dizz",
+    "artist": "Dizzy Gillespie",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "dizzy-gillespie-when-be-bop-was-king",
+    "title": "When Be-Bop Was King",
+    "artist": "Dizzy Gillespie",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-at-newport",
+    "title": "At Newport, 1956",
+    "artist": "Duke Ellington",
+    "year": 2014,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "MB: Live recording",
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-ties-tails",
+    "title": "Ties & Tails",
+    "artist": "Duke Ellington",
+    "year": 1986,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-the-feeling-of-jazz",
+    "title": "The Feeling of Jazz",
+    "artist": "Duke Ellington",
+    "year": 1988,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-braggin-in-brass-the-immortal-1938-year",
+    "title": "Braggin' in Brass: The Immortal 1938 Year",
+    "artist": "Duke Ellington",
+    "year": 1989,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-four-symphonic-works-by-duke-ellington",
+    "title": "Four Symphonic Works by Duke Ellington",
+    "artist": "Duke Ellington",
+    "year": 1989,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-orchestral-works",
+    "title": "Orchestral Works",
+    "artist": "Duke Ellington",
+    "year": 1989,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-new-mood-indigo",
+    "title": "New Mood Indigo",
+    "artist": "Duke Ellington",
+    "year": 1986,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-take-the-holiday-train",
+    "title": "Take the Holiday Train",
+    "artist": "Duke Ellington",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-up-in-dukes-workshop",
+    "title": "Up In Duke's Workshop",
+    "artist": "Duke Ellington",
+    "year": 1991,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1969"
+    ],
+    "suggestedYear": 1969
+  },
+  {
+    "id": "duke-ellington-happy-reunion",
+    "title": "Happy Reunion",
+    "artist": "Duke Ellington",
+    "year": 1991,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1956"
+    ],
+    "suggestedYear": 1956
+  },
+  {
+    "id": "duke-ellington-the-intimate-ellington",
+    "title": "The Intimate Ellington",
+    "artist": "Duke Ellington",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-16-classic-performances",
+    "title": "16 Classic Performances",
+    "artist": "Duke Ellington",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-big-bands-greatest-hits",
+    "title": "Big Band's Greatest Hits",
+    "artist": "Benny Goodman",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-jazz-tribune-no-69-indispensable",
+    "title": "Jazz Tribune No.69: Indispensable",
+    "artist": "Duke Ellington",
+    "year": 1993,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-one-oclock-jump",
+    "title": "One O'Clock Jump",
+    "artist": "Duke Ellington",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-a-tone-parallel-to-harlem",
+    "title": "A Tone Parallel to Harlem",
+    "artist": "Duke Ellington",
+    "year": 1999,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1947"
+    ],
+    "suggestedYear": 1947
+  },
+  {
+    "id": "duke-ellington-reflections-on-duke",
+    "title": "Reflections on Duke",
+    "artist": "Duke Ellington",
+    "year": 1999,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-classic-ellington",
+    "title": "Classic Ellington",
+    "artist": "Duke Ellington",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-swingin-with-the-duke",
+    "title": "Swingin' With The Duke",
+    "artist": "Duke Ellington",
+    "year": 2000,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-ellington-suite-from-the-river-harlem-solitude-dawson-negro-folk-symphony",
+    "title": "Ellington: Suite from \"The River\" / Harlem / Solitude / Dawson: Negro Folk Symphony",
+    "artist": "Duke Ellington",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-collages",
+    "title": "Collages",
+    "artist": "Duke Ellington",
+    "year": 2001,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1969-01-01"
+    ],
+    "suggestedYear": 1969
+  },
+  {
+    "id": "duke-ellington-jazz-caravan",
+    "title": "Jazz Caravan",
+    "artist": "Duke Ellington",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-love-you-madly",
+    "title": "Love You Madly",
+    "artist": "Duke Ellington",
+    "year": 2007,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-i-grandi-del-jazz-duke-ellington",
+    "title": "I Grandi Del Jazz - Duke Ellington",
+    "artist": "Duke Ellington",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-the-blues-i-love-to-sing",
+    "title": "The Blues I Love To Sing",
+    "artist": "Duke Ellington",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-classic-recordings-vol-5-1938-braggin-in-brass",
+    "title": "Classic Recordings, Vol. 5 (1938): Braggin' in Brass",
+    "artist": "Duke Ellington",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-jazz-moods-hot",
+    "title": "Jazz Moods - Hot",
+    "artist": "Duke Ellington",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-the-piano-player",
+    "title": "The Piano Player",
+    "artist": "Duke Ellington",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-rockin-in-rhythm",
+    "title": "Rockin' in Rhythm",
+    "artist": "Duke Ellington",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-west-coast-swing",
+    "title": "West Coast Swing",
+    "artist": "Duke Ellington",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-columbia-jazz-profiles",
+    "title": "Columbia Jazz Profiles",
+    "artist": "Duke Ellington",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-hot-from-the-cotton-club",
+    "title": "Hot From The Cotton Club",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1985,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-duke-ellington-presents",
+    "title": "Duke Ellington Presents",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1986,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-a-duke-in-concert",
+    "title": "A Duke in Concert",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-three-suites",
+    "title": "Three Suites",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-take-the-a-train-the-legendary-blanton-webster-transcriptions",
+    "title": "Take the \"A\" Train (The Legendary Blanton-Webster Transcriptions)",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-essential-jazz",
+    "title": "Essential Jazz",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-great-times",
+    "title": "Great Times!",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1991,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1950-01-01"
+    ],
+    "suggestedYear": 1950
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-symphonic-ellington",
+    "title": "The Symphonic Ellington",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1992,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1963-01-01"
+    ],
+    "suggestedYear": 1963
+  },
+  {
+    "id": "duke-ellington-his-orchestra-1969-all-star-white-house-tribute",
+    "title": "1969 All-Star White House Tribute",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-happy-birthday-duke-the-birthday-sessions-vol-5",
+    "title": "Happy Birthday, Duke! The Birthday Sessions Vol. 5",
+    "artist": "Duke Ellington and His Orchestra",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-april-in-paris",
+    "title": "April in Paris",
+    "artist": "Duke Ellington and His Orchestra",
+    "year": 1992,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-through-the-roof",
+    "title": "Through the Roof",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-satin-doll",
+    "title": "Satin Doll",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-ellington-55",
+    "title": "Ellington '55",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 1999,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-treasury-shows-volume-2",
+    "title": "The Treasury Shows, Volume 2",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2001,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-treasury-shows-volume-5",
+    "title": "The Treasury Shows, Volume 5",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-treasury-shows-volume-6",
+    "title": "The Treasury Shows, Volume 6",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2002,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-treasury-shows-volume-9",
+    "title": "The Treasury Shows, Volume 9",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-jazz-violin-session",
+    "title": "Jazz Violin Session",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-jaywalker",
+    "title": "The Jaywalker",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-treasury-shows-volume-10",
+    "title": "The Treasury Shows, Volume 10",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-the-treasury-shows-volume-11",
+    "title": "The Treasury Shows, Volume 11",
+    "artist": "Duke Ellington & His Orchestra",
+    "year": 2005,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "Wiki: described as \"compilation album\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "duke-ellington-his-orchestra-concert-in-the-virgin-islands",
+    "title": "Concert in the Virgin Islands",
+    "artist": "Duke Ellington and His Orchestra",
+    "year": 2007,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "WD: publication date 1965-01-01"
+    ],
+    "suggestedYear": 1965
+  },
+  {
+    "id": "ella-fitzgerald-the-first-lady-of-song",
+    "title": "The First Lady of Song",
+    "artist": "Ella Fitzgerald",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "ella-fitzgerald-how-high-the-moon",
+    "title": "How High the Moon",
+    "artist": "Ella Fitzgerald",
+    "year": 2011,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "ella-fitzgerald-all-my-life",
+    "title": "All My Life",
+    "artist": "Ella Fitzgerald",
+    "year": 2005,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1936"
+    ],
+    "suggestedYear": 1936
+  },
+  {
+    "id": "ella-fitzgerald-the-reprise-years",
+    "title": "The Reprise Years",
+    "artist": "Ella Fitzgerald",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "ella-fitzgerald-sings-cole-porter",
+    "title": "Ella Fitzgerald Sings Cole Porter",
+    "artist": "Ella Fitzgerald",
+    "year": 2007,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "ella-fitzgerald-ella-louis-and-oscar-too",
+    "title": "Ella & Louis (and Oscar Too)",
+    "artist": "Ella Fitzgerald",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "ella-fitzgerald-miss-ella-s-playhouse",
+    "title": "Miss Ella’s Playhouse",
+    "artist": "Ella Fitzgerald",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "eric-dolphy-dash-one",
+    "title": "Dash One",
+    "artist": "Eric Dolphy",
+    "year": 1982,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "gary-burton-collection",
+    "title": "Collection",
+    "artist": "Gary Burton",
+    "year": 1996,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "hank-mobley-complete-the-jazz-message-sessions-with-kenny-clarke",
+    "title": "Complete The Jazz Message Sessions with Kenny Clarke",
+    "artist": "Hank Mobley",
+    "year": 2003,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "hank-mobley-monday-nights-at-birdland-complete-recordings",
+    "title": "Monday Nights At Birdland: Complete Recordings",
+    "artist": "Hank Mobley",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "jaco-pastorius-broadway-blues-teresa",
+    "title": "Broadway Blues & Teresa",
+    "artist": "Jaco Pastorius",
+    "year": 1999,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "jaco-pastorius-broadway-blues",
+    "title": "Broadway Blues",
+    "artist": "Jaco Pastorius",
+    "year": 1999,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1975"
+    ],
+    "suggestedYear": 1975
+  },
+  {
+    "id": "jaco-pastorius-jacos-first-band",
+    "title": "Jaco's First Band",
+    "artist": "Jaco Pastorius",
+    "year": 2008,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "joe-henderson-the-griffith-park-collection",
+    "title": "The Griffith Park Collection",
+    "artist": "Stanley Clarke",
+    "year": 1982,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "john-coltrane-mating-call",
+    "title": "Mating Call",
+    "artist": "John Coltrane",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "john-coltrane-soultrane",
+    "title": "Soultrane",
+    "artist": "John Coltrane",
+    "year": 2010,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "john-coltrane-stellar-regions",
+    "title": "Stellar Regions",
+    "artist": "John Coltrane",
+    "year": 1995,
+    "action": "KEEP",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: mentions \"unreleased recordings\"",
+      "Wiki: mentions \"posthumous\""
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "john-coltrane-man-made-miles",
+    "title": "Man Made Miles",
+    "artist": "John Coltrane",
+    "year": 1997,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "john-coltrane-impressions-of-coltrane",
+    "title": "Impressions of Coltrane",
+    "artist": "John Coltrane",
+    "year": 2006,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "kenny-burrell-essential-masters",
+    "title": "Essential Masters",
+    "artist": "Kenny Burrell",
+    "year": 2009,
+    "action": "FIX_DATE",
+    "confidence": "medium",
+    "reason": [
+      "Wiki: recorded 1957"
+    ],
+    "suggestedYear": 1957
+  },
+  {
+    "id": "kenny-dorham-west-42nd-street",
+    "title": "West 42nd Street",
+    "artist": "Kenny Dorham",
+    "year": 1989,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "kenny-dorham-osmosis",
+    "title": "Osmosis",
+    "artist": "Kenny Dorham",
+    "year": 1990,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "kenny-dorham-the-flamboyan-queens-ny-1963",
+    "title": "The Flamboyan, Queens, NY, 1963",
+    "artist": "Kenny Dorham",
+    "year": 2009,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "lee-morgan-expoobident",
+    "title": "Expoobident",
+    "artist": "Lee Morgan",
+    "year": 1995,
+    "action": "REMOVE",
+    "confidence": "high",
+    "reason": [
+      "MB: Compilation type"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "lee-morgan-hanks-shout",
+    "title": "Hank's Shout",
+    "artist": "Lee Morgan",
+    "year": 1989,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "lee-morgan-introducing-lee-morgan",
+    "title": "Introducing Lee Morgan",
+    "artist": "Lee Morgan",
+    "year": 1991,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  },
+  {
+    "id": "lee-morgan-complete-introducing-sessions",
+    "title": "Complete Introducing Sessions",
+    "artist": "Lee Morgan",
+    "year": 2004,
+    "action": "REMOVE",
+    "confidence": "low",
+    "reason": [
+      "no evidence of original recording — likely reissue/compilation"
+    ],
+    "suggestedYear": null
+  }
+]

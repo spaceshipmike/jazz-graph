@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentFamily, familyColor } from "../data";
 import HorizontalBars from "../components/HorizontalBars";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 const RARE_THRESHOLD = 5;
 
@@ -47,6 +49,7 @@ const WIKI_LINKS = {
 
 export default function InstrumentsOverview() {
   const { albums } = useData();
+  const { isLoggedIn } = useSpotify();
 
   const data = useMemo(() => {
     const counts = new Map();
@@ -139,27 +142,39 @@ export default function InstrumentsOverview() {
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
                   {instAlbums.map((a) => (
-                    <Link
+                    <div
                       key={a.id}
-                      to={`/album/${a.id}`}
                       title={`${a.title} — ${a.artist} (${a.year || "?"})`}
                       style={{ textDecoration: "none" }}
                     >
                       <div style={{ width: 32, height: 32, borderRadius: 3, overflow: "hidden", background: "var(--bg)" }}>
                         {a.coverPath ? (
-                          <img
-                            src={`/data/${a.coverPath}`}
-                            alt={a.title}
-                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                            loading="lazy"
-                          />
+                          isLoggedIn ? (
+                            <PlayableAlbumArt album={a}>
+                              <img
+                                src={`/data/${a.coverPath}`}
+                                alt={a.title}
+                                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                loading="lazy"
+                              />
+                            </PlayableAlbumArt>
+                          ) : (
+                            <Link to={`/album/${a.id}`} style={{ display: "block", width: "100%", height: "100%" }}>
+                              <img
+                                src={`/data/${a.coverPath}`}
+                                alt={a.title}
+                                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                loading="lazy"
+                              />
+                            </Link>
+                          )
                         ) : (
                           <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <span className="mono" style={{ fontSize: 7, color: "var(--fg-ghost)" }}>?</span>
                           </div>
                         )}
                       </div>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>

@@ -50,13 +50,13 @@ A user sees 7 category pills in the primary nav. Clicking "Labels" shows the Lab
 - Sub-nav pills switch the visible panel without page reload
 - URL updates to reflect both category and sub-view (e.g., `/labels/flow`)
 - Direct URL access loads the correct category and sub-view
-- Detail pages hide both nav levels, show "← Back" and title
+- Detail pages hide both primary nav pills and sub-nav, show "← Back" and title
 
 ## S4: Labels Category
-A user navigates to Labels. They see a radial bar chart of top labels by album count. They switch to Browse and see albums grouped by label with filters. They switch to Flow and see the alluvial diagram of label transitions.
+A user navigates to Labels. They see a horizontal bar chart of top labels by album count. They switch to Browse and see albums grouped by label with filters. They switch to Flow and see the alluvial diagram of label transitions.
 
 **Satisfied when:**
-- Overview shows radial bar chart with label brand colors
+- Overview shows horizontal bar chart with label brand colors
 - Browse shows filterable album grid grouped by label
 - Flow shows alluvial diagram of musician label transitions
 - Filter bar (instrument family, label, artist) is present and functional
@@ -64,20 +64,20 @@ A user navigates to Labels. They see a radial bar chart of top labels by album c
 - All three panels render correctly with the full dataset
 
 ## S5: Instruments Category
-A user navigates to Instruments. They see a radial bar chart of lead instruments. They switch to Eras and see the streamgraph of instrument family prevalence over time.
+A user navigates to Instruments. They see a horizontal bar chart of lead instruments. They switch to Eras and see the streamgraph of instrument family prevalence over time.
 
 **Satisfied when:**
-- Overview shows radial bar chart of lead instruments colored by family
+- Overview shows horizontal bar chart of lead instruments colored by family
 - Overview includes a "Rare Instruments" section showing instruments with <5 appearances, each linking to its album(s)
 - Eras shows streamgraph with instrument family streams over decades
 - Filter bar is present and functional
 - Both panels render correctly with the full dataset
 
 ## S6: Artists Category
-A user navigates to Artists. They see a radial bar chart of top artists. They switch to Network and see the force-directed collaboration graph. They switch to Connections and pick two musicians to find the shortest path between them. They switch to Careers and see career span bars.
+A user navigates to Artists. They see a horizontal bar chart of top artists. They switch to Network and see the force-directed collaboration graph. They switch to Connections and pick two musicians to find the shortest path between them. They switch to Careers and see career span bars.
 
 **Satisfied when:**
-- Overview shows radial bar chart of top artists by album count
+- Overview shows horizontal bar chart of top artists by album count
 - Network shows force-directed graph with zoom/pan/hover/click
 - Connections shows Six Degrees path-finder with autocomplete inputs and most-connected leaderboard
 - Careers shows horizontal career span bars on a year axis
@@ -113,9 +113,9 @@ A user navigates to Words. They see a world map with place names from song/album
 
 **Satisfied when:**
 - Geography shows a dark-themed map with place name dots from titles
-- Mood shows a radial wheel with 8 emotion categories as spokes, keywords radiating outward sized by frequency
-- Clicking a mood category or keyword drills down to show matching album/track titles
-- Mood by Decade heatmap or stacked area shows emotional vocabulary shifts across eras
+- Mood shows a decade-grouped bubble chart with 8 emotion categories, keywords sized by frequency
+- Clicking a mood keyword drills down to show matching album/track titles
+- Decade grouping reveals how emotional vocabulary shifted across eras
 - Vocabulary shows musical form word frequencies (blues, bossa, waltz, etc.)
 - Imagery shows time-of-day/season/nature references
 - Title analysis uses both album titles and track titles (15,000+ data points)

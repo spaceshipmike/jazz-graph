@@ -3,6 +3,8 @@ import { useData } from "../App";
 import { getAllTitles, extractPlaces, albumsForTitles } from "../titleAnalysis";
 import { useNavigate } from "react-router-dom";
 import * as d3 from "d3";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 const REGION_MAP = {
   "New York": "US Northeast",
@@ -59,6 +61,7 @@ const REGION_COLORS = {
 
 export default function WordsGeography() {
   const { albums } = useData();
+  const { isLoggedIn } = useSpotify();
   const svgRef = useRef(null);
   const tooltipRef = useRef(null);
   const navigate = useNavigate();
@@ -345,12 +348,25 @@ export default function WordsGeography() {
                 onMouseLeave={(e) => (e.currentTarget.style.background = "var(--surface)")}
               >
                 {a.coverPath && (
-                  <img
-                    src={`/data/${a.coverPath}`}
-                    alt=""
-                    style={{ width: 36, height: 36, objectFit: "cover", borderRadius: 2, flexShrink: 0 }}
-                    loading="lazy"
-                  />
+                  isLoggedIn ? (
+                    <div onClick={(event) => event.stopPropagation()} style={{ width: 36, height: 36, flexShrink: 0 }}>
+                      <PlayableAlbumArt album={a}>
+                        <img
+                          src={`/data/${a.coverPath}`}
+                          alt=""
+                          style={{ width: 36, height: 36, objectFit: "cover", borderRadius: 2, flexShrink: 0 }}
+                          loading="lazy"
+                        />
+                      </PlayableAlbumArt>
+                    </div>
+                  ) : (
+                    <img
+                      src={`/data/${a.coverPath}`}
+                      alt=""
+                      style={{ width: 36, height: 36, objectFit: "cover", borderRadius: 2, flexShrink: 0 }}
+                      loading="lazy"
+                    />
+                  )
                 )}
                 <div style={{ minWidth: 0 }}>
                   <div

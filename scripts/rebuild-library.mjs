@@ -82,6 +82,11 @@ const JUNK_LABELS = new Set([
   "golden stars",
   "american jazz classics",
   "broken silence",
+  "discos marabú ltd.",
+  "discos marabú",
+  "rajon music group uk limited",
+  "rajon",
+  "jazz view",
 ]);
 
 function isJunkLabel(label) {

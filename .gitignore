@@ -4,6 +4,13 @@ data/images/
 data/images-webp/
 data/.fetch-progress.json
 data/.rebuild-progress.json
+data/.discogs-enrich-progress.json
+data/.spotify-enrichment-progress.json
+data/.subgenre-progress.json
+data/reggae-audit/progress.json
 .env
+.claude/
+.fctry/*.db-shm
+.fctry/*.db-wal
 .DS_Store
 *.log

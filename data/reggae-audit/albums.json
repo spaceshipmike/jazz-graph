@@ -1,0 +1,3930 @@
+[
+  {
+    "id": "bob-marley-the-wailers|soul-rebels|1970",
+    "title": "Soul Rebels",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1970,
+    "rgid": "58637e09-dec9-4023-80ff-734da967301c",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "burning-spear|studio-one-presents-burning-spear|1973",
+    "title": "Studio One Presents Burning Spear",
+    "artist": "Burning Spear",
+    "year": 1973,
+    "rgid": "c8424202-a7bb-3218-89fc-2f34de913155",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "culture|two-sevens-clash|1977",
+    "title": "Two Sevens Clash",
+    "artist": "Culture",
+    "year": 1977,
+    "rgid": "04bedda9-4ba9-3a19-8fe3-922b86557d8a",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "black-uhuru|love-crisis-black-sounds-of-freedom|1977",
+    "title": "Love Crisis / Black Sounds Of Freedom",
+    "artist": "Black Uhuru",
+    "year": 1977,
+    "rgid": "398d3532-b392-3db7-b2d0-96407f744ce6",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "lee-scratch-perry|africas-blood|1971",
+    "title": "Africa's Blood",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1971,
+    "rgid": "10ee061b-6c97-4192-b1f7-7d699b777bf9",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [],
+      "unmappedRawLabels": [
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": false,
+      "artistFallbackOnly": true,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "king-tubby|dub-me|1975",
+    "title": "Dub Me",
+    "artist": "King Tubby",
+    "year": 1975,
+    "rgid": "bd336fe0-0fd2-33f7-a17d-910c3e60ad39",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "augustus-pablo|ital-dub|1974",
+    "title": "Ital Dub",
+    "artist": "Augustus Pablo",
+    "year": 1974,
+    "rgid": "4f898a31-b65c-315e-a932-ef063cf53641",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "scientist|allied-dub-selection|1980",
+    "title": "Allied Dub Selection",
+    "artist": "Scientist",
+    "year": 1980,
+    "rgid": "a1c01519-635c-4f28-b7cd-ddfca8add51e",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "bob-marley-the-wailers|soul-revolution-part-ii|1971",
+    "title": "Soul Revolution Part II",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1971,
+    "rgid": "e664129e-53ba-3866-839c-129465368b70",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "burning-spear|rocking-time|1974",
+    "title": "Rocking Time",
+    "artist": "Burning Spear",
+    "year": 1974,
+    "rgid": "c3b6d9ac-6a3b-364f-adb5-15d6c07cf832",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "culture|africa-stand-alone|1978",
+    "title": "Africa Stand Alone",
+    "artist": "Culture",
+    "year": 1978,
+    "rgid": "f50b667d-3ef9-39e4-8fe6-ac6526f445f4",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "black-uhuru|showcase-guess-whos-coming-to-dinner-black-uhuru|1979",
+    "title": "Showcase / Guess Who's Coming to Dinner / Black Uhuru",
+    "artist": "Black Uhuru",
+    "year": 1979,
+    "rgid": "705e8021-3dda-3b5b-948a-9a32d1ed7baa",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "lee-scratch-perry|cloak-dagger|1972",
+    "title": "Cloak & Dagger",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1972,
+    "rgid": "daec9d93-8fd2-3e73-b571-bca26b1865be",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "king-tubby|dubbing-with-the-observer|1975",
+    "title": "Dubbing With the Observer",
+    "artist": "King Tubby",
+    "year": 1975,
+    "rgid": "d839e30f-4d87-47f1-8910-58e64de1c855",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "augustus-pablo|this-is-augustus-pablo|1974",
+    "title": "This Is Augustus Pablo",
+    "artist": "Augustus Pablo",
+    "year": 1974,
+    "rgid": "080b4120-827e-31b5-a8e6-085dd9a5b314",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "scientist|heavyweight-dub-champion|1980",
+    "title": "Heavyweight Dub Champion",
+    "artist": "Scientist",
+    "year": 1980,
+    "rgid": "14c31822-11b4-3780-a83a-14589cb322d6",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "bob-marley-the-wailers|soul-revolution-part-ii-dub|1971",
+    "title": "Soul Revolution Part II Dub",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1971,
+    "rgid": "58c74d55-ca15-4eff-9636-8450d41a53c4",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "burning-spear|marcus-garvey|1975",
+    "title": "Marcus Garvey",
+    "artist": "Burning Spear",
+    "year": 1975,
+    "rgid": "2b649670-7d2d-3287-9b40-5b88fb4e1f35",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "culture|baldhead-bridge|1978",
+    "title": "Baldhead Bridge",
+    "artist": "Culture",
+    "year": 1978,
+    "rgid": "3a12d4fd-c023-3a69-afe6-ff502136b183",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "black-uhuru|sinsemilla|1980",
+    "title": "Sinsemilla",
+    "artist": "Black Uhuru",
+    "year": 1980,
+    "rgid": "e97fa205-6cde-35ea-9a3b-c92b4781e95e",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": true,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "lee-scratch-perry|rhythm-shower|1973",
+    "title": "Rhythm Shower",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1973,
+    "rgid": "e4faa477-3432-4ce0-b6d0-4481a93cf341",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "king-tubby|shalom-dub|1975",
+    "title": "Shalom Dub",
+    "artist": "King Tubby",
+    "year": 1975,
+    "rgid": "11038854-aad0-3053-8d46-79783efac4ec",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "augustus-pablo|thriller|1975",
+    "title": "Thriller",
+    "artist": "Augustus Pablo",
+    "year": 1975,
+    "rgid": "ac52cdf1-81a9-405f-974b-987fea6d3995",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Reggae",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "scientist|scientist-vs-prince-jammy-big-showdown-at-king-tubbys|1980",
+    "title": "Scientist vs. Prince Jammy: Big Showdown at King Tubby's",
+    "artist": "Scientist",
+    "year": 1980,
+    "rgid": "c45a283f-2ccd-357b-9b48-796cc741767e",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "bob-marley-the-wailers|natty-dread|1974",
+    "title": "Natty Dread",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1974,
+    "rgid": "e776533c-4132-3b63-bfaa-94fe901951b5",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "burning-spear|garvey-s-ghost|1976",
+    "title": "Garvey’s Ghost",
+    "artist": "Burning Spear",
+    "year": 1976,
+    "rgid": "cd4f4111-1e48-427b-b967-376c04bd5729",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": true,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "culture|harder-than-the-rest|1978",
+    "title": "Harder Than the Rest",
+    "artist": "Culture",
+    "year": 1978,
+    "rgid": "1b22fa8c-5faf-378a-b8f1-39b88973d448",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "black-uhuru|red|1981",
+    "title": "Red",
+    "artist": "Black Uhuru",
+    "year": 1981,
+    "rgid": "8b23e15c-c1bf-38c6-94d8-0208da2a6519",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "lee-scratch-perry|kung-fu-meets-the-dragon|1975",
+    "title": "Kung Fu Meets the Dragon",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1975,
+    "rgid": "26be840f-e245-3aeb-a98a-a9dabc5062b5",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "king-tubby|the-roots-of-dub|1975",
+    "title": "The Roots of Dub",
+    "artist": "King Tubby",
+    "year": 1975,
+    "rgid": "807ce802-0266-32f2-b978-b3ad76fdd903",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "augustus-pablo|king-tubbys-meets-rockers-uptown|1976",
+    "title": "King Tubbys Meets Rockers Uptown",
+    "artist": "Augustus Pablo",
+    "year": 1976,
+    "rgid": "8426fa46-01c5-3343-97f5-0551822542ed",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "scientist|the-best-dub-album-in-the-world-introducing-scientist|1980",
+    "title": "The Best Dub Album in the World (Introducing Scientist)",
+    "artist": "Scientist",
+    "year": 1980,
+    "rgid": "e0afea16-3425-3881-b58c-150122d4faec",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "bob-marley-the-wailers|rastaman-vibration|1976",
+    "title": "Rastaman Vibration",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1976,
+    "rgid": "9e64450d-608d-3d85-b881-9b1de24f9195",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "burning-spear|man-in-the-hills|1976",
+    "title": "Man in the Hills",
+    "artist": "Burning Spear",
+    "year": 1976,
+    "rgid": "8ceca091-680b-3be5-a50a-a15f52357000",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "culture|cumbolo|1979",
+    "title": "Cumbolo",
+    "artist": "Culture",
+    "year": 1979,
+    "rgid": "8f778ea5-f82f-334a-ab99-b9dad17930f2",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "black-uhuru|chill-out|1982",
+    "title": "Chill Out",
+    "artist": "Black Uhuru",
+    "year": 1982,
+    "rgid": "ae356d35-0a1e-3aee-a451-b36ad9df488e",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": true,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "lee-scratch-perry|musical-bones|1975",
+    "title": "Musical Bones",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1975,
+    "rgid": "05e5ed4a-9610-3ea2-8744-774a7af7f1f3",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "instrumental",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "instrumental",
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "king-tubby|dub-basket-chapter-ii-a-king-tubbys-mix|1976",
+    "title": "Dub Basket Chapter II - A King Tubby's Mix",
+    "artist": "King Tubby",
+    "year": 1976,
+    "rgid": "f7e0c530-3680-4fe2-9e25-70070b455a10",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [],
+      "unmappedRawLabels": [
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": false,
+      "artistFallbackOnly": true,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "augustus-pablo|africa-must-be-free-by-1983-dub|1978",
+    "title": "Africa Must Be Free… by 1983 Dub",
+    "artist": "Augustus Pablo",
+    "year": 1978,
+    "rgid": "d5bfbdd8-31cc-47d7-a23b-b722f8810c60",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "scientist|dub-landing|1981",
+    "title": "Dub Landing",
+    "artist": "Scientist",
+    "year": 1981,
+    "rgid": "aaafe637-de91-3871-9d82-0f5264ba4040",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "bob-marley-the-wailers|exodus|1977",
+    "title": "Exodus",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1977,
+    "rgid": "c5650313-60f3-34d3-92e4-300545133792",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "burning-spear|dry-heavy|1977",
+    "title": "Dry & Heavy",
+    "artist": "Burning Spear",
+    "year": 1977,
+    "rgid": "f7be1d15-40e3-3077-8287-997e44179707",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "culture|international-herb|1979",
+    "title": "International Herb",
+    "artist": "Culture",
+    "year": 1979,
+    "rgid": "466fa913-a4fe-31b4-8046-eab670493070",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "black-uhuru|anthem|1983",
+    "title": "Anthem",
+    "artist": "Black Uhuru",
+    "year": 1983,
+    "rgid": "ebbd1c8f-a525-3b13-beea-12282e4934a4",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "lee-scratch-perry|revolution-dub|1975",
+    "title": "Revolution Dub",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1975,
+    "rgid": "3fd87a29-6f03-31f0-90f0-28712608577c",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "king-tubby|upset-the-upsetters|1976",
+    "title": "Upset the Upsetters",
+    "artist": "King Tubby",
+    "year": 1976,
+    "rgid": "43568af5-9957-4b14-b20c-a8421e9f37c3",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [],
+      "unmappedRawLabels": [
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": false,
+      "artistFallbackOnly": true,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "augustus-pablo|rockers-all-stars-chanting-dub-with-the-help-of-the-father|1978",
+    "title": "Rockers All Stars – Chanting Dub With The Help Of The Father",
+    "artist": "Augustus Pablo",
+    "year": 1978,
+    "rgid": "b84388e6-a89d-459a-9a4d-4f18335839e1",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": false,
+      "artistFallbackOnly": true,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  },
+  {
+    "id": "scientist|first-second-and-third-generation-of-dub|1981",
+    "title": "First, Second and Third Generation of Dub",
+    "artist": "Scientist",
+    "year": 1981,
+    "rgid": "897cdc31-d176-454f-ae43-975f5de2a29a",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "bob-marley-the-wailers|kaya|1978",
+    "title": "Kaya",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1978,
+    "rgid": "da0fbebe-0cef-344e-a0de-c9412ae0eb1a",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Reggae",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "psychedelic",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "psychedelic",
+        "reggae",
+        "Reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "burning-spear|social-living|1978",
+    "title": "Social Living",
+    "artist": "Burning Spear",
+    "year": 1978,
+    "rgid": "c21b7117-1837-3c0c-9924-3248119dcdd6",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "culture|more-culture|1981",
+    "title": "More Culture",
+    "artist": "Culture",
+    "year": 1981,
+    "rgid": "2a03e204-7e27-35fb-9252-650484a781b1",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "black-uhuru|the-dub-factor|1983",
+    "title": "The Dub Factor",
+    "artist": "Black Uhuru",
+    "year": 1983,
+    "rgid": "7b0ab202-0c4e-3c86-b0ed-44f5889c0932",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "lee-scratch-perry|roast-fish-collie-weed-corn-bread|1978",
+    "title": "Roast Fish Collie Weed & Corn Bread",
+    "artist": "Lee “Scratch” Perry",
+    "year": 1978,
+    "rgid": "3c0a1d4a-dcfb-36a4-9159-19c5a549445c",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "rock",
+          "rocksteady",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "rock",
+        "rocksteady",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "king-tubby|in-dub-conference-volume-3|1978",
+    "title": "In Dub Conference, Volume 3",
+    "artist": "King Tubby",
+    "year": 1978,
+    "rgid": "11e1e135-60be-47ce-91b3-8c532dec9c33",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "dub"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "augustus-pablo|original-rockers|1979",
+    "title": "Original Rockers",
+    "artist": "Augustus Pablo",
+    "year": 1979,
+    "rgid": "757ebfe6-53d8-39c2-adfd-56a9ebf38214",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "deejay",
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "deejay",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "scientist|in-dub|1981",
+    "title": "In Dub",
+    "artist": "Scientist",
+    "year": 1981,
+    "rgid": "edf8e1b3-f4f7-4ce3-ad88-df0c9008a678",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [],
+        "artistGenres": [
+          "dub",
+          "dubstep",
+          "reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub"
+      ],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "dub"
+      ],
+      "candidateTags": [
+        "dub"
+      ],
+      "albumLevelCandidateTags": [
+        "dub"
+      ],
+      "unmappedRawLabels": [
+        "dubstep",
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only Discogs provided usable album-level pilot evidence."
+  },
+  {
+    "id": "bob-marley-the-wailers|survival|1979",
+    "title": "Survival",
+    "artist": "Bob Marley & The Wailers",
+    "year": 1979,
+    "rgid": "549f63a0-10ba-3350-92b6-6b176606aeaa",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae",
+          "ska"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "ska"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Discogs and MusicBrainz release-group agree on the pilot tag."
+  },
+  {
+    "id": "burning-spear|living-dub-volume-1|1979",
+    "title": "Living Dub, Volume 1",
+    "artist": "Burning Spear",
+    "year": 1979,
+    "rgid": "9d14d8bb-bae3-3998-aba2-59015d5aee8a",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae"
+        ],
+        "artistGenres": [
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [],
+      "musicbrainzArtist": [
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [],
+      "unmappedRawLabels": [
+        "reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": false,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": false,
+      "artistFallbackOnly": true,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only artist-level fallback produced a pilot tag; not album-truth."
+  },
+  {
+    "id": "culture|lion-rock|1982",
+    "title": "Lion Rock",
+    "artist": "Culture",
+    "year": 1982,
+    "rgid": "03e56b2c-3d1e-3129-a359-efa25664aef5",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": []
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [],
+      "musicbrainzReleaseGroup": [
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae"
+      ]
+    },
+    "flags": {
+      "discogsUsable": false,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": false,
+      "albumSourcesAgree": false,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": false
+    },
+    "confidenceNote": "Only MusicBrainz release-group provided usable album-level pilot evidence."
+  },
+  {
+    "id": "black-uhuru|brutal|1986",
+    "title": "Brutal",
+    "artist": "Black Uhuru",
+    "year": 1986,
+    "rgid": "253cd473-024a-32ed-a4a9-b75d04cc5561",
+    "canonicalGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "raw": {
+      "discogs": {
+        "genre": [
+          "Reggae"
+        ],
+        "style": [
+          "Dub",
+          "Roots Reggae"
+        ]
+      },
+      "musicbrainz": {
+        "releaseGroupGenres": [
+          "dub",
+          "reggae",
+          "roots reggae"
+        ],
+        "artistGenres": [
+          "dub",
+          "reggae",
+          "roots reggae",
+          "soul"
+        ]
+      }
+    },
+    "normalized": {
+      "discogs": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzReleaseGroup": [
+        "dub",
+        "roots reggae"
+      ],
+      "musicbrainzArtist": [
+        "dub",
+        "roots reggae"
+      ],
+      "candidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "albumLevelCandidateTags": [
+        "dub",
+        "roots reggae"
+      ],
+      "unmappedRawLabels": [
+        "reggae",
+        "Reggae",
+        "soul"
+      ]
+    },
+    "flags": {
+      "discogsUsable": true,
+      "mbReleaseGroupUsable": true,
+      "bothUsable": true,
+      "albumSourcesAgree": true,
+      "conflictBetweenAlbumSources": false,
+      "albumLevelUsable": true,
+      "artistFallbackOnly": false,
+      "noUsableSignal": false,
+      "multiTagged": true
+    },
+    "confidenceNote": "Multiple pilot subgenres matched for the album."
+  }
+]

@@ -1,0 +1,195 @@
+{
+  "generatedAt": "2026-03-18T18:36:32.877Z",
+  "scope": {
+    "umbrellaGenre": "reggae",
+    "pilotSubgenres": [
+      "roots reggae",
+      "dub"
+    ],
+    "targetAlbums": 60,
+    "sourcePrecedence": [
+      "discogs.style",
+      "musicbrainz.release_group.genres",
+      "musicbrainz.artist.genres"
+    ]
+  },
+  "totals": {
+    "artists": 8,
+    "albums": 60
+  },
+  "coverage": {
+    "discogsUsable": 39,
+    "mbReleaseGroupUsable": 44,
+    "bothUsable": 28,
+    "albumSourceAgreement": 25,
+    "albumSourceConflict": 3,
+    "artistFallbackOnly": 5,
+    "unmapped": 0,
+    "albumLevelUsable": 55,
+    "multiTagged": 14
+  },
+  "topUnmappedRawLabels": [
+    {
+      "label": "reggae",
+      "count": 60
+    },
+    {
+      "label": "Reggae",
+      "count": 41
+    },
+    {
+      "label": "ska",
+      "count": 15
+    },
+    {
+      "label": "soul",
+      "count": 8
+    },
+    {
+      "label": "deejay",
+      "count": 7
+    },
+    {
+      "label": "dubstep",
+      "count": 7
+    },
+    {
+      "label": "rock",
+      "count": 7
+    },
+    {
+      "label": "rocksteady",
+      "count": 7
+    },
+    {
+      "label": "instrumental",
+      "count": 1
+    },
+    {
+      "label": "psychedelic",
+      "count": 1
+    }
+  ],
+  "manualReview": [
+    {
+      "album": "Lee “Scratch” Perry — Africa's Blood",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Black Uhuru — Showcase / Guess Who's Coming to Dinner / Black Uhuru",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Lee “Scratch” Perry — Cloak & Dagger",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Augustus Pablo — This Is Augustus Pablo",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Black Uhuru — Sinsemilla",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Burning Spear — Garvey’s Ghost",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Black Uhuru — Red",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Augustus Pablo — King Tubbys Meets Rockers Uptown",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Black Uhuru — Chill Out",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "King Tubby — Dub Basket Chapter II - A King Tubby's Mix",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Black Uhuru — Anthem",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "King Tubby — Upset the Upsetters",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Augustus Pablo — Rockers All Stars – Chanting Dub With The Help Of The Father",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    },
+    {
+      "album": "Burning Spear — Living Dub, Volume 1",
+      "normalized": [
+        "roots reggae"
+      ],
+      "reason": "Only artist-level fallback produced a pilot tag; not album-truth."
+    },
+    {
+      "album": "Black Uhuru — Brutal",
+      "normalized": [
+        "dub",
+        "roots reggae"
+      ],
+      "reason": "Multiple pilot subgenres matched for the album."
+    }
+  ],
+  "recommendation": "Proceed with source-backed album subgenre tagging"
+}

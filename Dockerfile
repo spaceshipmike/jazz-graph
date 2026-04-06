@@ -1,5 +1,7 @@
 FROM node:22-alpine AS build
 WORKDIR /app
+ARG VITE_SPOTIFY_CLIENT_ID=""
+ENV VITE_SPOTIFY_CLIENT_ID=$VITE_SPOTIFY_CLIENT_ID
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
 COPY . .

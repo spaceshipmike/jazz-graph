@@ -320,9 +320,9 @@ Semantic mining of album and song titles — 15,000+ titles analyzed for recurri
 
 **Sub-views:**
 - **Geography** (`/words` default) — Place names extracted from titles, displayed as a circle-pack cartogram grouped by region. Circles sized by frequency. Click to see matching albums. Includes venue-reference filtering. Reveals jazz's geographic imagination — where the music dreams of.
-- **Mood** (`/words/mood`) — Radial wheel visualization of emotional themes in album and track titles. 8 emotion categories (joy, love, melancholy, longing, peace, freedom, night, fire) arranged as spokes radiating from center, with keyword nodes along each spoke sized by frequency. Click any category or keyword to drill down into matching albums/tracks. Secondary view: "Mood by Decade" heatmap showing how jazz's emotional vocabulary shifted across eras — stacked area or heat grid with decade columns and mood rows. Title-based analysis using keyword dictionaries.
+- **Mood** (`/words/mood`) — Decade-grouped bubble chart of emotional themes in album and track titles. 8 emotion categories (joy, love, melancholy, longing, peace, freedom, night, fire) with keyword bubbles sized by frequency, grouped by decade to reveal how jazz's emotional vocabulary shifted across eras. Click any keyword to drill down into matching albums/tracks. Title-based analysis using keyword dictionaries.
 - **Vocabulary** (`/words/vocabulary`) — Frequency of musical form words (blues, bossa, waltz, swing, ballad, groove) as a treemap or radial layout. Adjacent section for jazz slang (cookin', blowin', groovin', etc.) if data density supports it.
-- **Imagery** (`/words/imagery`) — Time-of-day, seasons, weather, celestial, and nature references extracted from titles. Grouped horizontal bar chart by category. When does jazz happen in its own imagination?
+- **Imagery** (`/words/imagery`) — Time-of-day, seasons, weather, celestial, and nature references extracted from titles. Three visualization panels: a **clock face** (24-hour dial showing when jazz happens in its imagination), a **seasonal arc** (four-wedge ring with weather keyword bubbles), and a **circle pack** (hierarchical bubbles for celestial and nature references). Each panel is ~500-700px, stacked vertically. When does jazz happen in its own imagination?
 
 ### 3.8 Album Detail (`/album/:slug`)
 
@@ -408,7 +408,7 @@ Client-side routing with nested paths:
 
 **Sub-nav bar:** Secondary row of smaller pills below primary nav, showing available panels for the active category. Active panel indicated. Only visible on category pages (hidden on detail pages and Color home).
 
-**Detail pages:** Sub-nav hidden. Primary nav remains visible. Title remains as home link. "← Back" button for navigation context.
+**Detail pages:** Both primary nav pills and sub-nav hidden. Title remains as home link. "← Back" button for navigation context. The minimal chrome keeps focus on the content.
 
 **About page** (`/about`): Accessible via "?" icon in the nav bar. Describes the project, data sources, and credits.
 

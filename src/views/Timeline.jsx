@@ -6,14 +6,18 @@ import { SUBGENRE_LIST } from "../subgenres";
 import SubgenreIcon from "../components/SubgenreIcon";
 import FilterBar from "../components/FilterBar";
 import StatCard from "../components/StatCard";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 export default function Timeline() {
   const { albums } = useData();
+  const { isLoggedIn } = useSpotify();
   const [searchParams, setSearchParams] = useSearchParams();
   const targetYear = searchParams.get("year");
   const familyFilter = searchParams.get("family") || null;
   const labelFilter = searchParams.get("label") || null;
   const artistFilter = searchParams.get("artist") || null;
+  const subgenreFilter = searchParams.get("subgenres") ? searchParams.get("subgenres").split(",") : [];
   const yearRefs = useRef({});
 
   const setFamilyFilter = useCallback((v) => {
@@ -24,6 +28,9 @@ export default function Timeline() {
   }, [setSearchParams]);
   const setArtistFilter = useCallback((v) => {
     setSearchParams((p) => { v ? p.set("artist", v) : p.delete("artist"); return p; }, { replace: true });
+  }, [setSearchParams]);
+  const setSubgenreFilter = useCallback((v) => {
+    setSearchParams((p) => { v && v.length > 0 ? p.set("subgenres", v.join(",")) : p.delete("subgenres"); return p; }, { replace: true });
   }, [setSearchParams]);
 
   const filtered = useMemo(() => {
@@ -37,8 +44,11 @@ export default function Timeline() {
     if (artistFilter) {
       r = r.filter((a) => a.lineup.some((m) => m.name === artistFilter));
     }
+    if (subgenreFilter.length > 0) {
+      r = r.filter((a) => a.subgenres?.some((sg) => subgenreFilter.includes(sg)));
+    }
     return r;
-  }, [albums, familyFilter, labelFilter, artistFilter]);
+  }, [albums, familyFilter, labelFilter, artistFilter, subgenreFilter]);
 
   const byYear = useMemo(() => {
     const map = new Map();
@@ -141,6 +151,8 @@ export default function Timeline() {
         setLabel={setLabelFilter}
         artist={artistFilter}
         setArtist={setArtistFilter}
+        subgenres={subgenreFilter}
+        setSubgenres={setSubgenreFilter}
       />
 
       {filtered.length !== albums.length && (
@@ -204,9 +216,8 @@ export default function Timeline() {
             )}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {items.map((album) => (
-                <Link
+                <div
                   key={album.id}
-                  to={`/album/${album.id}`}
                   title={`${album.title} — ${album.artist}`}
                   style={{
                     width: 88, flexShrink: 0, textDecoration: "none",
@@ -217,13 +228,25 @@ export default function Timeline() {
                 >
                   <div style={{ aspectRatio: "1", background: "var(--surface)", overflow: "hidden" }}>
                     {album.coverPath ? (
-                      <img
-                        src={`/data/${album.coverPath}`}
-                        alt={album.title}
-                        loading="lazy"
-                        className="cover-img"
-                        onLoad={(e) => e.target.classList.add("loaded")}
-                      />
+                      isLoggedIn ? (
+                        <PlayableAlbumArt album={album}>
+                          <img
+                            src={`/data/${album.coverPath}`}
+                            alt={album.title}
+                            loading="lazy"
+                            className="cover-img"
+                            onLoad={(e) => e.target.classList.add("loaded")}
+                          />
+                        </PlayableAlbumArt>
+                      ) : (
+                        <img
+                          src={`/data/${album.coverPath}`}
+                          alt={album.title}
+                          loading="lazy"
+                          className="cover-img"
+                          onLoad={(e) => e.target.classList.add("loaded")}
+                        />
+                      )
                     ) : (
                       <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <span className="mono" style={{ color: "var(--fg-ghost)", fontSize: 7 }}>No cover</span>
@@ -231,17 +254,18 @@ export default function Timeline() {
                     )}
                   </div>
                   <div style={{ padding: "4px 5px" }}>
-                    <div style={{
+                    <Link to={`/album/${album.id}`} style={{
+                      display: "block",
                       fontSize: 8, fontWeight: 600, lineHeight: 1.2,
                       whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
                     }}>
                       {album.title}
-                    </div>
+                    </Link>
                     <div className="mono" style={{ fontSize: 7, color: labelColor(album.label) }}>
                       {album.artist}
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </section>

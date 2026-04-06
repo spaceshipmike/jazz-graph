@@ -1,0 +1,20 @@
+{
+  "updatedAlbums": [],
+  "unmatchedAlbums": [
+    {
+      "id": "fats-navarro-modern-jazz-trumpets",
+      "title": "Modern Jazz Trumpets",
+      "artist": "Fats Navarro",
+      "year": 1951,
+      "reason": "request-failed",
+      "error": "Spotify rate limited with retry-after 45517s for /search?q=album%3AModern+Jazz+Trumpets+artist%3AFats+Navarro&type=album&limit=5"
+    }
+  ],
+  "lowConfidenceMatches": [],
+  "summary": {
+    "scanned": 1,
+    "matchedAlbums": 0,
+    "unmatchedAlbums": 1,
+    "lowConfidenceMatches": 0
+  }
+}

@@ -1,17 +1,21 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { familyColor, FAMILIES, LABELS } from "../data";
 import { useData } from "../App";
+import { SUBGENRE_LIST } from "../subgenres";
+import SubgenreIcon from "./SubgenreIcon";
 
 const FAMILY_LIST = Object.keys(FAMILIES);
 
 /**
- * Shared filter bar: instrument family pills, top label pills, artist autocomplete.
+ * Shared filter bar: instrument family pills, top label pills, subgenre shape pills, artist autocomplete.
  * All state is driven via URL search params passed in as props.
+ * subgenres is an array of active subgenre names (multi-select, union filter).
  */
-export default function FilterBar({ family, setFamily, label, setLabel, artist, setArtist }) {
+export default function FilterBar({ family, setFamily, label, setLabel, artist, setArtist, subgenres, setSubgenres }) {
   const { albums, index } = useData();
   const [artistQuery, setArtistQuery] = useState(artist || "");
   const [showAllLabels, setShowAllLabels] = useState(false);
+  const [showAllSubgenres, setShowAllSubgenres] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef(null);
   const suggestRef = useRef(null);
@@ -133,6 +137,69 @@ export default function FilterBar({ family, setFamily, label, setLabel, artist, 
 
       {/* Separator */}
       <div style={{ width: 1, height: 18, background: "var(--border)", margin: "0 4px" }} />
+
+      {/* Subgenre shape pills (multi-select, union) */}
+      {setSubgenres && (
+        <>
+          {(showAllSubgenres ? SUBGENRE_LIST : SUBGENRE_LIST.slice(0, 6)).map((sg) => {
+            const active = subgenres?.includes(sg);
+            return (
+              <button
+                key={sg}
+                className="pill"
+                onClick={() => {
+                  if (active) {
+                    setSubgenres(subgenres.filter((s) => s !== sg));
+                  } else {
+                    setSubgenres([...(subgenres || []), sg]);
+                  }
+                }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                  background: active ? "var(--fg-dim)" + "22" : "var(--surface)",
+                  border: `1px solid ${active ? "var(--fg-dim)" : "var(--border)"}`,
+                  color: active ? "var(--fg)" : "var(--fg-muted)",
+                  fontWeight: active ? 600 : 400,
+                }}
+              >
+                <SubgenreIcon name={sg} size={14} />
+                {sg}
+              </button>
+            );
+          })}
+          {!showAllSubgenres && SUBGENRE_LIST.length > 6 && (
+            <button
+              className="pill"
+              onClick={() => setShowAllSubgenres(true)}
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                color: "var(--fg-ghost)",
+              }}
+            >
+              +{SUBGENRE_LIST.length - 6} more
+            </button>
+          )}
+          {showAllSubgenres && SUBGENRE_LIST.length > 6 && (
+            <button
+              className="pill"
+              onClick={() => setShowAllSubgenres(false)}
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                color: "var(--fg-ghost)",
+              }}
+            >
+              less
+            </button>
+          )}
+
+          {/* Separator */}
+          <div style={{ width: 1, height: 18, background: "var(--border)", margin: "0 4px" }} />
+        </>
+      )}
 
       {/* Artist search */}
       <div style={{ position: "relative" }}>

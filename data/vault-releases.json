@@ -1,0 +1,298 @@
+[
+  {
+    "id": "lee-morgan-the-procrastinator",
+    "title": "The Procrastinator",
+    "artist": "Lee Morgan",
+    "currentYear": 1978,
+    "recordedYear": 1967,
+    "source": "Wikipedia/LondonJazzCollector: recorded July 14, 1967 at Van Gelder Studio. Released 1978."
+  },
+  {
+    "id": "lee-morgan-sonic-boom",
+    "title": "Sonic Boom",
+    "artist": "Lee Morgan",
+    "currentYear": 1979,
+    "recordedYear": 1967,
+    "source": "Wikipedia/Discogs: recorded April 14 and 28, 1967 at Van Gelder Studio. Released 1979."
+  },
+  {
+    "id": "lee-morgan-tom-cat",
+    "title": "Tom Cat",
+    "artist": "Lee Morgan",
+    "currentYear": 1980,
+    "recordedYear": 1964,
+    "source": "Wikipedia/AllMusic: recorded August 1964 at Van Gelder Studio. Released 1980."
+  },
+  {
+    "id": "lee-morgan-taru",
+    "title": "Taru",
+    "artist": "Lee Morgan",
+    "currentYear": 1980,
+    "recordedYear": 1968,
+    "source": "Wikipedia/LondonJazzCollector: recorded February 15, 1968 at Van Gelder Studio. Released 1980."
+  },
+  {
+    "id": "lee-morgan-see-autumn",
+    "title": "See Autumn",
+    "artist": "Lee Morgan",
+    "currentYear": 1980,
+    "recordedYear": 1970,
+    "source": "AllAboutJazz/Discogs: recorded June 26, 1970 live at Both/And club, San Francisco. Released 1980."
+  },
+  {
+    "id": "grant-green-nigeria",
+    "title": "Nigeria",
+    "artist": "Grant Green",
+    "currentYear": 1980,
+    "recordedYear": 1962,
+    "source": "Blue Note/uDiscover: recorded January 13, 1962 at Van Gelder Studio. Released 1980."
+  },
+  {
+    "id": "grant-green-gooden-s-corner",
+    "title": "Gooden's Corner",
+    "artist": "Grant Green",
+    "currentYear": 1981,
+    "recordedYear": 1961,
+    "source": "Wikipedia/JazzWax: recorded December 23, 1961. Released 1980 (Japan) / 1981."
+  },
+  {
+    "id": "grant-green-remembering",
+    "title": "Remembering",
+    "artist": "Grant Green",
+    "currentYear": 1981,
+    "recordedYear": 1961,
+    "source": "Discogs/AllMusic: recorded August 28 and October 27, 1961 at Van Gelder Studio. Released 1981."
+  },
+  {
+    "id": "grant-green-blues-for-lou",
+    "title": "Blues For Lou",
+    "artist": "Grant Green",
+    "currentYear": 1999,
+    "recordedYear": 1963,
+    "source": "Wikipedia/AllMusic: recorded February 20 and June 7, 1963 at Van Gelder Studio. Released 1999."
+  },
+  {
+    "id": "grant-green-first-session",
+    "title": "First Session",
+    "artist": "Grant Green",
+    "currentYear": 2001,
+    "recordedYear": 1960,
+    "source": "Wikipedia/AllMusic: recorded November 26, 1960 and October 27, 1961 at Van Gelder Studio. Released 2001."
+  },
+  {
+    "id": "hank-mobley-curtain-call",
+    "title": "Curtain Call",
+    "artist": "Hank Mobley",
+    "currentYear": 1996,
+    "recordedYear": 1957,
+    "source": "Wikipedia/LondonJazzCollector: recorded August 18, 1957. First released 1984 (Japan), dataset year 1996."
+  },
+  {
+    "id": "john-coltrane-selflessness-featuring-my-favorite-things",
+    "title": "Selflessness, Featuring My Favorite Things",
+    "artist": "John Coltrane",
+    "currentYear": 1968,
+    "recordedYear": 1963,
+    "source": "Wikipedia: tracks from 1963 Newport Jazz Festival and October 1965 studio session. Released October 1969 (dataset year 1968 also wrong)."
+  },
+  {
+    "id": "john-coltrane-transition",
+    "title": "Transition",
+    "artist": "John Coltrane",
+    "currentYear": 1970,
+    "recordedYear": 1965,
+    "source": "Wikipedia: recorded May 26 and June 10, 1965 at Van Gelder Studio. Released 1970."
+  },
+  {
+    "id": "john-coltrane-sun-ship",
+    "title": "Sun Ship",
+    "artist": "John Coltrane",
+    "currentYear": 1971,
+    "recordedYear": 1965,
+    "source": "Wikipedia/AllMusic: recorded August 26, 1965 at RCA Victor Studios, NYC. Released 1971."
+  },
+  {
+    "id": "john-coltrane-infinity",
+    "title": "Infinity",
+    "artist": "John Coltrane",
+    "currentYear": 1972,
+    "recordedYear": 1965,
+    "source": "Wikipedia: original Coltrane tracks recorded 1965-1966, with Alice Coltrane overdubs added 1972. Released 1972."
+  },
+  {
+    "id": "john-coltrane-interstellar-space",
+    "title": "Interstellar Space",
+    "artist": "John Coltrane",
+    "currentYear": 1974,
+    "recordedYear": 1967,
+    "source": "Wikipedia: recorded February 22, 1967 at Van Gelder Studio. Released September 1974."
+  },
+  {
+    "id": "john-coltrane-first-meditations-for-quartet",
+    "title": "First Meditations (for quartet)",
+    "artist": "John Coltrane",
+    "currentYear": 1977,
+    "recordedYear": 1965,
+    "source": "Wikipedia: recorded September 2, 1965 at Van Gelder Studio. Released 1977."
+  },
+  {
+    "id": "john-coltrane-impressions",
+    "title": "Impressions",
+    "artist": "John Coltrane",
+    "currentYear": 1978,
+    "recordedYear": 1961,
+    "source": "Wikipedia: title track recorded November 1961 at Village Vanguard. Originally released July 1963 -- dataset year 1978 is a reissue date, not original release."
+  },
+  {
+    "id": "john-coltrane-stellar-regions",
+    "title": "Stellar Regions",
+    "artist": "John Coltrane",
+    "currentYear": 1995,
+    "recordedYear": 1967,
+    "source": "Wikipedia: recorded February 15, 1967 at Van Gelder Studio. Tapes discovered 1994 by Alice Coltrane. Released 1995."
+  },
+  {
+    "id": "eric-dolphy-last-date",
+    "title": "Last Date",
+    "artist": "Eric Dolphy",
+    "currentYear": 1965,
+    "recordedYear": 1964,
+    "source": "Wikipedia: recorded June 2, 1964 in Hilversum, Netherlands. Released early 1965. Minor 1-year gap."
+  },
+  {
+    "id": "eric-dolphy-here-and-there",
+    "title": "Here and There",
+    "artist": "Eric Dolphy",
+    "currentYear": 1966,
+    "recordedYear": 1960,
+    "source": "Wikipedia: tracks recorded April 1960, July 1961, September 1961. Released 1966 on Prestige."
+  },
+  {
+    "id": "eric-dolphy-iron-man",
+    "title": "Iron Man",
+    "artist": "Eric Dolphy",
+    "currentYear": 1968,
+    "recordedYear": 1963,
+    "source": "Wikipedia: recorded July 1 and 3, 1963 at Music Maker's Studios, NYC. Released 1968."
+  },
+  {
+    "id": "eric-dolphy-stockholm-sessions",
+    "title": "Stockholm Sessions",
+    "artist": "Eric Dolphy",
+    "currentYear": 1981,
+    "recordedYear": 1961,
+    "source": "Wikipedia/Discogs: recorded September and November 1961 at Swedish Broadcast station, Stockholm. Released 1981."
+  },
+  {
+    "id": "eric-dolphy-other-aspects",
+    "title": "Other Aspects",
+    "artist": "Eric Dolphy",
+    "currentYear": 1987,
+    "recordedYear": 1960,
+    "source": "Wikipedia: tracks recorded July 1960, November 1960, and March 1964. Released 1987 on Blue Note."
+  },
+  {
+    "id": "eric-dolphy-candid-dolphy",
+    "title": "Candid Dolphy",
+    "artist": "Eric Dolphy",
+    "currentYear": 1989,
+    "recordedYear": 1960,
+    "source": "Discogs/AllMusic: tracks recorded October-November 1960 at Nola Penthouse Studios, NYC. Released 1989."
+  },
+  {
+    "id": "albert-ayler-swing-low-sweet-spiritual",
+    "title": "Swing Low Sweet Spiritual",
+    "artist": "Albert Ayler",
+    "currentYear": 1971,
+    "recordedYear": 1964,
+    "source": "Wikipedia: recorded February 24, 1964 at Atlantic Studios, NYC. Released 1971."
+  },
+  {
+    "id": "bill-evans-you-must-believe-in-spring",
+    "title": "You Must Believe in Spring",
+    "artist": "Bill Evans",
+    "currentYear": 1981,
+    "recordedYear": 1977,
+    "source": "Wikipedia: recorded August 23-25, 1977 at Capitol Studios, Hollywood. Released February 1981."
+  },
+  {
+    "id": "bill-evans-unknown-session",
+    "title": "Unknown Session",
+    "artist": "Bill Evans",
+    "currentYear": 1983,
+    "recordedYear": 1962,
+    "source": "Discogs/MusicBrainz: recorded August 21-22, 1962 at Nola Penthouse Sound Studios, NYC. Released 1983."
+  },
+  {
+    "id": "bill-evans-more-from-the-vanguard",
+    "title": "More From The Vanguard",
+    "artist": "Bill Evans",
+    "currentYear": 1984,
+    "recordedYear": 1961,
+    "source": "Discogs/AllMusic: recorded live at Village Vanguard June 25, 1961. Released 1984 on Milestone."
+  },
+  {
+    "id": "bill-evans-eloquence",
+    "title": "Eloquence",
+    "artist": "Bill Evans",
+    "currentYear": 1982,
+    "recordedYear": 1973,
+    "source": "Wikipedia: compilation of recordings from 1973-1975. Released 1982 on Fantasy."
+  },
+  {
+    "id": "bill-evans-bill-evans-trio-with-symphony-orchestra",
+    "title": "Bill Evans Trio With Symphony Orchestra",
+    "artist": "Bill Evans",
+    "currentYear": 1985,
+    "recordedYear": 1965,
+    "source": "Wikipedia: recorded September-December 1965. Originally released February 1966 -- dataset year 1985 is a reissue date."
+  },
+  {
+    "id": "kenny-dorham-short-story",
+    "title": "Short Story",
+    "artist": "Kenny Dorham",
+    "currentYear": 1979,
+    "recordedYear": 1963,
+    "source": "Discogs/AllMusic: recorded live December 19, 1963 at Montmartre Jazzhus, Copenhagen. Released 1979."
+  },
+  {
+    "id": "kenny-burrell-previously-unreleased-recordings",
+    "title": "Previously Unreleased Recordings",
+    "artist": "Gil Evans Orchestra",
+    "currentYear": 1974,
+    "recordedYear": 1963,
+    "source": "Discogs: recorded September 1963 - July 1964. Released January 1974 on Verve."
+  },
+  {
+    "id": "jim-hall-the-unreleased-sessions",
+    "title": "The Unreleased Sessions",
+    "artist": "Jim Hall",
+    "currentYear": 2004,
+    "recordedYear": 1957,
+    "source": "AllMusic/Discogs: recorded 1956-1959. Released 2004."
+  },
+  {
+    "id": "mahavishnu-orchestra-the-lost-trident-sessions",
+    "title": "The Lost Trident Sessions",
+    "artist": "Mahavishnu Orchestra",
+    "currentYear": 1999,
+    "recordedYear": 1973,
+    "source": "Wikipedia: recorded June 25-29, 1973 at Trident Studios, London. Released September 1999."
+  },
+  {
+    "id": "charlie-parker-nows-the-time",
+    "title": "Now's the Time",
+    "artist": "Charlie Parker",
+    "currentYear": 1957,
+    "recordedYear": 1952,
+    "source": "Wikipedia: recorded December 30, 1952 and 1953. Released 1957 on Verve (posthumous compilation)."
+  },
+  {
+    "id": "charlie-parker-jazz-at-massey-hall",
+    "title": "Jazz at Massey Hall",
+    "artist": "Charlie Parker",
+    "currentYear": 1956,
+    "recordedYear": 1953,
+    "source": "Wikipedia: recorded live May 15, 1953 at Massey Hall, Toronto. Originally released December 1953 -- dataset year 1956 is a reissue date."
+  }
+]

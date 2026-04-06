@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../App";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 export default function Color() {
   const { albums } = useData();
+  const { isLoggedIn, playAlbum } = useSpotify();
 
   const sorted = useMemo(() => {
     const withColor = albums.filter((a) => a.coverPath && a.vibrant);
@@ -137,26 +140,69 @@ export default function Color() {
       }}
     >
       {sorted.map((album) => (
-        <Link
-          key={album.id}
-          to={`/album/${album.id}`}
-          style={{ display: "block", aspectRatio: "1", overflow: "hidden" }}
-        >
-          <img
-            src={`/data/${album.coverPath}`}
-            alt={album.title}
-            loading="lazy"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-              transition: "filter 200ms ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.2)")}
-            onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
-          />
-        </Link>
+        <div key={album.id} style={{ position: "relative", aspectRatio: "1", overflow: "hidden" }}>
+          {isLoggedIn ? (
+            <>
+              <PlayableAlbumArt album={album} showOverlay={false}>
+                <img
+                  src={`/data/${album.coverPath}`}
+                  alt={album.title}
+                  loading="lazy"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                    transition: "filter 200ms ease",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.2)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
+                />
+              </PlayableAlbumArt>
+              <div className="cover-action-rail">
+                <button
+                  type="button"
+                  className="mono cover-action-button"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    playAlbum(album);
+                  }}
+                  aria-label={`Play ${album.title}`}
+                >
+                  Play
+                </button>
+                <Link
+                  to={`/album/${album.id}`}
+                  className="mono cover-action-button cover-action-button-secondary"
+                  aria-label={`View details for ${album.title}`}
+                >
+                  View
+                </Link>
+              </div>
+            </>
+          ) : (
+            <Link
+              to={`/album/${album.id}`}
+              style={{ display: "block", width: "100%", height: "100%" }}
+            >
+              <img
+                src={`/data/${album.coverPath}`}
+                alt={album.title}
+                loading="lazy"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  transition: "filter 200ms ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.filter = "brightness(1.2)")}
+                onMouseLeave={(e) => (e.currentTarget.style.filter = "brightness(1)")}
+              />
+            </Link>
+          )}
+        </div>
       ))}
     </div>
   );

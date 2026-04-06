@@ -7,6 +7,7 @@ export default function About() {
   const labelSet = new Set(albums.map((a) => a.label).filter(Boolean));
   const labelCount = labelSet.size;
   const withCovers = albums.filter((a) => a.coverPath).length;
+  const withSpotify = albums.filter((a) => a.spotifyId || a.spotifyUri).length;
 
   return (
     <div style={{ padding: "var(--space-3xl) var(--space-xl)", maxWidth: 640, margin: "0 auto" }}>
@@ -33,6 +34,14 @@ export default function About() {
         Every album has real cover art, session lineups, and track listings
         sourced from MusicBrainz and Spotify. The design is a love letter to
         Reid Miles' iconic Blue Note Records covers from the 1950s and 60s.
+      </p>
+
+      <p style={{ fontSize: 18, lineHeight: 1.7, color: "var(--fg)", marginBottom: "var(--space-lg)" }}>
+        If you log in with Spotify, you can listen inline to albums the site can
+        resolve in Spotify's catalog. Not everything in the archive is available
+        there, and some lookups depend on Spotify availability and rate limits,
+        but the listening layer is meant to sit quietly on top of the archive,
+        not overwhelm it.
       </p>
 
       <p style={{ fontSize: 18, lineHeight: 1.7, color: "var(--fg)", marginBottom: "var(--space-lg)" }}>
@@ -72,15 +81,18 @@ export default function About() {
           The data pipeline starts with a curated roster of jazz artists, then
           pulls album metadata, session lineups, and track listings from
           MusicBrainz. Cover art comes from Spotify, with the Cover Art Archive
-          as fallback. Missing labels are recovered from Discogs. Dominant colors
-          are extracted from each cover using sharp. The whole pipeline is
-          automated and repeatable.
+          as fallback. Missing labels are recovered from Discogs. Dominant
+          colors are extracted from each cover using sharp. Spotify playback is
+          handled separately in the browser and only kicks in when a listener
+          chooses to connect their account.
         </p>
 
         <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--fg-dim)", marginBottom: "var(--space-lg)" }}>
           The front end is a static React app built with Vite, with all
-          visualizations rendered using D3.js. There's no backend — everything
-          runs in the browser against pre-built JSON and images.
+          visualizations rendered using D3.js. There is no application backend
+          for the core archive — it runs in the browser against pre-built JSON
+          and images — and Spotify auth/playback is layered on top as an
+          optional browser-side feature.
         </p>
 
         <p style={{ fontSize: 16, lineHeight: 1.7, color: "var(--fg-dim)", marginBottom: "var(--space-lg)" }}>
@@ -91,7 +103,7 @@ export default function About() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-sm)", marginBottom: "var(--space-lg)" }}>
           {[
             { name: "MusicBrainz", url: "https://musicbrainz.org", desc: "album metadata, lineups, tracks" },
-            { name: "Spotify", url: "https://developer.spotify.com", desc: "cover art" },
+            { name: "Spotify", url: "https://developer.spotify.com", desc: "cover art + optional playback" },
             { name: "Discogs", url: "https://www.discogs.com", desc: "label fallback" },
             { name: "Cover Art Archive", url: "https://coverartarchive.org", desc: "cover art fallback" },
           ].map(({ name, url, desc }) => (
@@ -206,7 +218,8 @@ export default function About() {
       }}>
         {albums.length.toLocaleString()} albums &middot;{" "}
         {withCovers.toLocaleString()} covers &middot;{" "}
-        {artistCount.toLocaleString()} musicians
+        {artistCount.toLocaleString()} musicians &middot;{" "}
+        {withSpotify.toLocaleString()} pre-linked Spotify albums
       </div>
     </div>
   );

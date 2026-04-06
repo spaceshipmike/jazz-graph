@@ -3,6 +3,8 @@ import { useData } from "../App";
 import { instrumentColor, labelColor, slugify } from "../data";
 import { SubgenreBadge } from "../components/SubgenreIcon";
 import { useMemo } from "react";
+import { PlayableAlbumArt, PlayableTrackTitle } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 function formatDuration(ms) {
   const totalSec = Math.round(ms / 1000);
@@ -14,6 +16,7 @@ function formatDuration(ms) {
 export default function AlbumDetail() {
   const { slug } = useParams();
   const { albums, index } = useData();
+  const { beginLogin, getAlbumUri, isConfigured, isLoggedIn, openSpotify, playAlbum } = useSpotify();
 
   const album = index?.albumsBySlug.get(slug);
 
@@ -52,7 +55,13 @@ export default function AlbumDetail() {
       <div style={{ display: "flex", gap: "var(--space-xl)", marginBottom: "var(--space-2xl)", flexWrap: "wrap" }}>
         <div style={{ width: 280, flexShrink: 0, borderRadius: "var(--radius-md)", overflow: "hidden", background: "var(--surface)" }}>
           {coverSrc ? (
-            <img src={coverSrc} alt={album.title} className="cover-img" onLoad={(e) => e.target.classList.add("loaded")} style={{ aspectRatio: "1" }} />
+            isLoggedIn ? (
+              <PlayableAlbumArt album={album}>
+                <img src={coverSrc} alt={album.title} className="cover-img" onLoad={(e) => e.target.classList.add("loaded")} style={{ aspectRatio: "1" }} />
+              </PlayableAlbumArt>
+            ) : (
+              <img src={coverSrc} alt={album.title} className="cover-img" onLoad={(e) => e.target.classList.add("loaded")} style={{ aspectRatio: "1" }} />
+            )
           ) : (
             <div style={{ width: "100%", aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <span className="mono" style={{ color: "var(--fg-ghost)" }}>No cover</span>
@@ -72,6 +81,49 @@ export default function AlbumDetail() {
           {album.subgenres?.length > 0 && (
             <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: 8 }}>
               {album.subgenres.map((sg) => <SubgenreBadge key={sg} name={sg} />)}
+            </div>
+          )}
+          {isConfigured && (
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 14 }}>
+              {isLoggedIn ? (
+                <>
+                  <button
+                    type="button"
+                    className="mono"
+                    onClick={() => playAlbum(album)}
+                    style={{
+                      fontSize: 10,
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "var(--fg-muted)",
+                      border: "1px solid var(--border-light)",
+                      borderRadius: 999,
+                      padding: "7px 12px",
+                    }}
+                  >
+                    Play Album
+                  </button>
+                  {getAlbumUri(album) && (
+                    <button
+                      type="button"
+                      className="mono"
+                      onClick={() => openSpotify(getAlbumUri(album))}
+                      style={{ fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--fg-ghost)" }}
+                    >
+                      Open in Spotify
+                    </button>
+                  )}
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="mono"
+                  onClick={() => beginLogin(`/album/${album.id}`)}
+                  style={{ fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--fg-muted)" }}
+                >
+                  Listen with Spotify
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -98,7 +150,13 @@ export default function AlbumDetail() {
                 <span className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)", width: 20, textAlign: "right" }}>
                   {t.position}
                 </span>
-                <span style={{ fontSize: 13, color: "var(--fg-dim)" }}>{t.title}</span>
+                <PlayableTrackTitle
+                  album={album}
+                  track={t}
+                  style={{ fontSize: 13, color: "var(--fg-dim)" }}
+                >
+                  {t.title}
+                </PlayableTrackTitle>
               </div>
               {t.lengthMs && (
                 <span className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)" }}>
@@ -151,9 +209,8 @@ export default function AlbumDetail() {
           </h3>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "var(--space-sm)" }}>
             {connected.map(({ album: a, shared }) => (
-              <Link
+              <div
                 key={a.id}
-                to={`/album/${a.id}`}
                 style={{
                   display: "flex",
                   gap: "var(--space-sm)",
@@ -161,17 +218,24 @@ export default function AlbumDetail() {
                   background: "var(--surface)",
                   borderRadius: "var(--radius-md)",
                   border: "1px solid var(--border)",
-                  textDecoration: "none",
                   transition: "var(--ease-default)",
                 }}
               >
                 <div style={{ width: 48, height: 48, borderRadius: "var(--radius-sm)", overflow: "hidden", flexShrink: 0, background: "var(--bg)" }}>
                   {a.coverPath ? (
-                    <img src={`/data/${a.coverPath}`} alt={a.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                    isLoggedIn ? (
+                      <PlayableAlbumArt album={a}>
+                        <img src={`/data/${a.coverPath}`} alt={a.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                      </PlayableAlbumArt>
+                    ) : (
+                      <Link to={`/album/${a.id}`}>
+                        <img src={`/data/${a.coverPath}`} alt={a.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                      </Link>
+                    )
                   ) : null}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{a.title}</div>
+                  <Link to={`/album/${a.id}`} style={{ fontSize: 12, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", display: "block" }}>{a.title}</Link>
                   <div className="mono" style={{ fontSize: 9, color: "var(--fg-muted)" }}>{a.artist} · {a.year}</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 3 }}>
                     {shared.map((m) => (
@@ -185,7 +249,7 @@ export default function AlbumDetail() {
                     ))}
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </section>

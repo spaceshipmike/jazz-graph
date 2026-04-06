@@ -30,35 +30,67 @@ data/                — pipeline output (gitignored images)
 scripts/             — data pipeline scripts
   rebuild-library.mjs     — full rebuild from artist roster (--browse, --resume)
   filter-catalog.mjs      — filter catalog between browse and fetch phases
+  fetch-tracks.mjs        — fetch track listings from MusicBrainz
   fetch-spotify-covers.mjs    — Spotify 640px cover art (primary)
   fetch-covers.mjs            — Cover Art Archive fallback
   fetch-wikipedia-covers.mjs  — Wikipedia/Wikimedia Commons fallback
   spotify-upgrade-covers.mjs  — slow background Spotify upgrader (--batch, resumable)
-  extract-colors.mjs          — dominant color extraction (HSL)
+  extract-colors.mjs          — dominant color extraction (CIELAB + OKLCH)
+  optimize-images.mjs         — JPG/PNG → WebP conversion
   clean-data.mjs           — instrument/label normalization
   fix-dates.mjs            — automated date correction
-  fix-labels.mjs           — label corrections
+  fix-labels.mjs           — label corrections (MusicBrainz lookup)
+  fix-labels-discogs.mjs   — label corrections (Discogs lookup)
   fix-leads.mjs            — leader instrument resolution
   add-artist.mjs           — interactive single-artist addition
   enrich-subgenres.mjs     — subgenre enrichment (Discogs + MusicBrainz, resumable)
+  enrich-lineups-discogs.mjs — lineup enrichment via Discogs
   audit-library.mjs        — post-build quality audit (reissues, dates, lineup, tracks)
 src/                 — application source
   App.jsx            — router, two-level nav, data context
+  main.jsx           — React entry point
   data.js            — instrument/label/family maps, buildIndex()
+  subgenres.js       — 15-subgenre taxonomy with shape definitions
+  titleAnalysis.js   — NLP: place/mood/imagery extraction from titles
   tokens.css         — design tokens + reset
-  components/FilterBar.jsx   — shared filter bar (family pills, label pills, artist autocomplete)
-  components/CategoryPage.jsx — category layout with sub-nav tabs
-  views/Color.jsx              — color mosaic home
-  views/ArtistsCategory.jsx    — Artists: Overview, Network, Connections, Careers
-  views/ArtistsConnections.jsx — Six Degrees of Jazz path finder
-  views/ArtistsCareers.jsx     — career span chart
-  views/InstrumentsCategory.jsx — Instruments: Overview, Eras
-  views/LabelsCategory.jsx      — Labels: Overview, Browse, Flow
-  views/TimeCategory.jsx        — Time: Timeline, Density, Ensembles
-  views/SoundCategory.jsx       — Sound: Durations, By Era, Track Counts
-  views/WordsCategory.jsx       — Words: Geography, Mood, Vocabulary, Imagery
-  views/AlbumDetail.jsx
-  views/ArtistDetail.jsx
+  components/
+    FilterBar.jsx      — shared filter bar (family pills, label pills, artist autocomplete)
+    CategoryPage.jsx   — category layout with sub-nav tabs
+    SubgenreIcon.jsx   — SVG shape renderers for 15 subgenres
+    StatCard.jsx       — stat display card
+    HorizontalBars.jsx — reusable D3 horizontal bar chart
+  views/
+    Color.jsx              — color mosaic home (CIELAB sorting)
+    ArtistsCategory.jsx    — Artists category router
+    ArtistsOverview.jsx    — top musicians bar chart + stats
+    Network.jsx            — force-directed collaboration graph (canvas)
+    ArtistsConnections.jsx — Six Degrees of Jazz path finder
+    ArtistsCareers.jsx     — career span chart
+    InstrumentsCategory.jsx — Instruments category router
+    InstrumentsOverview.jsx — lead instruments + rare instruments
+    Eras.jsx               — instrument family streamgraph
+    LabelsCategory.jsx     — Labels category router
+    LabelsOverview.jsx     — labels bar chart + stats
+    Gallery.jsx            — label-filtered album grid (Browse)
+    Flow.jsx               — label transition Sankey (Flow)
+    TimeCategory.jsx       — Time category router
+    Timeline.jsx           — year-by-year album layout + subgenre markers
+    TimeDensity.jsx        — albums per year bar chart
+    TimeEnsembles.jsx      — ensemble size distribution
+    SoundCategory.jsx      — Sound category router
+    SoundCombos.jsx        — lead-to-sideman Sankey diagram
+    SoundDurations.jsx     — track length distribution
+    SoundByEra.jsx         — instruments by decade heatmap
+    SoundTrackCounts.jsx   — tracks per album distribution
+    WordsCategory.jsx      — Words category router
+    WordsGeography.jsx     — circle pack by region
+    WordsMood.jsx          — decade-grouped mood bubble chart
+    WordsVocabulary.jsx    — musical vocabulary treemap
+    WordsImagery.jsx       — clock face + seasonal arc + circle pack
+    AlbumDetail.jsx        — album page with tracks, lineup, connections
+    ArtistDetail.jsx       — artist page with timeline, discography
+    Search.jsx             — global search (albums, artists, tracks)
+    About.jsx              — project info and credits
 ```
 
 ## Key Decisions

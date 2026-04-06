@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useMemo, createContext, useContext } from "react";
 import { buildIndex } from "./data";
+import { SpotifyProvider, useSpotify } from "./spotify";
+import { NowPlayingFooter, SpotifyAuthControl } from "./components/SpotifyUI";
+import SpotifyDebugPanel from "./components/SpotifyDebugPanel";
+import { ToastProvider } from "./toasts";
 import "./tokens.css";
 
 import Color from "./views/Color";
@@ -14,6 +18,7 @@ import AlbumDetail from "./views/AlbumDetail";
 import ArtistDetail from "./views/ArtistDetail";
 import About from "./views/About";
 import Search from "./views/Search";
+import SpotifyCallback from "./views/SpotifyCallback";
 
 // Global data context
 const DataContext = createContext(null);
@@ -51,7 +56,23 @@ export default function App() {
   return (
     <DataContext.Provider value={{ albums, index, artistPhotos }}>
       <BrowserRouter>
-        <div className="grain" />
+        <ToastProvider>
+          <SpotifyProvider>
+            <AppShell />
+          </SpotifyProvider>
+        </ToastProvider>
+      </BrowserRouter>
+    </DataContext.Provider>
+  );
+}
+
+function AppShell() {
+  const { footerVisible } = useSpotify();
+
+  return (
+    <>
+      <div className="grain" />
+      <div style={{ paddingBottom: footerVisible ? 118 : 0, transition: "padding-bottom 200ms ease" }}>
         <Nav />
         <ScrollToTop />
         <Routes>
@@ -66,9 +87,12 @@ export default function App() {
           <Route path="/artist/:slug" element={<ArtistDetail />} />
           <Route path="/search" element={<Search />} />
           <Route path="/about" element={<About />} />
+          <Route path="/spotify/callback" element={<SpotifyCallback />} />
         </Routes>
-      </BrowserRouter>
-    </DataContext.Provider>
+      </div>
+      <SpotifyDebugPanel />
+      <NowPlayingFooter />
+    </>
   );
 }
 
@@ -160,6 +184,8 @@ function Nav() {
           </NavLink>
         </nav>
       )}
+      {!isDetail && <SpotifyAuthControl />}
+      {isDetail && <SpotifyAuthControl />}
     </header>
   );
 }

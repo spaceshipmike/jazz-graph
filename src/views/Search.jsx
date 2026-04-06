@@ -2,9 +2,12 @@ import { useMemo, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, slugify } from "../data";
+import { PlayableAlbumArt, PlayableTrackTitle } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 export default function Search() {
   const { albums, index } = useData();
+  const { isLoggedIn } = useSpotify();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
 
@@ -87,21 +90,27 @@ export default function Search() {
           <SectionHeader label="Albums" count={results.albums.length} />
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {results.albums.map((album) => (
-              <Link key={album.id} to={`/album/${album.id}`} className="search-row" style={{ display: "flex", alignItems: "center", gap: 14, padding: "8px 12px", borderRadius: "var(--radius-md)", textDecoration: "none" }}>
+              <div key={album.id} className="search-row" style={{ display: "flex", alignItems: "center", gap: 14, padding: "8px 12px", borderRadius: "var(--radius-md)", textDecoration: "none" }}>
                 <div style={{ width: 44, height: 44, borderRadius: "var(--radius-sm)", overflow: "hidden", background: "var(--surface)", flexShrink: 0 }}>
-                  {album.coverPath && (
-                    <img src={`/data/${album.coverPath}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
-                  )}
+                  {album.coverPath && (isLoggedIn ? (
+                    <PlayableAlbumArt album={album}>
+                      <img src={`/data/${album.coverPath}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                    </PlayableAlbumArt>
+                  ) : (
+                    <Link to={`/album/${album.id}`}>
+                      <img src={`/data/${album.coverPath}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                    </Link>
+                  ))}
                 </div>
                 <div style={{ minWidth: 0, flex: 1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <Link to={`/album/${album.id}`} style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", display: "block" }}>
                     {album.title}
-                  </div>
+                  </Link>
                   <div className="mono" style={{ fontSize: 11, color: "var(--fg-muted)" }}>
                     {album.artist} · {album.year || "?"}
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </section>
@@ -137,21 +146,27 @@ export default function Search() {
           <SectionHeader label="Tracks" count={results.tracks.length} />
           <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
             {results.tracks.map(({ track, album }, i) => (
-              <Link key={`${album.id}-${track.position}-${i}`} to={`/album/${album.id}`} className="search-row" style={{ display: "flex", alignItems: "center", gap: 14, padding: "8px 12px", borderRadius: "var(--radius-md)", textDecoration: "none" }}>
+              <div key={`${album.id}-${track.position}-${i}`} className="search-row" style={{ display: "flex", alignItems: "center", gap: 14, padding: "8px 12px", borderRadius: "var(--radius-md)", textDecoration: "none" }}>
                 <div style={{ width: 44, height: 44, borderRadius: "var(--radius-sm)", overflow: "hidden", background: "var(--surface)", flexShrink: 0 }}>
-                  {album.coverPath && (
-                    <img src={`/data/${album.coverPath}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
-                  )}
+                  {album.coverPath && (isLoggedIn ? (
+                    <PlayableAlbumArt album={album}>
+                      <img src={`/data/${album.coverPath}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                    </PlayableAlbumArt>
+                  ) : (
+                    <Link to={`/album/${album.id}`}>
+                      <img src={`/data/${album.coverPath}`} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                    </Link>
+                  ))}
                 </div>
                 <div style={{ minWidth: 0, flex: 1 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <PlayableTrackTitle album={album} track={track} style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                     {track.title}
-                  </div>
+                  </PlayableTrackTitle>
                   <div className="mono" style={{ fontSize: 11, color: "var(--fg-muted)" }}>
-                    {album.title} · {album.artist}
+                    <Link to={`/album/${album.id}`}>{album.title}</Link> · {album.artist}
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </section>

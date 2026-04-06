@@ -3,6 +3,8 @@ import { useData } from "../App";
 import { getAllTitles, countKeywords, MOOD_CATEGORIES } from "../titleAnalysis";
 import { Link } from "react-router-dom";
 import * as d3 from "d3";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 const MOOD_COLORS = {
   joy: "#d4a843",
@@ -347,6 +349,7 @@ function MoodByDecade({ albums }) {
 // ─── Drill-down Panel ───────────────────────────────────────────────
 
 function DrillDown({ albums, selected }) {
+  const { isLoggedIn } = useSpotify();
   const matches = useMemo(() => {
     if (!selected) return [];
     if (selected.keyword) {
@@ -379,9 +382,8 @@ function DrillDown({ albums, selected }) {
       </h3>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 6 }}>
         {matches.slice(0, 40).map(({ album: a, albumMatch, tracks }) => (
-          <Link
+          <div
             key={a.id}
-            to={`/album/${a.id}`}
             style={{
               display: "flex",
               gap: "var(--space-sm)",
@@ -395,13 +397,19 @@ function DrillDown({ albums, selected }) {
           >
             <div style={{ width: 40, height: 40, borderRadius: 3, overflow: "hidden", flexShrink: 0, background: "var(--bg)" }}>
               {a.coverPath ? (
-                <img src={`/data/${a.coverPath}`} alt={a.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                isLoggedIn ? (
+                  <PlayableAlbumArt album={a}>
+                    <img src={`/data/${a.coverPath}`} alt={a.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                  </PlayableAlbumArt>
+                ) : (
+                  <img src={`/data/${a.coverPath}`} alt={a.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                )
               ) : null}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 12, fontWeight: albumMatch ? 600 : 400, color: albumMatch ? "var(--fg)" : "var(--fg-dim)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              <Link to={`/album/${a.id}`} style={{ display: "block", fontSize: 12, fontWeight: albumMatch ? 600 : 400, color: albumMatch ? "var(--fg)" : "var(--fg-dim)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                 {a.title}
-              </div>
+              </Link>
               <div className="mono" style={{ fontSize: 9, color: "var(--fg-muted)" }}>
                 {a.artist} · {a.year || "?"}
               </div>
@@ -412,7 +420,7 @@ function DrillDown({ albums, selected }) {
                 </div>
               )}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
       {matches.length > 40 && (

@@ -4,10 +4,13 @@ import { instrumentColor, labelColor, slugify } from "../data";
 import { SubgenreBadge } from "../components/SubgenreIcon";
 import { useMemo, useRef, useEffect } from "react";
 import * as d3 from "d3";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 export default function ArtistDetail() {
   const { slug } = useParams();
   const { index, artistPhotos, albums } = useData();
+  const { isLoggedIn } = useSpotify();
 
   const artist = index?.artistsBySlug.get(slug);
 
@@ -98,22 +101,30 @@ export default function ArtistDetail() {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))", gap: "var(--space-sm)" }}>
           {sortedAlbums.map((a) => (
-            <Link key={a.id} to={`/album/${a.id}`} style={{ textAlign: "center", textDecoration: "none" }}>
+            <div key={a.id} style={{ textAlign: "center" }}>
               <div style={{ borderRadius: "var(--radius-sm)", overflow: "hidden", opacity: a._lead ? 1 : 0.6, background: "var(--surface)", aspectRatio: "1" }}>
                 {a.coverPath ? (
-                  <img src={`/data/${a.coverPath}`} alt={a.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  isLoggedIn ? (
+                    <PlayableAlbumArt album={a}>
+                      <img src={`/data/${a.coverPath}`} alt={a.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </PlayableAlbumArt>
+                  ) : (
+                    <Link to={`/album/${a.id}`}>
+                      <img src={`/data/${a.coverPath}`} alt={a.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    </Link>
+                  )
                 ) : (
                   <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span className="mono" style={{ fontSize: 8, color: "var(--fg-ghost)" }}>?</span>
                   </div>
                 )}
               </div>
-              <div style={{ fontSize: 10, fontWeight: a._lead ? 700 : 400, marginTop: 4, lineHeight: 1.2 }}>
+              <Link to={`/album/${a.id}`} style={{ display: "block", fontSize: 10, fontWeight: a._lead ? 700 : 400, marginTop: 4, lineHeight: 1.2 }}>
                 {a._lead && <span style={{ color: instrumentColor(a._inst) }}>★ </span>}
                 {a.title.length > 18 ? a.title.slice(0, 16) + "…" : a.title}
-              </div>
+              </Link>
               <div className="mono" style={{ fontSize: 9, color: "var(--fg-muted)" }}>{a.year || "?"}</div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>

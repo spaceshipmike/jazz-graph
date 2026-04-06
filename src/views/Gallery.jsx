@@ -3,6 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, instrumentFamily, labelColor } from "../data";
 import FilterBar from "../components/FilterBar";
+import { PlayableAlbumArt } from "../components/SpotifyUI";
+import { useSpotify } from "../spotify";
 
 export default function Gallery() {
   const { albums } = useData();
@@ -13,6 +15,7 @@ export default function Gallery() {
   const familyFilter = searchParams.get("family") || null;
   const labelFilter = searchParams.get("label") || null;
   const artistFilter = searchParams.get("artist") || null;
+  const subgenreFilter = searchParams.get("subgenres") ? searchParams.get("subgenres").split(",") : [];
 
   const setSearch = useCallback((v) => {
     setSearchParams((p) => { v ? p.set("q", v) : p.delete("q"); return p; }, { replace: true });
@@ -28,6 +31,9 @@ export default function Gallery() {
   }, [setSearchParams]);
   const setArtistFilter = useCallback((v) => {
     setSearchParams((p) => { v ? p.set("artist", v) : p.delete("artist"); return p; }, { replace: true });
+  }, [setSearchParams]);
+  const setSubgenreFilter = useCallback((v) => {
+    setSearchParams((p) => { v && v.length > 0 ? p.set("subgenres", v.join(",")) : p.delete("subgenres"); return p; }, { replace: true });
   }, [setSearchParams]);
 
   const filtered = useMemo(() => {
@@ -58,8 +64,11 @@ export default function Gallery() {
     if (artistFilter) {
       r = r.filter((a) => a.lineup.some((m) => m.name === artistFilter));
     }
+    if (subgenreFilter.length > 0) {
+      r = r.filter((a) => a.subgenres?.some((sg) => subgenreFilter.includes(sg)));
+    }
     return r;
-  }, [albums, search, instFilter, familyFilter, labelFilter, artistFilter]);
+  }, [albums, search, instFilter, familyFilter, labelFilter, artistFilter, subgenreFilter]);
 
   const groups = useMemo(() => {
     const map = new Map();
@@ -81,6 +90,8 @@ export default function Gallery() {
         setLabel={setLabelFilter}
         artist={artistFilter}
         setArtist={setArtistFilter}
+        subgenres={subgenreFilter}
+        setSubgenres={setSubgenreFilter}
       />
 
       {/* Search + active instrument filter */}
@@ -157,10 +168,10 @@ export default function Gallery() {
 
 function AlbumCard({ album, index, instFilter, setInstFilter }) {
   const coverSrc = album.coverPath ? `/data/${album.coverPath}` : null;
+  const { isLoggedIn } = useSpotify();
 
   return (
-    <Link
-      to={`/album/${album.id}`}
+    <div
       className="card fade-in"
       style={{
         animationDelay: `${index * 40}ms`,
@@ -172,13 +183,27 @@ function AlbumCard({ album, index, instFilter, setInstFilter }) {
       {/* Cover */}
       <div style={{ aspectRatio: "1", background: "var(--surface)", overflow: "hidden", borderRadius: "var(--radius-lg) var(--radius-lg) 0 0" }}>
         {coverSrc ? (
-          <img
-            src={coverSrc}
-            alt={album.title}
-            loading="lazy"
-            className="cover-img"
-            onLoad={(e) => e.target.classList.add("loaded")}
-          />
+          isLoggedIn ? (
+            <PlayableAlbumArt album={album}>
+              <img
+                src={coverSrc}
+                alt={album.title}
+                loading="lazy"
+                className="cover-img"
+                onLoad={(e) => e.target.classList.add("loaded")}
+              />
+            </PlayableAlbumArt>
+          ) : (
+            <Link to={`/album/${album.id}`}>
+              <img
+                src={coverSrc}
+                alt={album.title}
+                loading="lazy"
+                className="cover-img"
+                onLoad={(e) => e.target.classList.add("loaded")}
+              />
+            </Link>
+          )
         ) : (
           <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <span className="mono" style={{ color: "var(--fg-ghost)", fontSize: 10 }}>No cover</span>
@@ -187,9 +212,9 @@ function AlbumCard({ album, index, instFilter, setInstFilter }) {
       </div>
       {/* Info */}
       <div style={{ padding: "10px 12px 12px" }}>
-        <div style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.2, marginBottom: 2 }}>
+        <Link to={`/album/${album.id}`} style={{ display: "block", fontSize: 14, fontWeight: 700, lineHeight: 1.2, marginBottom: 2 }}>
           {album.title}
-        </div>
+        </Link>
         <div className="mono" style={{ fontSize: 10, color: labelColor(album.label), marginBottom: 6 }}>
           {album.artist} · {album.year || "?"} · {album.label || "?"}
         </div>
@@ -222,7 +247,7 @@ function AlbumCard({ album, index, instFilter, setInstFilter }) {
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
