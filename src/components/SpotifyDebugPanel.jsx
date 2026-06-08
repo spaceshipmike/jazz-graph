@@ -26,7 +26,8 @@ export default function SpotifyDebugPanel() {
     sdkReady,
   } = useSpotify();
 
-  const enabled = import.meta.env.DEV || import.meta.env.VITE_SHOW_SPOTIFY_DEBUG === "true";
+  // Opt-in only: set VITE_SHOW_SPOTIFY_DEBUG=true to surface it (was on for all of dev).
+  const enabled = import.meta.env.VITE_SHOW_SPOTIFY_DEBUG === "true";
   if (!enabled) return null;
 
   return (

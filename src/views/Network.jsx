@@ -2,10 +2,18 @@ import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../App";
 import { instrumentColor, slugify } from "../data";
+import { louvain } from "../community";
 import * as d3 from "d3";
 
 const MIN_ALBUMS = 4; // minimum albums to appear as a node
 const MIN_SHARED = 2; // minimum shared albums to draw an edge
+
+// Vivid palette for the largest scenes; remaining scenes fall back to gray.
+const SCENE_PALETTE = [
+  "#ff6b6b", "#ffd166", "#06d6a0", "#4cc9f0", "#b8a4ff", "#ff9f1c",
+  "#f15bb5", "#80ed99", "#00bbf9", "#fee440", "#e07a5f", "#9bf6ff",
+];
+const SCENE_GRAY = "#4a4a52";
 
 export default function Network() {
   const { albums, index } = useData();
@@ -18,11 +26,27 @@ export default function Network() {
   const hoverRef = useRef(null);
   const [dims, setDims] = useState({ w: 900, h: 600 });
   const [tip, setTip] = useState(null);
+  const [colorMode, setColorMode] = useState("scene"); // "scene" | "instrument"
   const [instFilter, setInstFilter] = useState(null);
+  const [commFilter, setCommFilter] = useState(null);
+  const [resolution, setResolution] = useState(1); // committed Louvain granularity (drives recompute)
+  const [resInput, setResInput] = useState(1); // live slider value (display only)
+  const resTimer = useRef(null);
+
+  // Debounce the slider: show the value instantly, recompute scenes once dragging settles.
+  const onResolution = useCallback((v) => {
+    setResInput(v);
+    if (resTimer.current) clearTimeout(resTimer.current);
+    resTimer.current = setTimeout(() => {
+      setResolution(v);
+      setCommFilter(null);
+    }, 280);
+  }, []);
+  useEffect(() => () => { if (resTimer.current) clearTimeout(resTimer.current); }, []);
 
   // Build musician-to-musician collaboration graph
-  const { nodes, links, instruments } = useMemo(() => {
-    if (!index) return { nodes: [], links: [], instruments: [] };
+  const { nodes, links, instruments, scenes } = useMemo(() => {
+    if (!index) return { nodes: [], links: [], instruments: [], scenes: [] };
 
     const musicians = index.musicians.filter((m) => m.albums.length >= MIN_ALBUMS && m.primary !== "unknown");
     const nameToIdx = new Map();
@@ -80,6 +104,35 @@ export default function Network() {
         weight: l.weight,
       }));
 
+    // Detect scenes (communities) via weighted Louvain.
+    const comm = louvain(nodes.length, remapped, { resolution });
+    nodes.forEach((n, i) => { n.community = comm[i]; });
+
+    // Aggregate per-community stats: size + most prolific member (the namesake).
+    const sceneMap = new Map();
+    for (const n of nodes) {
+      let s = sceneMap.get(n.community);
+      if (!s) {
+        s = { id: n.community, size: 0, lead: null };
+        sceneMap.set(n.community, s);
+      }
+      s.size += 1;
+      if (!s.lead || n.albumCount > s.lead.albumCount) s.lead = n;
+    }
+
+    // Rank scenes by size; top ones get vivid colors + names, rest go gray.
+    const scenes = [...sceneMap.values()].sort((a, b) => b.size - a.size);
+    scenes.forEach((s, rank) => {
+      s.rank = rank;
+      s.color = rank < SCENE_PALETTE.length ? SCENE_PALETTE[rank] : SCENE_GRAY;
+      // Named after its anchor (most prolific) musician; "scene" is the noun.
+      s.name = s.lead ? s.lead.name.split(" ").slice(-1)[0] : `Scene ${s.id}`;
+      s.fullName = s.lead ? s.lead.name : `Scene ${s.id}`;
+    });
+
+    const sceneColor = new Map(scenes.map((s) => [s.id, s.color]));
+    nodes.forEach((n) => { n.sceneColor = sceneColor.get(n.community) || SCENE_GRAY; });
+
     const instSet = new Set();
     nodes.forEach((n) => instSet.add(n.primary));
 
@@ -87,14 +140,30 @@ export default function Network() {
       nodes,
       links: remapped,
       instruments: [...instSet].sort(),
+      scenes,
     };
-  }, [albums, index]);
+  }, [albums, index, resolution]);
+
+  // Color resolver per node, by current mode.
+  const nodeColor = useCallback(
+    (n) => (colorMode === "scene" ? n.sceneColor : instrumentColor(n.primary)),
+    [colorMode]
+  );
+
+  // Whether a node passes the active filter (instrument or scene).
+  const passesFilter = useCallback(
+    (n) => {
+      if (colorMode === "scene") return !commFilter || n.community === commFilter;
+      return !instFilter || n.primary === instFilter;
+    },
+    [colorMode, commFilter, instFilter]
+  );
 
   // Resize
   useEffect(() => {
     const update = () => setDims({
       w: Math.min(window.innerWidth - 64, 1600),
-      h: Math.min(window.innerHeight - 200, 800),
+      h: Math.min(window.innerHeight - 220, 800),
     });
     update();
     window.addEventListener("resize", update);
@@ -128,16 +197,19 @@ export default function Network() {
       }
     }
 
+    const sceneMode = colorMode === "scene";
+
     // Links
     for (const l of linksRef.current) {
       const s = typeof l.source === "object" ? l.source : nodesRef.current[l.source];
       const tgt = typeof l.target === "object" ? l.target : nodesRef.current[l.target];
       if (!s || !tgt) continue;
 
-      const si = s.idx;
-      const ti = tgt.idx;
-      const matchFilter = !instFilter || nodesRef.current[si]?.primary === instFilter || nodesRef.current[ti]?.primary === instFilter;
-      const isHoverLink = hovered != null && (si === hovered || ti === hovered);
+      const sn = nodesRef.current[s.idx];
+      const tn = nodesRef.current[tgt.idx];
+      const matchFilter = passesFilter(sn) || passesFilter(tn);
+      const isHoverLink = hovered != null && (s.idx === hovered || tgt.idx === hovered);
+      const sameScene = sceneMode && sn.community === tn.community;
 
       if (hovered != null && !isHoverLink) {
         ctx.globalAlpha = 0.03;
@@ -145,9 +217,16 @@ export default function Network() {
       } else if (!matchFilter) {
         ctx.globalAlpha = 0.03;
         ctx.strokeStyle = "#1a1a1e";
+      } else if (isHoverLink) {
+        ctx.globalAlpha = 0.7;
+        ctx.strokeStyle = nodeColor(nodesRef.current[s.idx === hovered ? tgt.idx : s.idx]);
+      } else if (sameScene) {
+        // Intra-scene edges tinted with the scene color so clusters cohere.
+        ctx.globalAlpha = Math.min(0.12 + l.weight * 0.05, 0.4);
+        ctx.strokeStyle = sn.sceneColor;
       } else {
-        ctx.globalAlpha = isHoverLink ? 0.7 : Math.min(0.1 + l.weight * 0.06, 0.5);
-        ctx.strokeStyle = isHoverLink ? instrumentColor(nodesRef.current[si === hovered ? ti : si]?.primary) : "#2a2a2e";
+        ctx.globalAlpha = Math.min(0.08 + l.weight * 0.04, 0.3);
+        ctx.strokeStyle = "#2a2a2e";
       }
 
       ctx.lineWidth = Math.min(0.5 + l.weight * 0.3, 3);
@@ -159,23 +238,50 @@ export default function Network() {
 
     // Nodes
     for (const n of nodesRef.current) {
-      const matchFilter = !instFilter || n.primary === instFilter;
+      const matchFilter = passesFilter(n);
       const isHovered = hovered === n.idx;
       const isConn = hovered != null && hoveredConns.has(n.idx);
       const isDimmed = hovered != null && !isHovered && !isConn;
 
-      ctx.globalAlpha = isDimmed ? 0.06 : !matchFilter ? 0.1 : isHovered ? 1 : isConn ? 0.9 : 0.7;
-      ctx.fillStyle = instrumentColor(n.primary);
+      ctx.globalAlpha = isDimmed ? 0.06 : !matchFilter ? 0.1 : isHovered ? 1 : isConn ? 0.9 : 0.75;
+      ctx.fillStyle = nodeColor(n);
 
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
 
       if (isHovered || isConn) {
-        ctx.strokeStyle = instrumentColor(n.primary);
+        ctx.strokeStyle = nodeColor(n);
         ctx.lineWidth = isHovered ? 2 : 1;
         ctx.globalAlpha = isHovered ? 1 : 0.5;
         ctx.stroke();
+      }
+    }
+
+    // Scene name labels at cluster centroids (scene mode, when not hovering)
+    if (sceneMode && hovered == null) {
+      const centroids = new Map(); // community -> { x, y, n, color, name }
+      for (const n of nodesRef.current) {
+        const meta = nodes[n.idx];
+        let c = centroids.get(meta.community);
+        if (!c) {
+          const scene = scenes.find((s) => s.id === meta.community);
+          if (!scene || scene.rank >= SCENE_PALETTE.length || scene.size < 4) continue;
+          c = { x: 0, y: 0, n: 0, color: scene.color, name: scene.name };
+          centroids.set(meta.community, c);
+        }
+        c.x += n.x; c.y += n.y; c.n += 1;
+      }
+      ctx.textAlign = "center";
+      ctx.font = "300 16px 'Oswald', sans-serif";
+      for (const c of centroids.values()) {
+        const cx = c.x / c.n, cy = c.y / c.n;
+        ctx.globalAlpha = 0.92;
+        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = "#0c0c0e";
+        ctx.strokeText(c.name, cx, cy);
+        ctx.fillStyle = c.color;
+        ctx.fillText(c.name, cx, cy);
       }
     }
 
@@ -201,7 +307,7 @@ export default function Network() {
     }
 
     ctx.restore();
-  }, [dims, instFilter]);
+  }, [dims, colorMode, nodeColor, passesFilter, nodes, scenes]);
 
   // Simulation
   useEffect(() => {
@@ -229,15 +335,13 @@ export default function Network() {
     return () => sim.stop();
   }, [nodes, links, dims, draw]);
 
-  // Redraw on filter/hover change
-  useEffect(() => { draw(); }, [instFilter, draw]);
+  // Redraw on filter/mode change
+  useEffect(() => { draw(); }, [instFilter, commFilter, colorMode, draw]);
 
   // Canvas interaction
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    const dpr = window.devicePixelRatio || 1;
 
     function hitTest(px, py) {
       const t = transformRef.current;
@@ -272,10 +376,12 @@ export default function Network() {
         hoverRef.current = newHover;
         draw();
         if (hit) {
+          const meta = nodes[hit.idx];
+          const scene = scenes.find((s) => s.id === meta.community);
           setTip({
             x: e.clientX,
             y: e.clientY,
-            text: `${hit.name}\n${hit.instruments.join(", ")}\n${hit.albumCount} albums`,
+            text: `${hit.name}\n${hit.instruments.join(", ")}\n${hit.albumCount} albums${scene ? `\n— ${scene.fullName} scene` : ""}`,
           });
           canvas.style.cursor = "pointer";
         } else {
@@ -305,7 +411,7 @@ export default function Network() {
       canvas.removeEventListener("mousemove", onMove);
       canvas.removeEventListener("click", onClick);
     };
-  }, [draw, navigate, tip]);
+  }, [draw, navigate, tip, nodes, scenes]);
 
   // Set canvas resolution
   useEffect(() => {
@@ -317,35 +423,102 @@ export default function Network() {
     draw();
   }, [dims, draw]);
 
+  const namedScenes = scenes.filter((s) => s.rank < SCENE_PALETTE.length);
+
   return (
     <div style={{ padding: "var(--space-md) var(--space-xl)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "var(--space-sm)" }}>
         <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>Collaboration Network</h1>
         <span className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)" }}>
-          {nodes.length} musicians · {links.length} connections
+          {nodes.length} musicians · {links.length} connections · {scenes.length} scenes
         </span>
       </div>
 
-      {/* Instrument filter */}
-      <div className="mono" style={{ display: "flex", flexWrap: "wrap", gap: "4px 12px", fontSize: 10, color: "var(--fg-muted)", marginBottom: "var(--space-sm)" }}>
-        {instruments.map((inst) => (
-          <span
-            key={inst}
-            style={{
-              cursor: "pointer",
-              opacity: instFilter && instFilter !== inst ? 0.2 : 1,
-              transition: "opacity 0.2s",
-              display: "flex",
-              alignItems: "center",
-              gap: 3,
-            }}
-            onClick={() => setInstFilter(instFilter === inst ? null : inst)}
-          >
-            <span style={{ width: 7, height: 7, borderRadius: "50%", background: instrumentColor(inst), display: "inline-block" }} />
-            {inst}
-          </span>
-        ))}
+      {/* Color mode toggle + scene granularity */}
+      <div className="mono" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "6px 16px", fontSize: 10, marginBottom: "var(--space-sm)" }}>
+        <div style={{ display: "flex", gap: 6 }}>
+          {[
+            ["scene", "scenes"],
+            ["instrument", "instrument"],
+          ].map(([mode, label]) => (
+            <button
+              key={mode}
+              onClick={() => { setColorMode(mode); setInstFilter(null); setCommFilter(null); }}
+              style={{
+                cursor: "pointer",
+                background: colorMode === mode ? "var(--fg-dim)" : "transparent",
+                color: colorMode === mode ? "#0c0c0e" : "var(--fg-muted)",
+                border: "1px solid var(--border-light)",
+                borderRadius: 4,
+                padding: "3px 10px",
+                font: "inherit",
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {colorMode === "scene" ? (
+          <label style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--fg-muted)" }}>
+            <span style={{ color: "var(--fg-ghost)" }}>granularity</span>
+            <input
+              type="range"
+              min="0.6"
+              max="2.4"
+              step="0.1"
+              value={resInput}
+              onChange={(e) => onResolution(+e.target.value)}
+              style={{ width: 140, accentColor: "var(--fg-dim)" }}
+            />
+            <span style={{ color: "var(--fg-ghost)", minWidth: 110 }}>
+              {resInput < 0.9 ? "fewer, broader" : resInput > 1.6 ? "many, tighter" : "balanced"}
+              {resInput === resolution ? ` · ${scenes.length}` : " · …"}
+            </span>
+          </label>
+        ) : (
+          <span style={{ color: "var(--fg-ghost)" }}>colored by primary instrument family</span>
+        )}
       </div>
+
+      {/* Legend */}
+      {colorMode === "scene" ? (
+        <div className="mono" style={{ display: "flex", flexWrap: "wrap", gap: "4px 14px", fontSize: 10, color: "var(--fg-muted)", marginBottom: "var(--space-sm)" }}>
+          {namedScenes.map((s) => (
+            <span
+              key={s.id}
+              style={{
+                cursor: "pointer",
+                opacity: commFilter && commFilter !== s.id ? 0.25 : 1,
+                transition: "opacity 0.2s",
+                display: "flex", alignItems: "center", gap: 4,
+              }}
+              onClick={() => setCommFilter(commFilter === s.id ? null : s.id)}
+            >
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: s.color, display: "inline-block" }} />
+              {s.name} <span style={{ color: "var(--fg-ghost)" }}>· {s.size}</span>
+            </span>
+          ))}
+        </div>
+      ) : (
+        <div className="mono" style={{ display: "flex", flexWrap: "wrap", gap: "4px 12px", fontSize: 10, color: "var(--fg-muted)", marginBottom: "var(--space-sm)" }}>
+          {instruments.map((inst) => (
+            <span
+              key={inst}
+              style={{
+                cursor: "pointer",
+                opacity: instFilter && instFilter !== inst ? 0.2 : 1,
+                transition: "opacity 0.2s",
+                display: "flex", alignItems: "center", gap: 3,
+              }}
+              onClick={() => setInstFilter(instFilter === inst ? null : inst)}
+            >
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: instrumentColor(inst), display: "inline-block" }} />
+              {inst}
+            </span>
+          ))}
+        </div>
+      )}
 
       <canvas
         ref={canvasRef}
@@ -366,7 +539,7 @@ export default function Network() {
       )}
 
       <p className="mono" style={{ textAlign: "center", fontSize: 10, color: "var(--fg-ghost)", marginTop: "var(--space-sm)" }}>
-        Scroll to zoom · Hover to explore · Click to view artist · Click legend to filter by instrument
+        Scroll to zoom · Hover to explore · Click to view artist · Click legend to isolate a {colorMode === "scene" ? "scene" : "instrument"}
       </p>
     </div>
   );
