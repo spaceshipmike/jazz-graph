@@ -18,12 +18,14 @@ cd "$PROJECT_DIR"
 
 app_only=false
 data_only=false
+artists_only=false
 umami_only=false
 
 for arg in "$@"; do
   case $arg in
     --app-only) app_only=true ;;
     --data-only) data_only=true ;;
+    --artists-only) artists_only=true ;;
     --umami) umami_only=true ;;
   esac
 done
@@ -75,6 +77,33 @@ sync_data() {
   ssh "$NAS" "chmod -R o+rX ~/$NAS_DATA_DIR/"
 
   echo "    Data sync complete."
+}
+
+# ── Sync only artist photos (fast — skips cover art) ────────────
+
+sync_artists() {
+  echo "==> Syncing artist photos to NAS..."
+
+  if [ ! -f data/artist-photos.json ]; then
+    echo "    data/artist-photos.json not found. Run: op run --env-file .env -- node scripts/fetch-artist-photos.mjs"
+    exit 1
+  fi
+
+  echo "    Syncing artist-photos.json..."
+  cat data/artist-photos.json | ssh "$NAS" "cat > ~/$NAS_DATA_DIR/artist-photos.json"
+
+  if [ -d data/images/artists ] && [ "$(ls -A data/images/artists 2>/dev/null)" ]; then
+    local count
+    count=$(ls data/images/artists/ | wc -l | tr -d ' ')
+    echo "    Syncing $count artist portraits..."
+    ssh "$NAS" "mkdir -p ~/$NAS_DATA_DIR/images/artists"
+    COPYFILE_DISABLE=1 tar cf - -C data/images/artists . \
+      | ssh "$NAS" "tar xf - -C ~/$NAS_DATA_DIR/images/artists/"
+  fi
+
+  echo "    Setting permissions..."
+  ssh "$NAS" "chmod -R o+rX ~/$NAS_DATA_DIR/"
+  echo "    Artist photo sync complete."
 }
 
 # ── Deploy app container ────────────────────────────────────────
@@ -135,6 +164,8 @@ EOF"
 
 if [ "$umami_only" = true ]; then
   deploy_umami
+elif [ "$artists_only" = true ]; then
+  sync_artists
 elif [ "$data_only" = true ]; then
   sync_data
 elif [ "$app_only" = true ]; then

@@ -7,6 +7,7 @@ data/.rebuild-progress.json
 data/.discogs-enrich-progress.json
 data/.spotify-enrichment-progress.json
 data/.subgenre-progress.json
+data/.artist-photos-progress.json
 data/reggae-audit/progress.json
 .env
 .claude/
