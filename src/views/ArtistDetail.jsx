@@ -131,30 +131,80 @@ export default function ArtistDetail() {
 
       {/* Collaborators */}
       {collaborators.length > 0 && (
-        <section>
+        <section style={{ marginBottom: "var(--space-2xl)" }}>
           <h3 className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "var(--space-sm)" }}>
             Top Collaborators
           </h3>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-            {collaborators.map((c) => (
-              <Link
-                key={c.name}
-                to={`/artist/${slugify(c.name)}`}
-                className="pill"
-                style={{
-                  background: "var(--surface)",
-                  color: "var(--fg-dim)",
-                  border: "1px solid var(--border)",
-                  fontSize: 10,
-                  textDecoration: "none",
-                }}
-              >
-                {c.name} <span style={{ opacity: 0.4 }}>({c.count})</span>
-              </Link>
-            ))}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+            {collaborators.map((c) => {
+              const photo = artistPhotos[c.name];
+              const color = instrumentColor(c.instruments[0]);
+              return (
+                <Link
+                  key={c.name}
+                  to={`/artist/${slugify(c.name)}`}
+                  title={`${c.instruments.join(", ")} · ${c.count} shared albums`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 7,
+                    background: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 999,
+                    padding: "3px 12px 3px 3px",
+                    fontSize: 11,
+                    color: "var(--fg-dim)",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span style={{ width: 26, height: 26, borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: `1px solid ${color}66`, background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {photo ? (
+                      <img src={`/data/${photo}`} alt="" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    ) : (
+                      <span style={{ width: 7, height: 7, borderRadius: "50%", background: color }} />
+                    )}
+                  </span>
+                  {c.name} <span style={{ opacity: 0.4 }}>({c.count})</span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
+
+      {/* Labels */}
+      {(() => {
+        const labelCounts = new Map();
+        for (const a of sortedAlbums) {
+          if (a.label) labelCounts.set(a.label, (labelCounts.get(a.label) || 0) + 1);
+        }
+        const labels = [...labelCounts.entries()].sort((a, b) => b[1] - a[1]);
+        return labels.length > 0 ? (
+          <section>
+            <h3 className="mono" style={{ fontSize: 10, color: "var(--fg-ghost)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "var(--space-sm)" }}>
+              Labels
+            </h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+              {labels.map(([label, count]) => (
+                <Link
+                  key={label}
+                  to={`/labels/browse?label=${encodeURIComponent(label)}`}
+                  className="pill mono"
+                  style={{
+                    fontSize: 9,
+                    background: "transparent",
+                    border: `1px solid ${labelColor(label)}55`,
+                    color: labelColor(label),
+                    textDecoration: "none",
+                  }}
+                >
+                  {label} <span style={{ opacity: 0.6 }}>({count})</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null;
+      })()}
     </div>
   );
 }

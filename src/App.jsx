@@ -75,6 +75,7 @@ function AppShell() {
       <div style={{ paddingBottom: footerVisible ? 118 : 0, transition: "padding-bottom 200ms ease" }}>
         <Nav />
         <ScrollToTop />
+        <SearchHotkey />
         <Routes>
           <Route path="/" element={<Color />} />
           <Route path="/artists/*" element={<ArtistsCategory />} />
@@ -99,6 +100,23 @@ function AppShell() {
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
+// Press "/" anywhere (outside a text field) to jump to search.
+function SearchHotkey() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable) return;
+      e.preventDefault();
+      navigate("/search");
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [navigate]);
   return null;
 }
 

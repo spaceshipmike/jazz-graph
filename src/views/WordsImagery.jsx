@@ -1,6 +1,7 @@
-import { useMemo, useRef, useEffect } from "react";
+import { useMemo, useRef, useEffect, useState } from "react";
 import { useData } from "../App";
 import { getAllTitles, countKeywords, IMAGERY_CATEGORIES } from "../titleAnalysis";
+import KeywordAlbums from "../components/KeywordAlbums";
 import * as d3 from "d3";
 
 const CATEGORY_COLORS = {
@@ -36,11 +37,20 @@ export default function WordsImagery() {
   const clockRef = useRef(null);
   const seasonRef = useRef(null);
   const natureRef = useRef(null);
+  // { keywords: [..], label, color } — which word/group is drilled into
+  const [selected, setSelected] = useState(null);
+  const selectedRef = useRef(null);
+  selectedRef.current = selected;
 
   const imageryData = useMemo(() => {
     const titles = getAllTitles(albums);
     return countKeywords(titles, IMAGERY_CATEGORIES);
   }, [albums]);
+
+  // Toggle selection; clicking the active word clears it.
+  const pick = (sel) => {
+    setSelected((cur) => (cur && cur.label === sel.label ? null : sel));
+  };
 
   // Clock face — time of day
   useEffect(() => {
@@ -93,11 +103,16 @@ export default function WordsImagery() {
       const bx = cx + dist * Math.cos(angle);
       const by = cy + dist * Math.sin(angle);
       const r = rScale(count);
+      const isSel = selected?.label === word;
 
       g.append("circle")
         .attr("cx", bx).attr("cy", by).attr("r", r)
-        .attr("fill", color).attr("fill-opacity", 0.25)
-        .attr("stroke", color).attr("stroke-opacity", 0.6).attr("stroke-width", 1);
+        .attr("fill", color).attr("fill-opacity", isSel ? 0.5 : 0.25)
+        .attr("stroke", color).attr("stroke-opacity", isSel ? 1 : 0.6).attr("stroke-width", isSel ? 2 : 1)
+        .style("cursor", "pointer")
+        .on("mouseenter", function () { d3.select(this).attr("fill-opacity", 0.45); })
+        .on("mouseleave", function () { d3.select(this).attr("fill-opacity", selectedRef.current?.label === word ? 0.5 : 0.25); })
+        .on("click", () => pick({ keywords: [word], label: word, color, source: "clock" }));
 
       if (r > 14) {
         g.append("text")
@@ -134,7 +149,7 @@ export default function WordsImagery() {
       .attr("font-family", "var(--font-mono)").attr("font-size", 10)
       .text("of day");
 
-  }, [imageryData]);
+  }, [imageryData, selected]);
 
   // Seasonal arc — seasons + weather
   useEffect(() => {
@@ -185,20 +200,26 @@ export default function WordsImagery() {
         .innerRadius(innerR).outerRadius(fillR)
         .startAngle(startAngle + Math.PI / 2).endAngle(endAngle + Math.PI / 2);
 
+      // "autumn" titles also say "fall" — search both
+      const seasonKeywords = season === "autumn" ? ["autumn", "fall"] : [season];
+      const isSeasonSel = selected?.label === seasonLabels[season];
+
       g.append("path").attr("d", arc())
         .attr("transform", `translate(${cx},${cy})`)
-        .attr("fill", seasonColor).attr("fill-opacity", 0.2)
-        .attr("stroke", seasonColor).attr("stroke-opacity", 0.4).attr("stroke-width", 1);
+        .attr("fill", seasonColor).attr("fill-opacity", isSeasonSel ? 0.45 : 0.2)
+        .attr("stroke", seasonColor).attr("stroke-opacity", isSeasonSel ? 0.9 : 0.4).attr("stroke-width", isSeasonSel ? 2 : 1);
 
-      // Outline for full wedge
+      // Outline for full wedge — also the click target for the season
       const arcOutline = d3.arc()
         .innerRadius(innerR).outerRadius(outerR)
         .startAngle(startAngle + Math.PI / 2).endAngle(endAngle + Math.PI / 2);
 
       g.append("path").attr("d", arcOutline())
         .attr("transform", `translate(${cx},${cy})`)
-        .attr("fill", "none")
-        .attr("stroke", "var(--border)").attr("stroke-width", 0.5);
+        .attr("fill", "transparent")
+        .attr("stroke", "var(--border)").attr("stroke-width", 0.5)
+        .style("cursor", "pointer")
+        .on("click", () => pick({ keywords: seasonKeywords, label: seasonLabels[season], color: seasonColor, source: "season" }));
 
       // Season label
       const midAngle = startAngle + wedgeAngle / 2;
@@ -239,12 +260,15 @@ export default function WordsImagery() {
           const wR = outerR - 25;
           const wr = d3.scaleSqrt().domain([1, maxW]).range([5, 16])(wCount);
 
+          const isWSel = selected?.label === word;
           g.append("circle")
             .attr("cx", cx + wR * Math.cos(wAngle))
             .attr("cy", cy + wR * Math.sin(wAngle))
             .attr("r", wr)
-            .attr("fill", weatherColor).attr("fill-opacity", 0.3)
-            .attr("stroke", weatherColor).attr("stroke-opacity", 0.5).attr("stroke-width", 0.5);
+            .attr("fill", weatherColor).attr("fill-opacity", isWSel ? 0.6 : 0.3)
+            .attr("stroke", weatherColor).attr("stroke-opacity", isWSel ? 1 : 0.5).attr("stroke-width", isWSel ? 2 : 0.5)
+            .style("cursor", "pointer")
+            .on("click", () => pick({ keywords: [word], label: word, color: weatherColor, source: "season" }));
 
           const labelR = wr > 7 ? wR : wR + wr + 10;
           g.append("text")
@@ -269,7 +293,7 @@ export default function WordsImagery() {
       .attr("font-family", "var(--font-mono)").attr("font-size", 10)
       .text("& weather");
 
-  }, [imageryData]);
+  }, [imageryData, selected]);
 
   // Circle pack — celestial + nature
   useEffect(() => {
@@ -328,11 +352,17 @@ export default function WordsImagery() {
     // Leaf circles
     root.leaves().forEach((leaf) => {
       const color = leaf.parent?.data.name === "celestial" ? celestialColor : natureColor;
+      const word = leaf.data.name;
+      const isSel = selected?.label === word;
 
       g.append("circle")
         .attr("cx", leaf.x).attr("cy", leaf.y).attr("r", leaf.r)
-        .attr("fill", color).attr("fill-opacity", 0.2)
-        .attr("stroke", color).attr("stroke-opacity", 0.5).attr("stroke-width", 1);
+        .attr("fill", color).attr("fill-opacity", isSel ? 0.5 : 0.2)
+        .attr("stroke", color).attr("stroke-opacity", isSel ? 1 : 0.5).attr("stroke-width", isSel ? 2 : 1)
+        .style("cursor", "pointer")
+        .on("mouseenter", function () { d3.select(this).attr("fill-opacity", 0.4); })
+        .on("mouseleave", function () { d3.select(this).attr("fill-opacity", selectedRef.current?.label === word ? 0.5 : 0.2); })
+        .on("click", () => pick({ keywords: [word], label: word, color, source: "nature" }));
 
       if (leaf.r > 16) {
         g.append("text")
@@ -357,19 +387,30 @@ export default function WordsImagery() {
       }
     });
 
-  }, [imageryData]);
+  }, [imageryData, selected]);
 
   return (
     <div className="fade-in" style={{ padding: "var(--space-xl)" }}>
       <h1 style={{ fontSize: 28, fontWeight: 300, marginBottom: 4 }}>imagery</h1>
       <p className="mono" style={{ fontSize: 11, color: "var(--fg-ghost)", marginBottom: "var(--space-xl)" }}>
-        When and where does jazz happen in its own imagination?
+        When and where does jazz happen in its own imagination? — click any word to hear it in titles
       </p>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-2xl)" }}>
         <svg ref={clockRef} style={{ maxWidth: "100%" }} />
+        {selected?.source === "clock" && <Results albums={albums} selected={selected} />}
         <svg ref={seasonRef} style={{ maxWidth: "100%" }} />
+        {selected?.source === "season" && <Results albums={albums} selected={selected} />}
         <svg ref={natureRef} style={{ maxWidth: "100%" }} />
+        {selected?.source === "nature" && <Results albums={albums} selected={selected} />}
       </div>
+    </div>
+  );
+}
+
+function Results({ albums, selected }) {
+  return (
+    <div style={{ width: "100%" }}>
+      <KeywordAlbums albums={albums} keywords={selected.keywords} color={selected.color} label={selected.label} />
     </div>
   );
 }
