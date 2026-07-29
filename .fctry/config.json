@@ -38,5 +38,36 @@
       "action": "suggest-external-minor-bump"
     }
   ],
-  "formatVersion": "0.68.1"
+  "formatVersion": "0.81.0",
+  "modelRouting": {
+    "interviewer": "claude",
+    "stateOwner": "codex",
+    "researcher": {
+      "codeReferences": "codex",
+      "visualReferences": "gemini"
+    },
+    "executorPlan": "codex-assist",
+    "executorBuild": "claude",
+    "scenarioJudge": "multi-model",
+    "freshAudit": "codex",
+    "localPrefilter": "oss"
+  },
+  "evaluation": {
+    "trials": 3,
+    "passThreshold": 2,
+    "models": {}
+  },
+  "foreman": {
+    "enabled": false,
+    "discoveryEnabled": true,
+    "budgetPerDay": 500000,
+    "cycleCapPerRun": 3,
+    "quietHours": {
+      "start": 23,
+      "end": 7
+    },
+    "eligibleTypes": [
+      "reference"
+    ]
+  }
 }

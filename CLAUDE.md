@@ -80,7 +80,7 @@ src/                 — application source
     SoundCategory.jsx      — Sound category router
     SoundCombos.jsx        — lead-to-sideman Sankey diagram
     SoundDurations.jsx     — track length distribution
-    SoundByEra.jsx         — instruments by decade heatmap
+    SoundByEra.jsx         — average track duration by decade
     SoundTrackCounts.jsx   — tracks per album distribution
     WordsCategory.jsx      — Words category router
     WordsGeography.jsx     — circle pack by region

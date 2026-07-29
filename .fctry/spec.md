@@ -2,37 +2,16 @@
 title: The Jazz Graph
 spec-version: "0.14"
 spec-format: nlspec-v2
-date: 2026-03-13
-status: active
+date: 2026-04-11
+status: stable
 author: mike
 synopsis:
   short: "Interactive visual encyclopedia exploring 2,200+ jazz albums through seven data dimensions with subgenre taxonomy and shape iconography"
   medium: "The Jazz Graph is a static web app that visualizes jazz through seven thematic lenses. Each category contains multiple sub-visualizations — from a hue-sorted cover mosaic to geographic maps of song title references — all built on 2,200+ albums with full track listings, session lineups, subgenre classifications, and real cover art in a Blue Note-inspired dark aesthetic. A 15-subgenre taxonomy with geometric shape icons threads through filters, detail pages, timeline markers, and search."
   readme: "The Jazz Graph is an interactive encyclopedia of jazz, built for discovery. Starting from 2,200+ albums (sourced from MusicBrainz, enriched via Discogs and Spotify), it reveals the hidden structure of jazz through seven thematic categories: Color (cover art mosaic), Artists (collaborations and careers), Instruments (families and eras), Labels (rosters and transitions), Time (chronological browsing with subgenre evolution markers), Sound (instrument combinations and sonic texture), and Words (semantic mining of song and album titles for geography, mood, musical vocabulary, and nature imagery). Each category contains multiple visualization panels accessed via sub-navigation tabs. A 15-subgenre taxonomy — from bebop to bossa nova — uses geometric shape families to communicate stylistic lineage, appearing as filterable pills, detail page badges, timeline markers, and searchable metadata. Every view is crafted in a dark, typographically bold aesthetic inspired by Reid Miles' iconic Blue Note Records covers. A post-build audit pipeline flags reissues, compilations, label-era mismatches, and metadata gaps with human-in-the-loop review and quarantine-based removal."
-  stack:
-    - JavaScript
-    - React + Vite
-    - D3.js
-    - MusicBrainz API
-    - Discogs API (subgenre styles)
-    - Spotify API (cover art)
-    - Static site deployment
-  patterns:
-    - Static SPA with pre-built data
-    - Build-time data pipeline
-    - Multi-source data enrichment (MusicBrainz + Discogs + Spotify)
-    - Client-side routing with nested sub-navigation
-    - Category + sub-view navigation model
-    - Multiple specialized data visualizations
-    - Design token system
-    - Geometric shape icon system for categorical identity
-  goals:
-    - Visualize jazz through seven thematic data dimensions with multiple viz types per dimension
-    - Provide a browsable encyclopedia experience with real album art
-    - Classify albums by subgenre using a canonical 15-style taxonomy with geometric shape iconography
-    - Maintain Blue Note-inspired visual identity across all views
-    - Perform fluidly with 2,200+ albums on commodity hardware
-    - Mine semantic meaning from 15,000+ song and album titles
+  tech-stack: ["React + Vite static SPA", "D3.js visualizations", "MusicBrainz + Discogs + Spotify enrichment", "satellite.js-style pre-built data pipeline", "Cover Art Archive + Wikipedia cover fallback", "Blue Note-inspired dark design tokens"]
+  patterns: ["static SPA with pre-built data bundle", "category + sub-view navigation (7 categories)", "15-subgenre canonical taxonomy", "geometric shape icon family (circle/triangle/diamond/square/hexagon)", "build-time data enrichment pipeline (rebuild-library.mjs)", "post-build audit pipeline (audit-library.mjs)", "client-side routing with nested sub-navigation"]
+  goals: ["interactive jazz encyclopedia (2,200+ albums)", "subgenre classification by shape iconography", "Blue Note Reid Miles aesthetic", "semantic mining of album/song titles", "fluid performance on commodity hardware"]
 plugin-version: 0.28.0
 ```
 

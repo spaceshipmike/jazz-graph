@@ -115,13 +115,13 @@ export default function WordsImagery() {
         .on("click", () => pick({ keywords: [word], label: word, color, source: "clock" }));
 
       if (r > 14) {
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", bx).attr("y", by - 2)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", color).attr("font-family", "var(--font-mono)")
           .attr("font-size", Math.min(12, r * 0.6))
           .text(word);
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", bx).attr("y", by + 11)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
@@ -130,7 +130,7 @@ export default function WordsImagery() {
       } else {
         // Small label outside
         const lDist = dist + r + 14;
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", cx + lDist * Math.cos(angle)).attr("y", cy + lDist * Math.sin(angle))
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
@@ -140,11 +140,11 @@ export default function WordsImagery() {
     }
 
     // Center label
-    g.append("text").attr("x", cx).attr("y", cy - 6)
+    g.append("text").style("pointer-events", "none").attr("x", cx).attr("y", cy - 6)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-dim)")
       .attr("font-family", "var(--font-mono)").attr("font-size", 12).attr("font-weight", 600)
       .text("time");
-    g.append("text").attr("x", cx).attr("y", cy + 10)
+    g.append("text").style("pointer-events", "none").attr("x", cx).attr("y", cy + 10)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-ghost)")
       .attr("font-family", "var(--font-mono)").attr("font-size", 10)
       .text("of day");
@@ -224,7 +224,7 @@ export default function WordsImagery() {
       // Season label
       const midAngle = startAngle + wedgeAngle / 2;
       const labelR = outerR + 24;
-      g.append("text")
+      g.append("text").style("pointer-events", "none")
         .attr("x", cx + labelR * Math.cos(midAngle))
         .attr("y", cy + labelR * Math.sin(midAngle))
         .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
@@ -235,7 +235,7 @@ export default function WordsImagery() {
       // Count inside wedge
       if (count > 0) {
         const countR = innerR + (fillR - innerR) / 2;
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", cx + countR * Math.cos(midAngle))
           .attr("y", cy + countR * Math.sin(midAngle))
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
@@ -271,7 +271,7 @@ export default function WordsImagery() {
             .on("click", () => pick({ keywords: [word], label: word, color: weatherColor, source: "season" }));
 
           const labelR = wr > 7 ? wR : wR + wr + 10;
-          g.append("text")
+          g.append("text").style("pointer-events", "none")
             .attr("x", cx + labelR * Math.cos(wAngle))
             .attr("y", cy + labelR * Math.sin(wAngle))
             .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
@@ -284,11 +284,11 @@ export default function WordsImagery() {
     }
 
     // Center label
-    g.append("text").attr("x", cx).attr("y", cy - 6)
+    g.append("text").style("pointer-events", "none").attr("x", cx).attr("y", cy - 6)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-dim)")
       .attr("font-family", "var(--font-mono)").attr("font-size", 12).attr("font-weight", 600)
       .text("seasons");
-    g.append("text").attr("x", cx).attr("y", cy + 10)
+    g.append("text").style("pointer-events", "none").attr("x", cx).attr("y", cy + 10)
       .attr("text-anchor", "middle").attr("fill", "var(--fg-ghost)")
       .attr("font-family", "var(--font-mono)").attr("font-size", 10)
       .text("& weather");
@@ -339,7 +339,7 @@ export default function WordsImagery() {
         .attr("stroke-opacity", 0.15).attr("stroke-width", 1);
 
       // Group label — outside the circle
-      g.append("text")
+      g.append("text").style("pointer-events", "none")
         .attr("x", gc.x).attr("y", gc.y - gc.r - 10)
         .attr("text-anchor", "middle")
         .attr("fill", gc.data.name === "celestial" ? celestialColor : natureColor)
@@ -365,20 +365,20 @@ export default function WordsImagery() {
         .on("click", () => pick({ keywords: [word], label: word, color, source: "nature" }));
 
       if (leaf.r > 16) {
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", leaf.x).attr("y", leaf.y - 2)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", color).attr("font-family", "var(--font-mono)")
           .attr("font-size", Math.min(12, leaf.r * 0.55))
           .text(leaf.data.name);
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", leaf.x).attr("y", leaf.y + 11)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")
           .attr("font-size", 9)
           .text(leaf.data.value);
       } else if (leaf.r > 8) {
-        g.append("text")
+        g.append("text").style("pointer-events", "none")
           .attr("x", leaf.x).attr("y", leaf.y)
           .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
           .attr("fill", "var(--fg-ghost)").attr("font-family", "var(--font-mono)")

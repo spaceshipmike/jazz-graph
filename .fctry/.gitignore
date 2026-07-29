@@ -7,3 +7,8 @@ inbox.json
 viewer/
 build-trace-*.md
 architecture.md
+session-handoff.md
+doom-loop-state.json
+quality-baseline.json
+pre-compact-snapshot.json
+resume-index.json
