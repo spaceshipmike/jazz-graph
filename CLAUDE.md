@@ -2,22 +2,26 @@
 
 Interactive visual encyclopedia of jazz — 2,200+ albums, real cover art, seven thematic visualization categories, 15-subgenre taxonomy with shape iconography, Blue Note-inspired dark aesthetic.
 
-## Factory Contract
+## How work runs here
 
-This project uses the factory spec model. The spec is the source of truth for what to build.
+fctry is retired (2026-10-07, https://github.com/spaceshipmike/de-fctry/issues/51). Its
+plugin and commands are being removed, so do not run any `fctry` or `/fctry:` command and do
+not treat an fctry record as owed. Work in this project runs under the de-fctry method (the
+`de-fctry` skill), with `~/Code/CLAUDE.md` and `~/CLAUDE.md`.
+
+The project's own records still hold: `INVARIANTS.md`, `SURFACES.md`, `MODEL_DECISIONS.md`
+and `.fctry/lessons.md` where they exist. Anything else under `.fctry/` is history from the
+old tool: read it if useful, never write to it on fctry's terms.
+
+## Spec Records
+
+This project was built under the retired fctry factory spec model. The spec is the source of truth for what to build.
 
 - **Spec:** `.fctry/spec.md` — read before implementing anything
 - **Scenarios:** `.fctry/scenarios.md` — 17 end-to-end scenarios that define "done"
 - **State:** `.fctry/state.json` — current workflow step and progress
 
-If requirements shift, update the spec first (via `/fctry:evolve`), then implement.
-
-## Commands
-
-- `/fctry:execute` — assess state, propose build plan, implement from spec
-- `/fctry:evolve <section>` — add features or modify the spec
-- `/fctry:ref <url>` — incorporate external references
-- `/fctry:review` — audit spec vs. codebase, find drift
+If requirements shift, write the change to `spec-proposals/` and wait for Michael's approval, then implement.
 
 ## Project Structure
 
